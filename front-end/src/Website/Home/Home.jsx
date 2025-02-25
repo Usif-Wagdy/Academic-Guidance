@@ -1,11 +1,14 @@
-import { Col, Container, Row, Button } from "react-bootstrap";
+import { Col, Container, Row, Button, Card } from "react-bootstrap";
 import { FaBolt } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import Testimonials from "../../Components/Testimonials/Testimonials";
+import Benefits from "../../Components/Benefits/Benefits";
 export default function Home() {
   const navigate = useNavigate();
 
   return (
     <Container>
+      {/* Hero msg */}
       <Row className="text-center ">
         <Col className="my-4">
           <h1
@@ -20,6 +23,7 @@ export default function Home() {
         </Col>
       </Row>
 
+      {/* Hero Button */}
       <Row>
         <Col className="d-flex justify-content-center">
           <Button
@@ -31,6 +35,7 @@ export default function Home() {
         </Col>
       </Row>
 
+      {/* Brand Pannel STATIC */}
       <Row
         className="py-4 px-3 my-5 text-center"
         style={{ backgroundColor: "#FCFCFD" }}
@@ -58,12 +63,14 @@ export default function Home() {
         </Col>
       </Row>
 
+      {/* Hero Video STATIC */}
       <Row className="mb-2">
         <img src={require("../../Assets/hero.png")} alt="hero" />
       </Row>
 
-      <Row className="justify-content-between align-items-center my-4 p-2">
-        <Col xs={9}>
+      {/* Benefits Section STATIC */}
+      <Row className="justify-content-center align-items-center">
+        <Col xs={12} lg={9}>
           <h2 className="fs-1">Benefits</h2>
           <p className="text-muted">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam
@@ -72,16 +79,50 @@ export default function Home() {
           </p>
         </Col>
 
-        <Col xs={3} className="text-center">
+        <Col xs={12} lg={3} className="text-center">
+          <Benefits layout="modal" />
+        </Col>
+      </Row>
+      <Benefits layout="grid" />
+
+      {/* Courses Section API */}
+      <Row className="justify-content-center align-items-center">
+        <Col xs={12} lg={9}>
+          <h2 className="fs-1">Our Courses</h2>
+          <p className="text-muted">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam
+            eaque vero quidem quisquam porro sint asperiores veritatis ipsum.
+            Qua
+          </p>
+        </Col>
+
+        <Col xs={12} lg={3} className="text-center">
           <Button
             variant="secondary"
-            className="d-inline-block"
-            onClick={() => navigate("/benefits")}
+            className="d-inline-block fs-7"
+            onClick={() => navigate("/courses")}
           >
             View All
           </Button>
         </Col>
       </Row>
+
+      {/* Testimonials Section API */}
+      <Row className="justify-content-center align-items-center">
+        <Col xs={12} lg={9}>
+          <h2 className="fs-1">Our Testimonials</h2>
+          <p className="text-muted">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam
+            eaque vero quidem quisquam porro sint asperiores veritatis ipsum.
+            Qua
+          </p>
+        </Col>
+
+        <Col xs={12} lg={3} className="text-center">
+          <Testimonials layout="modal" />
+        </Col>
+      </Row>
+      <Testimonials layout="grid" />
     </Container>
   );
 }

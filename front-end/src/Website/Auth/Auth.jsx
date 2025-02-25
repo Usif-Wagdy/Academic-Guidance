@@ -121,7 +121,8 @@ function Auth() {
         </Col>
 
         <Col
-          xs={10}
+          xs={11}
+          sm={6}
           lg={5}
           className={`p-3 rounded-4 form-box ${
             isFading ? "fade-in" : "fade-out"
