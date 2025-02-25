@@ -1,0 +1,121 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "Web Design Fundamentals",
+      "description": "Learn the fundamentals of web design, including HTML, CSS, and responsive design principles. Develop the skills to create visually appealing and user-friendly websites",
+      "duration": "4 Week",
+      "level": "Beginner",
+      "author": "John Smith",
+      "curriculum": [
+        "Introduction to HTML",
+        "Styling wit CSS",
+        "Introduction to Responsive Design",
+        "Design Principles for Web",
+        "Building a Basic Website"
+      ],
+      "images": ["one-1.jpg", "one-2.jpg", "one-3.jpg"]
+    },
+
+    {
+      "id": 2,
+      "name": "UI/UX Design",
+      "description": "Master the art of creating intuitive user interfaces (UI) and enhancing user experiences (UX). Learn design principles, wireframing, prototyping, and usability testing techniques.",
+      "duration": "6 Week",
+      "level": "Intermediate",
+      "author": "Emily Johanson",
+      "curriculum": [
+        "Introduction to UI/UX Design",
+        "User Research and Personas",
+        "Wireframing and Prototyping",
+        "Visual Design and Branding",
+        "Usability Testing and Lteration"
+      ],
+      "images": ["two-1.jpg", "two-2.jpg", "two-3.jpg"]
+    },
+
+    {
+      "id": 3,
+      "name": "Mobile App Development",
+      "description": "Dive into the world of mobile app development. Learn to build native iOS and Android applications using industry-leading frameworks like Swift and Kotlin industry-leading frameworks like Swift and Kotlin .",
+      "duration": "8 Week",
+      "level": "Intermediate",
+      "author": "David Brown",
+      "curriculum": [
+        "Introduction to Mobile App Development",
+        "Fundamentals of Swift Programming (iOS)",
+        "Fundamentals of Kotlin Programming (Android)",
+        "Bulding User Interfaces",
+        "App Deploymen and Testing"
+      ],
+      "images": ["three-1.jpg", "three-2.jpg", "three-3.jpg"]
+    },
+
+    {
+      "id": 4,
+      "name": "Graphic Design for Beginners",
+      "description": "  Discover the fundamentals of graphic design, including typography, color theory, layout design, and image manipulation techniques. Create visually stunning designs for print and digital media.",
+      "duration": "10 Week",
+      "level": "Beginner",
+      "author": "Sarah Thompson",
+      "curriculum": [
+        "Introduction to Grapgic Design",
+        "Typography and Color Theory",
+        "Layout Design and Composition",
+        "Image Editing and Manipulation",
+        "Designing for Print and Digital Media"
+      ],
+      "images": ["four-1.jpg", "four-2.jpg", "four-3.jpg"]
+    },
+
+    {
+      "id": 5,
+      "name": "Front-End Web Development",
+      "description": "Become proficient in front-end web development. Learn HTML, CSS, JavaScript, and popular frameworks like Bootstrap and React. Build interactive and responsive websites.",
+      "duration": "10 Week",
+      "level": "Intermediate",
+      "author": "Michael Adams",
+      "curriculum": [
+        "HTML Fundamintals",
+        "CSS Styling and Layouts",
+        "JavaScript Basics",
+        "Bulding Responsive Websites",
+        "Introduction to Bootsrap and React"
+      ],
+      "images": ["five-1.jpg", "five-2.jpg", "five-3.jpg"]
+    }
+  ],
+
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Ahmed Elsayed",
+      "profilePic": "https://randomuser.me/api/portraits/men/32.jpg",
+      "testimonial": "This course was amazing! The lessons were well-structured, and the projects helped me gain real experience."
+    },
+    {
+      "id": 2,
+      "name": "Sara Mahmoud",
+      "profilePic": "https://randomuser.me/api/portraits/women/44.jpg",
+      "testimonial": "I loved how interactive the learning process was. The instructors were very supportive, and the content was top-notch."
+    },
+    {
+      "id": 3,
+      "name": "Mohamed Tarek",
+      "profilePic": "https://randomuser.me/api/portraits/men/56.jpg",
+      "testimonial": "A fantastic learning experience! I was able to build real projects and gain confidence in my skills."
+    },
+    {
+      "id": 4,
+      "name": "Nourhan Ali",
+      "profilePic": "https://randomuser.me/api/portraits/women/38.jpg",
+      "testimonial": "Highly recommended! The hands-on exercises made a huge difference in my understanding of the topics."
+    },
+    {
+      "id": 5,
+      "name": "Omar Hassan",
+      "profilePic": "https://randomuser.me/api/portraits/men/67.jpg",
+      "testimonial": "The course exceeded my expectations. Clear explanations and great community support!"
+    }
+  ]
+}

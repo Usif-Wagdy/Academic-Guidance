@@ -9,6 +9,7 @@ import {
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./custom.css";
+import "./CSS/root.css";
 
 // Components
 import Header from "./Components/Header/Header";
@@ -17,6 +18,7 @@ import Footer from "./Components/Footer/Footer";
 // Website Pages
 import Home from "./Website/Home/Home";
 import Auth from "./Website/Auth/Auth";
+import Courses from "./Website/courses/Courses";
 
 // Layouts, main with header, auth without
 const MainLayout = () => (
@@ -41,6 +43,7 @@ root.render(
         {/* Pages With Header and Footer */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Courses />} />
         </Route>
       </Routes>
     </Router>
