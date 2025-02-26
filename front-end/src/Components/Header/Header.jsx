@@ -27,7 +27,7 @@ export default function Header() {
       <Container>
         {/* Logo (Left) */}
         <Navbar.Brand as={Link} to="/">
-            <img src={logo} alt="Logo" width="40" height="40" />
+          <img src={logo} alt="Logo" width="40" height="40" />
         </Navbar.Brand>
 
         {/* Toggle Button for Mobile */}
@@ -46,7 +46,7 @@ export default function Header() {
               { path: "/tracks", label: "Tracks" },
               { path: "/courses", label: "Courses" },
               { path: "/internship", label: "Internship" },
-              { path: "/blog", label: "Blog" },
+              { path: "/blogs", label: "Blog" },
               { path: "/cvbuilder", label: "CV Builder" },
               { path: "/about", label: "About Us" },
             ].map(({ path, label }) => (

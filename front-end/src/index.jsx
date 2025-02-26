@@ -19,6 +19,8 @@ import Footer from "./Components/Footer/Footer";
 import Home from "./Website/Home/Home";
 import Auth from "./Website/Auth/Auth";
 import Courses from "./Website/courses/Courses";
+import Tracks from "./Website/tracks/Tracks";
+import Blogs from "./Website/blogs/Blogs";
 
 // Layouts, main with header, auth without
 const MainLayout = () => (
@@ -44,6 +46,8 @@ root.render(
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/tracks" element={<Tracks />} />
+          <Route path="/blogs" element={<Blogs />} />
         </Route>
       </Routes>
     </Router>
