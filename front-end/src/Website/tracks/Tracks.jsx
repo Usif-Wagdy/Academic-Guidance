@@ -12,8 +12,8 @@ export default function Tracks() {
 
   const showTracks = tracks.map((track, i) => (
     <div key={i} className="bg-secondary px-md-5 p-3 mb-4">
-      <h2>{`Track ${i + 1}`}</h2>
-      <div>{track}</div>
+      <h2>{track.name}</h2>
+      <div>{track.description}</div>
     </div>
   ));
 

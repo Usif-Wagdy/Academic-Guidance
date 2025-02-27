@@ -74,7 +74,7 @@ export default function Testimonials({ layout = "slider" }) {
                         <Card.Title>{name}</Card.Title>
                       </div>
                       <Button
-                        variant="secondary"
+                        className="bg-info border w-sm-100"
                         onClick={() =>
                           openModal({ id, name, profilePic, testimonial })
                         }
@@ -105,13 +105,13 @@ export default function Testimonials({ layout = "slider" }) {
         <Row xs={1} lg={2}>
           {limitedTestimonials.map(({ id, name, profilePic, testimonial }) => (
             <Col key={id} className="mb-4">
-              <Card className="p-4 shadow-sm text-start h-100">
-                <Card.Text className="text-muted mb-4">
+              <Card className="p-4 shadow-sm text-start h-100 border-0">
+                <Card.Text className="text-muted mb-4 text-center text-md-start">
                   {testimonial.length > MAX_TEXT_LENGTH
                     ? `${testimonial.substring(0, MAX_TEXT_LENGTH)}...`
                     : testimonial}
                 </Card.Text>
-                <div className="d-flex align-items-center justify-content-between gap-3">
+                <div className="center-flex justify-content-md-between flex-column flex-md-row gap-3">
                   <div className="d-flex align-items-center gap-3">
                     <img
                       src={profilePic}
@@ -123,7 +123,7 @@ export default function Testimonials({ layout = "slider" }) {
                     <Card.Title>{name}</Card.Title>
                   </div>
                   <Button
-                    variant="secondary"
+                    className="bg-info border w-sm-100"
                     onClick={() =>
                       openModal({ id, name, profilePic, testimonial })
                     }
@@ -138,8 +138,7 @@ export default function Testimonials({ layout = "slider" }) {
       ) : layout === "modal" ? (
         // Button to Open Infinite Scroll Modal
         <Button
-          variant="secondary"
-          className="d-inline-block fs-7"
+          className="bg-white border w-sm-100"
           onClick={() => setShowModal(true)}
         >
           View All

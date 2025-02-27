@@ -39,7 +39,7 @@ export default function Courses() {
       </div>
 
       <div className="between-flex flex-wrap p-2">
-        <div className="py-2">
+        <div className="py-2">-
           <span className="me-2 py-2 px-3 border rounded-3">
             {course.duration}
           </span>

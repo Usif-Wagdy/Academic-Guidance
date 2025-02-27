@@ -13,7 +13,7 @@ export default function Benefits({ layout = "grid" }) {
         <Row xs={1} lg={3}>
           {benefitsData.map(({ id, title, description }) => (
             <Col key={id} className="mb-4">
-              <Card className="p-4 shadow-sm text-start h-100 ">
+              <Card className="p-4 shadow-sm text-start h-100 border-0 ">
                 <span className="d-block fs-1 fw-bold text-end mb-2">
                   {id < 10 ? `0${id}` : id}
                 </span>
@@ -28,8 +28,7 @@ export default function Benefits({ layout = "grid" }) {
       {/* Modal Layout (View All Button) */}
       {layout === "modal" && (
         <Button
-          variant="secondary"
-          className="d-inline-block fs-7"
+          className="bg-white border w-sm-100"
           onClick={() => setShowModal(true)}
         >
           View All

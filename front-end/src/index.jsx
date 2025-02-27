@@ -21,6 +21,7 @@ import Auth from "./Website/Auth/Auth";
 import Courses from "./Website/courses/Courses";
 import Tracks from "./Website/tracks/Tracks";
 import Blogs from "./Website/blogs/Blogs";
+import About from "./Website/About/About";
 
 // Layouts, main with header, auth without
 const MainLayout = () => (
@@ -48,6 +49,7 @@ root.render(
           <Route path="/courses" element={<Courses />} />
           <Route path="/tracks" element={<Tracks />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/about" element={<About />} />
         </Route>
       </Routes>
     </Router>
