@@ -20,12 +20,22 @@ export default function Header() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname.startsWith("/profile")) {
-      setActiveLink("/profile");
+    if (location.pathname.startsWith("/blogs")) {
+      setActiveLink("/blogs");
+    } else if (location.pathname.startsWith("/tracks")) {
+      setActiveLink("/tracks");
+    } else if (location.pathname.startsWith("/courses")) {
+      setActiveLink("/courses");
+    } else if (location.pathname.startsWith("/internship")) {
+      setActiveLink("/internship");
+    } else if (location.pathname.startsWith("/cvbuilder")) {
+      setActiveLink("/cvbuilder");
+    } else if (location.pathname.startsWith("/about")) {
+      setActiveLink("/about");
     } else {
       setActiveLink(location.pathname);
     }
-  }, [location, auth]);
+  }, [location.pathname, auth]);
 
   // Function to handle logout
   const handleLogout = () => {

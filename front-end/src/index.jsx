@@ -32,8 +32,9 @@ import ErrorPage from "./Website/Error/ErrorPage";
 
 import Dashboard from "./Website/Admin/Dashboard";
 import { AuthProvider } from "./Context/AuthProvider";
+import BlogView from "./Website/blogs/BlogView";
 
-// Layouts, main with header, auth without
+// Layout with header and footer
 const MainLayout = () => (
   <div className="d-flex flex-column min-vh-100 main">
     <Header />
@@ -62,6 +63,9 @@ root.render(
             <Route path="/tracks" element={<Tracks />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/about" element={<About />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/:id" element={<BlogView />} />
+            {/* Blog Details */}
             <Route
               path="/dashboard"
               element={
