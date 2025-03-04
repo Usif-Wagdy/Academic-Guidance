@@ -16,7 +16,6 @@
       ],
       "images": ["one-1.jpg", "one-2.jpg", "one-3.jpg"]
     },
-
     {
       "id": 2,
       "name": "UI/UX Design",
@@ -33,7 +32,6 @@
       ],
       "images": ["two-1.jpg", "two-2.jpg", "two-3.jpg"]
     },
-
     {
       "id": 3,
       "name": "Mobile App Development",
@@ -50,7 +48,6 @@
       ],
       "images": ["three-1.jpg", "three-2.jpg", "three-3.jpg"]
     },
-
     {
       "id": 4,
       "name": "Graphic Design for Beginners",
@@ -67,7 +64,6 @@
       ],
       "images": ["four-1.jpg", "four-2.jpg", "four-3.jpg"]
     },
-
     {
       "id": 5,
       "name": "Front-End Web Development",
@@ -85,7 +81,6 @@
       "images": ["five-1.jpg", "five-2.jpg", "five-3.jpg"]
     }
   ],
-
   "testimonials": [
     {
       "id": 1,
@@ -118,7 +113,6 @@
       "testimonial": "The course exceeded my expectations. Clear explanations and great community support!"
     }
   ],
-
   "tracks": [
     {
       "id": 1,
@@ -141,7 +135,6 @@
       "description": "A track is a path or route used for various activities such as transportation, racing, or recreation. It can refer to a physical trail for walking, running, or cycling, a racing circuit for cars or athletes, or even the path laid out for trains. Tracks can be natural, like forest trails, or man-made, like stadium tracks or train lines, and are often designed to facilitate specific activities"
     }
   ],
-
   "blogs": [
     {
       "image": "one-1.jpg",
@@ -178,6 +171,18 @@
       "title": "Lorem ipsum dolor ",
       "date": "March 12, 2022 - 6 min read",
       "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }
+  ],
+  "users": [
+    {
+      "token": "TOKEN",
+      "userData": {
+        "id": "1",
+        "name": "youssef",
+        "email": "wego@test.com",
+        "password": "Wego@123123",
+        "profilePicture": "https://i.pravatar.cc/150?img=3"
+      }
     }
   ]
 }

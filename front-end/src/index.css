@@ -21,6 +21,12 @@ ul {
   margin: 0 !important;
 }
 
+img {
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+}
+
 .main {
   padding-top: 72px;
 }

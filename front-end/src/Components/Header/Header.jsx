@@ -64,19 +64,21 @@ export default function Header() {
           {/* Login & Signup (Inside the Collapsible Menu) */}
           <Nav className="d-lg-none flex-column text-center">
             <Button
-              variant={activeLink == "/login" ? "primary" : "outline-primary"}
+              variant={
+                activeLink == "/auth/login" ? "primary" : "outline-primary"
+              }
               as={Link}
-              to="/login"
+              to="/auth/login"
               className="mb-2 py-1"
             >
               Login
             </Button>
             <Button
               variant={
-                activeLink == "/register" ? "primary" : "outline-primary"
+                activeLink == "/auth/register" ? "primary" : "outline-primary"
               }
               as={Link}
-              to="/signup"
+              to="/auth/register"
               className="py-1"
             >
               Register
@@ -87,17 +89,21 @@ export default function Header() {
         {/* Desktop View - Login & Signup (Outside the Collapse) */}
         <Nav className="ms-auto d-none d-lg-flex">
           <Button
-            variant={activeLink == "/register" ? "primary" : "outline-primary"}
+            variant={
+              activeLink == "/auth/register" ? "primary" : "outline-primary"
+            }
             as={Link}
-            to="/register"
+            to="/auth/register"
             className="me-2 py-1 px-2"
           >
             Register
           </Button>
           <Button
-            variant={activeLink == "/login" ? "primary" : "outline-primary"}
+            variant={
+              activeLink == "/auth/login" ? "primary" : "outline-primary"
+            }
             as={Link}
-            to="/login"
+            to="/auth/login"
             className="py-1 px-3"
           >
             Login
