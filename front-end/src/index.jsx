@@ -62,21 +62,19 @@ root.render(
             <Route path="/courses" element={<Courses />} />
             <Route path="/tracks" element={<Tracks />} />
             <Route path="/blogs" element={<Blogs />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/blogs" element={<Blogs />} />
             <Route path="/blogs/:id" element={<BlogView />} />
-            {/* Blog Details */}
-            <Route
-              path="/dashboard"
-              element={
-                <PrivateRoute>
-                  <Dashboard />
-                </PrivateRoute>
-              }
-            />
+            <Route path="/about" element={<About />} />
           </Route>
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
           {/* Redirect unknown routes to Home */}
-          <Route path="*" element={<ErrorPage />} />{" "}
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>
     </AuthProvider>
