@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Axios } from "../../api/axios";
 import { blogsAPI } from "../../api/Api";
-import { Container, Card } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import BreadCrumbs from "../../Components/BreadCrumbs/BreadCrumbs";
 
 export default function BlogView() {
