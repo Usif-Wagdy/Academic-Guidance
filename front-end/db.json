@@ -1,7 +1,7 @@
 {
   "courses": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Web Design Fundamentals",
       "description": "Learn the fundamentals of web design, including HTML, CSS, and responsive design principles. Develop the skills to create visually appealing and user-friendly websites",
       "duration": "4 Week",
@@ -16,9 +16,8 @@
       ],
       "images": ["one-1.jpg", "one-2.jpg", "one-3.jpg"]
     },
-
     {
-      "id": 2,
+      "id": "2",
       "name": "UI/UX Design",
       "description": "Master the art of creating intuitive user interfaces (UI) and enhancing user experiences (UX). Learn design principles, wireframing, prototyping, and usability testing techniques.",
       "duration": "6 Week",
@@ -33,9 +32,8 @@
       ],
       "images": ["two-1.jpg", "two-2.jpg", "two-3.jpg"]
     },
-
     {
-      "id": 3,
+      "id": "3",
       "name": "Mobile App Development",
       "description": "Dive into the world of mobile app development. Learn to build native iOS and Android applications using industry-leading frameworks like Swift and Kotlin industry-leading frameworks like Swift and Kotlin .",
       "duration": "8 Week",
@@ -50,9 +48,8 @@
       ],
       "images": ["three-1.jpg", "three-2.jpg", "three-3.jpg"]
     },
-
     {
-      "id": 4,
+      "id": "4",
       "name": "Graphic Design for Beginners",
       "description": "  Discover the fundamentals of graphic design, including typography, color theory, layout design, and image manipulation techniques. Create visually stunning designs for print and digital media.",
       "duration": "10 Week",
@@ -67,9 +64,8 @@
       ],
       "images": ["four-1.jpg", "four-2.jpg", "four-3.jpg"]
     },
-
     {
-      "id": 5,
+      "id": "5",
       "name": "Front-End Web Development",
       "description": "Become proficient in front-end web development. Learn HTML, CSS, JavaScript, and popular frameworks like Bootstrap and React. Build interactive and responsive websites.",
       "duration": "10 Week",
@@ -85,99 +81,102 @@
       "images": ["five-1.jpg", "five-2.jpg", "five-3.jpg"]
     }
   ],
-
   "testimonials": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Ahmed Elsayed",
       "profilePic": "https://randomuser.me/api/portraits/men/32.jpg",
       "testimonial": "This course was amazing! The lessons were well-structured, and the projects helped me gain real experience."
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Sara Mahmoud",
       "profilePic": "https://randomuser.me/api/portraits/women/44.jpg",
       "testimonial": "I loved how interactive the learning process was. The instructors were very supportive, and the content was top-notch."
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Mohamed Tarek",
       "profilePic": "https://randomuser.me/api/portraits/men/56.jpg",
       "testimonial": "A fantastic learning experience! I was able to build real projects and gain confidence in my skills."
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Nourhan Ali",
       "profilePic": "https://randomuser.me/api/portraits/women/38.jpg",
       "testimonial": "Highly recommended! The hands-on exercises made a huge difference in my understanding of the topics."
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Omar Hassan",
       "profilePic": "https://randomuser.me/api/portraits/men/67.jpg",
       "testimonial": "The course exceeded my expectations. Clear explanations and great community support!"
     }
   ],
-
   "tracks": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Track 1",
       "description": "A track is a path or route used for various activities such as transportation, racing, or recreation. It can refer to a physical trail for walking, running, or cycling, a racing circuit for cars or athletes, or even the path laid out for trains. Tracks can be natural, like forest trails, or man-made, like stadium tracks or train lines, and are often designed to facilitate specific activities"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Track 2",
       "description": "A track is a path or route used for various activities such as transportation, racing, or recreation. It can refer to a physical trail for walking, running, or cycling, a racing circuit for cars or athletes, or even the path laid out for trains. Tracks can be natural, like forest trails, or man-made, like stadium tracks or train lines, and are often designed to facilitate specific activities"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Track 3",
       "description": "A track is a path or route used for various activities such as transportation, racing, or recreation. It can refer to a physical trail for walking, running, or cycling, a racing circuit for cars or athletes, or even the path laid out for trains. Tracks can be natural, like forest trails, or man-made, like stadium tracks or train lines, and are often designed to facilitate specific activities"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Track 4",
       "description": "A track is a path or route used for various activities such as transportation, racing, or recreation. It can refer to a physical trail for walking, running, or cycling, a racing circuit for cars or athletes, or even the path laid out for trains. Tracks can be natural, like forest trails, or man-made, like stadium tracks or train lines, and are often designed to facilitate specific activities"
     }
   ],
-
   "blogs": [
     {
       "image": "one-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "April 24, 2022 - 5 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "id": "5e54"
     },
     {
       "image": "two-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "April 03, 2022 - 4 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "id": "c617"
     },
     {
       "image": "three-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "March 12, 2022 - 6 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "id": "b14f"
     },
     {
       "image": "four-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "April 24, 2022 - 5 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "id": "59a4"
     },
     {
       "image": "five-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "April 03, 2022 - 4 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "id": "832d"
     },
     {
       "image": "six-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "March 12, 2022 - 6 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "id": "d5bd"
     }
   ]
 }

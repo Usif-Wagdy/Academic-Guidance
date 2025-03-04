@@ -4,6 +4,7 @@ import { coursesAPI } from "../../api/Api";
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
+
 export default function Courses() {
   const [courses, setCourses] = useState([]);
 
@@ -39,7 +40,8 @@ export default function Courses() {
       </div>
 
       <div className="between-flex flex-wrap p-2">
-        <div className="py-2">-
+        <div className="py-2">
+          -
           <span className="me-2 py-2 px-3 border rounded-3">
             {course.duration}
           </span>
