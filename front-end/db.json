@@ -181,7 +181,8 @@
         "name": "youssef",
         "email": "wego@test.com",
         "password": "Wego@123123",
-        "profilePicture": "https://i.pravatar.cc/150?img=3"
+        "profilePicture": "https://www.viverefermo.it/images/user.png",
+        "role": "admin"
       }
     }
   ]

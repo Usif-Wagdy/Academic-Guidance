@@ -4,19 +4,23 @@ import Cookies from "js-cookie";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState(null);
+  const [auth, setAuth] = useState(() => {
+    const token = Cookies.get("authToken");
+    const userData = Cookies.get("userData");
+
+    return token && userData ? { token, user: JSON.parse(userData) } : null;
+  });
 
   useEffect(() => {
     const token = Cookies.get("authToken");
     const userData = Cookies.get("userData");
 
-    // console.log("Auth Token from Cookies:", token);
-    // console.log("User Data from Cookies:", userData);
-
     if (token && userData) {
       setAuth({ token, user: JSON.parse(userData) });
+    } else {
+      setAuth(null);
     }
-  }, [Cookies.get("authToken")]); // Runs again if token changes
+  }, []);
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>

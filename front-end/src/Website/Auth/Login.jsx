@@ -7,12 +7,14 @@ import { Axios } from "../../api/axios";
 import { usersAPI } from "../../api/Api";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/AuthProvider";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
@@ -56,6 +58,7 @@ export default function Login() {
       // Store user data
       Cookies.set("userData", JSON.stringify(userData), { expires: 7 });
 
+      setAuth({ token: token, user: userData });
       // Redirect to home
       navigate("/");
     } catch (error) {
