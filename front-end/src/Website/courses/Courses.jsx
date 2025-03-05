@@ -12,6 +12,7 @@ export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [visibleItems, setVisibleItems] = useState(2);
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     Axios(`${coursesAPI}`).then((res) => {
@@ -109,8 +110,41 @@ export default function Courses() {
               </div>
 
               <div className="d-flex flex-column border rounded-3 mt-5">
-                <div className="fw-bold fs-5 border-bottom p-3">Curriculum</div>
-                <div className="d-flex justify-content-between py-3 flex-wrap">
+                {/* Header (Clickable on mobile) */}
+                <div className="fw-bold fs-5 border-bottom p-3 d-flex justify-content-between align-items-center">
+                  Curriculum
+                  <Button
+                    variant="secondary"
+                    className="d-lg-none"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setOpen(!open)}
+                  >
+                    {open ? "▲" : "▼"}
+                  </Button>
+                </div>
+
+                {/* Mobile View: Collapsible */}
+                {open && (
+                  <div className="d-lg-none py-3">
+                    {course.curriculum.map((step, i) => (
+                      <Card
+                        key={i}
+                        className="border-0 w-100 mb-2"
+                        style={{ minWidth: "180px" }}
+                      >
+                        <Card.Body className="border-bottom">
+                          <Card.Title className="fs-1 fw-bold">{`0${
+                            i + 1
+                          }`}</Card.Title>
+                          <Card.Text className="fs-16px">{step}</Card.Text>
+                        </Card.Body>
+                      </Card>
+                    ))}
+                  </div>
+                )}
+
+                {/* Desktop View: Row Layout */}
+                <div className="d-none d-lg-flex justify-content-between py-3 flex-wrap">
                   {course.curriculum.map((step, i) => (
                     <Card
                       key={i}
