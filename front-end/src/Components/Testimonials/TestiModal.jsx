@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Button, Card } from "react-bootstrap";
+import { Modal, Card } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { motion } from "framer-motion";
 

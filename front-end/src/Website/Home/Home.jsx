@@ -59,7 +59,7 @@ export default function Home() {
   ));
 
   return (
-    <Container>
+    <Container className="my-5">
       {/* Hero msg */}
       <Row className="text-center ">
         <Col className="my-4">
@@ -116,13 +116,13 @@ export default function Home() {
 
       {/* Hero Video STATIC */}
       <Row className="mb-4">
-        <img src={require("../../Assets/hero.png")} alt="hero" />
+        <img src={require("../../Assets/hero.png")} alt="hero" loading="lazy" />
       </Row>
 
-      {/* Benefits Section STATIC */}
-      <Row className="justify-content-center align-items-center ">
-        <div className="center-flex flex-wrap">
-          <div className="d-flex flex-column col-md-10 col-12 mt-5 mb-3">
+      {/* Benefits Section API */}
+      <Row className="justify-content-center align-items-center mt-5">
+        <div className="center-flex flex-wrap" id="benefits">
+          <div className="d-flex flex-column col-md-10 col-12  mb-3">
             <h2 className="w-100">Benefits</h2>
             <p className="my-1 text-muted">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam
@@ -142,9 +142,9 @@ export default function Home() {
       <Benefits layout="grid" />
 
       {/* Courses Section API */}
-      <Row className="justify-content-center align-items-center ">
-        <div className="center-flex flex-wrap">
-          <div className="d-flex flex-column col-md-10 col-12 mt-5 mb-4">
+      <Row className="justify-content-center align-items-center mt-5">
+        <div className="center-flex flex-wrap" id="courses">
+          <div className="d-flex flex-column col-md-10 col-12 mb-4">
             <h2 className="w-100">Our Courses</h2>
             <p className="my-1 text-muted">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam
@@ -166,9 +166,9 @@ export default function Home() {
       </Row>
 
       {/* Testimonials Section API */}
-      <Row className="justify-content-center align-items-center ">
-        <div className="center-flex flex-wrap">
-          <div className="d-flex flex-column col-md-10 col-12 mt-5 mb-3">
+      <Row className="justify-content-center align-items-center mt-5 ">
+        <div className="center-flex flex-wrap" id="testimonials">
+          <div className="d-flex flex-column col-md-10 col-12  mb-3">
             <h2 className="w-100">Our Testimonials</h2>
             <p className="my-1 text-muted">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam

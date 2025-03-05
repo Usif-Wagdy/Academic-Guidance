@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -6,18 +6,20 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Card, Button, Container, Row, Col, Modal } from "react-bootstrap";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import testimonialsData from "../../Data/testimonialsData";
 import TestiModal from "./TestiModal";
+import { Axios } from "../../api/axios";
+import { testmonialsAPI } from "../../api/Api";
 
 const MAX_TEXT_LENGTH = 100;
 
 export default function Testimonials({ layout = "slider" }) {
   const [selectedTestimonial, setSelectedTestimonial] = useState(null);
+  const [testimonials, setTestimonials] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const swiperRef = useRef(null);
 
   // Only Show 4 Testimonials in Slider
-  const limitedTestimonials = testimonialsData.slice(0, 4);
+  const limitedTestimonials = testimonials.slice(0, 4);
 
   // Open modal for full testimonial
   const openModal = (testimonial) => {
@@ -33,6 +35,10 @@ export default function Testimonials({ layout = "slider" }) {
   const handleModalClose = () => {
     setShowModal(false);
   };
+
+  useEffect(() => {
+    Axios(`${testmonialsAPI}`).then((res) => setTestimonials(res.data));
+  }, []);
 
   return (
     <Container className="mt-3">
@@ -174,7 +180,7 @@ export default function Testimonials({ layout = "slider" }) {
         show={showModal}
         onClose={handleModalClose}
         title="All Testimonials"
-        contentList={testimonialsData}
+        contentList={testimonials}
         imageKey="profilePic"
         animate={true}
       />

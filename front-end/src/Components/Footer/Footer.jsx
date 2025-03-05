@@ -1,6 +1,7 @@
-import { Col, Container, Nav, Row } from "react-bootstrap";
+import { useState } from "react";
+import { Col, Container, Nav, Row, Accordion } from "react-bootstrap";
 import logo from "../../Assets/Logo.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   FaEnvelope,
   FaFacebook,
@@ -11,122 +12,180 @@ import {
 } from "react-icons/fa";
 
 export default function Footer() {
+  const [activeKey, setActiveKey] = useState(null);
+  const navigate = useNavigate();
+
+  const toggleAccordion = (key) => {
+    setActiveKey(activeKey === key ? null : key);
+  };
+
+  // handle navigation and scrolling
+  const handleNavigation = (path, section) => {
+    navigate(path);
+    setTimeout(() => {
+      const element = document.getElementById(section);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
+
   return (
-    <footer className="bg-light text-center py-3 mt-auto shadow-sm">
+    <footer className="bg-light text-center py-4 mt-auto shadow-sm">
       <Container>
-        <Row className="align-items-center flex-column flex-sm-row">
-          <Col>
-            <Link to={"/"} className="d-block text-center text-sm-start mb-3">
-              <img src={logo} alt="Logo" width="40" height="40" />
-            </Link>
-            <Row>
+        <Row className="align-items-center flex-column flex-lg-row text-lg-start">
+          {/* Logo and Contact (Reach For Us) */}
+          <Col lg={3} className="mb-4 mb-lg-0">
+            <div className="d-flex justify-content-center justify-content-lg-start">
+              <img src={logo} alt="Logo" width="50" height="50" />
+            </div>
+            <h6 className="fw-bold mt-3">Reach For Us</h6>
+            <div className="d-flex flex-column gap-2 text-muted">
               <a
                 href="mailto:someone@example.com"
-                className="d-flex align-items-center gap-2 ps-3 text-decoration-none text-dark"
+                className="text-decoration-none"
               >
-                <FaEnvelope /> someone@example.com
+                <FaEnvelope className="me-2" /> someone@example.com
               </a>
-            </Row>
-
-            <Row>
-              <a
-                href="tel:+201234567890"
-                className="d-flex align-items-center gap-2 ps-3 text-decoration-none text-dark"
-              >
-                <FaPhone /> +20 123 456 7890
+              <a href="tel:+201234567890" className="text-decoration-none">
+                <FaPhone className="me-2" /> +20 123 456 7890
               </a>
-            </Row>
-
-            <Row>
               <a
                 href="https://www.google.com/maps/search/?q=Cairo,Egypt"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="d-flex align-items-center gap-2 ps-3 text-decoration-none text-dark"
+                className="text-decoration-none"
               >
-                <FaMapMarkerAlt /> Cairo, Egypt
+                <FaMapMarkerAlt className="me-2" /> Cairo, Egypt
               </a>
-            </Row>
-            <Row></Row>
+            </div>
           </Col>
 
-          <Col>
-            <Nav className="flex-column  py-2">
+          {/* Quick Links */}
+          <Col lg={3}>
+            <Accordion activeKey={activeKey} className="d-lg-none">
+              <Accordion.Item eventKey="0">
+                <Accordion.Header onClick={() => toggleAccordion("0")}>
+                  Quick Links
+                </Accordion.Header>
+                <Accordion.Body>
+                  <Nav className="flex-column">
+                    {[
+                      { section: "benefits", label: "Benefits" },
+                      { section: "courses", label: "Our Courses" },
+                      { section: "testimonials", label: "Testimonials" },
+                      { section: "faq", label: "Our FAQ" },
+                    ].map(({ section, label }) => (
+                      <Nav.Link
+                        key={section}
+                        onClick={() => handleNavigation("/", section)}
+                        className="text-muted cursor-pointer"
+                      >
+                        {label}
+                      </Nav.Link>
+                    ))}
+                  </Nav>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+
+            {/* Desktop Quick Links */}
+            <div className="d-none d-lg-flex flex-column">
+              <h6 className="fw-bold">Quick Links</h6>
               {[
-                { path: "/", label: "Home" },
-                { path: "/benefits", label: "Benefits" },
-                { path: "/courses", label: "Our Courses" },
-                { path: "/testimonials", label: "Testimonials" },
-                { path: "/faq", label: "Our FAQ" },
-              ].map(({ path, label }) => (
+                { section: "benefits", label: "Benefits" },
+                { section: "courses", label: "Our Courses" },
+                { section: "testimonials", label: "Testimonials" },
+                { section: "faq", label: "Our FAQ" },
+              ].map(({ section, label }) => (
                 <Nav.Link
-                  key={path}
-                  as={Link}
-                  to={path}
-                  className="text-dark  text-start px-3"
+                  key={section}
+                  onClick={() => handleNavigation("/", section)}
+                  className="text-muted cursor-pointer"
                 >
                   {label}
                 </Nav.Link>
               ))}
-            </Nav>
+            </div>
           </Col>
 
-          <Col>
-            <Nav className="flex-column  py-2">
+          {/* Company Links */}
+          <Col lg={3}>
+            <Accordion activeKey={activeKey} className="d-lg-none">
+              <Accordion.Item eventKey="1">
+                <Accordion.Header onClick={() => toggleAccordion("1")}>
+                  Company
+                </Accordion.Header>
+                <Accordion.Body>
+                  <Nav className="flex-column">
+                    {[
+                      { section: "company", label: "Company" },
+                      { section: "achievements", label: "Achievements" },
+                      { section: "goal", label: "Our Goal" },
+                    ].map(({ section, label }) => (
+                      <Nav.Link
+                        key={section}
+                        onClick={() => handleNavigation("/about", section)}
+                        className="text-muted cursor-pointer"
+                      >
+                        {label}
+                      </Nav.Link>
+                    ))}
+                  </Nav>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+
+            {/* Desktop Company Links */}
+            <div className="d-none d-lg-flex flex-column">
+              <h6 className="fw-bold">Company</h6>
               {[
-                { path: "/about", label: "About Us" },
-                { path: "/company", label: "Company" },
-                { path: "/achievments", label: "Achievments" },
-                { path: "/goal", label: "Our Goal" },
-              ].map(({ path, label }) => (
+                { section: "company", label: "Company" },
+                { section: "achievements", label: "Achievements" },
+                { section: "goal", label: "Our Goal" },
+              ].map(({ section, label }) => (
                 <Nav.Link
-                  key={path}
-                  as={Link}
-                  to={path}
-                  className="text-dark text-start px-3"
+                  key={section}
+                  onClick={() => handleNavigation("/about", section)}
+                  className="text-muted cursor-pointer"
                 >
                   {label}
                 </Nav.Link>
               ))}
-            </Nav>
+            </div>
           </Col>
 
-          <Col>
-            <p className="fw-bold pt-2 fs-5 mb-2">Social Profiles</p>
-            <ul className="d-flex justify-content-center gap-3">
-              <li>
-                <a
-                  href="https://www.facebook.com/"
-                  target="_blank"
-                  className="text-secondary fs-5"
-                >
-                  <FaFacebook />
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="https://www.x.com/"
-                  target="_blank"
-                  className="text-secondary fs-5"
-                >
-                  <FaTwitter />
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="https://www.linkedin.com/"
-                  target="_blank"
-                  className="text-secondary fs-5"
-                >
-                  <FaLinkedin />
-                </a>
-              </li>
-            </ul>
-          </Col>
+          {/* Social Media */}
+          <div className="mt-4 mt-lg-0 col-lg-3 col">
+            <h6 className="fw-bold text-center mb-3">Follow Us</h6>
+            <div className="center-flex gap-3">
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                className="btn btn-secondary p-2  center-flex fs-4 "
+              >
+                <FaFacebook />
+              </a>
+              <a
+                href="https://www.twitter.com/"
+                target="_blank"
+                className="btn btn-secondary p-2  center-flex fs-4 "
+              >
+                <FaTwitter />
+              </a>
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                className="btn btn-secondary p-2  center-flex fs-4 "
+              >
+                <FaLinkedin />
+              </a>
+            </div>
+          </div>
         </Row>
-        <p className="mb-0 mt-4 text-secondary">
+
+        {/* Copyright */}
+        <p className="mb-0 mt-4 text-muted">
           © 2024 Your Website. All Rights Reserved.
         </p>
       </Container>

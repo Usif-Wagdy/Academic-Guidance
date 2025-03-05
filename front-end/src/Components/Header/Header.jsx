@@ -18,6 +18,7 @@ export default function Header() {
   const [activeLink, setActiveLink] = useState(location.pathname);
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     if (location.pathname.startsWith("/blogs")) {
@@ -43,6 +44,7 @@ export default function Header() {
     Cookies.remove("userData");
     setAuth(null);
     navigate("/auth/login");
+    setExpanded(false);
   };
 
   return (
@@ -52,6 +54,7 @@ export default function Header() {
       variant="light"
       fixed="top"
       className="shadow-sm"
+      expanded={expanded}
     >
       <Container>
         {/* Logo (Left) */}
@@ -63,6 +66,7 @@ export default function Header() {
         <Navbar.Toggle
           aria-controls="navbar-nav"
           className="border-0 shadow-none"
+          onClick={() => setExpanded(expanded ? false : true)}
         >
           <FaBars />
         </Navbar.Toggle>
@@ -83,6 +87,7 @@ export default function Header() {
                 key={path}
                 as={Link}
                 to={path}
+                onClick={() => setExpanded(false)}
                 className={`py-2 py-lg-0 ${
                   activeLink === path ? "fw-bold text-primary" : ""
                 }`}
@@ -99,7 +104,12 @@ export default function Header() {
                 placement="bottom"
                 overlay={<Tooltip id="logout-tooltip">Profile</Tooltip>}
               >
-                <Button as={Link} to="/profile" variant="link">
+                <Button
+                  as={Link}
+                  to="/profile"
+                  variant="link"
+                  onClick={() => setExpanded(false)}
+                >
                   <img
                     src={auth.user.profilePicture}
                     alt="Profile"
@@ -130,6 +140,7 @@ export default function Header() {
                 }
                 as={Link}
                 to="/auth/login"
+                onClick={() => setExpanded(false)}
                 className="mb-2 py-1"
               >
                 Login
@@ -142,6 +153,7 @@ export default function Header() {
                 }
                 as={Link}
                 to="/auth/register"
+                onClick={() => setExpanded(false)}
                 className="py-1"
               >
                 Register

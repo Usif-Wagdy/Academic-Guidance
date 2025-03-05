@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { FaLeftLong } from "react-icons/fa6";
 import Testimonials from "../../Components/Testimonials/Testimonials";
 import "./Auth.css";
 
@@ -13,11 +12,8 @@ function Auth() {
 
   return (
     <Container className="d-flex justify-content-around align-items-center min-vh-100 py-4">
-      <Row className="w-100 justify-content-center">
+      <Row className="w-100 justify-content-center align-items-center">
         <Col lg={7} className="d-none d-lg-block left fade-in">
-          <Button variant="outline-dark" onClick={() => navigate("/")}>
-            <FaLeftLong /> Home
-          </Button>
           <Row className="align-items-center flex-column justify-content-start h-100 text-center testimonials ">
             <h2 className="mt-4 mb-2 text-start">Students Testimonials</h2>
             <p className="text-start text-muted mb-4">
