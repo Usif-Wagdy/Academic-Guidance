@@ -7,14 +7,109 @@
       "duration": "4 Week",
       "level": "Beginner",
       "author": "John Smith",
+      "images": ["one-1.jpg", "one-2.jpg", "one-3.jpg"],
       "curriculum": [
-        "Introduction to HTML",
-        "Styling wit CSS",
-        "Introduction to Responsive Design",
-        "Design Principles for Web",
-        "Building a Basic Website"
-      ],
-      "images": ["one-1.jpg", "one-2.jpg", "one-3.jpg"]
+        {
+          "title": "Introduction to HTML",
+          "parts": [
+            {
+              "title": "Understanding UI/UX Design Principles",
+              "duration": "45 Minutes",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Importance of User-Centered Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "The Role of UI/UX Design in Product Development",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Styling wit CSS",
+          "parts": [
+            {
+              "title": "Conducting User Research and Interviews",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Analyzing User Needs and Behavior",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Creating User Personas and Scenarios",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Introduction to Responsive Design",
+          "parts": [
+            {
+              "title": "Introduction to Wireframing Tools and Techniques",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Creating Low-Fidelity Wireframes",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Prototyping and Interactive Mockups",
+              "duration": "1 Hour",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Design Principles for Web",
+          "parts": [
+            {
+              "title": "Color Theory and Typography in UI Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Visual Hierarchy and Layout Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Creating a Strong Brand Identity",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Building a Basic Website",
+          "parts": [
+            {
+              "title": "Usability Testing Methods and Techniques",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Analyzing Usability Test Results",
+              "duration": "45 Minutes",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Iterating and Improving UX Designs",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "2",
@@ -23,14 +118,109 @@
       "duration": "6 Week",
       "level": "Intermediate",
       "author": "Emily Johanson",
+      "images": ["two-1.jpg", "two-2.jpg", "two-3.jpg"],
       "curriculum": [
-        "Introduction to UI/UX Design",
-        "User Research and Personas",
-        "Wireframing and Prototyping",
-        "Visual Design and Branding",
-        "Usability Testing and Lteration"
-      ],
-      "images": ["two-1.jpg", "two-2.jpg", "two-3.jpg"]
+        {
+          "title": "Introduction to UI/UX Design",
+          "parts": [
+            {
+              "title": "Understanding UI/UX Design Principles",
+              "duration": "45 Minutes",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Importance of User-Centered Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "The Role of UI/UX Design in Product Development",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "User Research and Personas",
+          "parts": [
+            {
+              "title": "Conducting User Research and Interviews",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Analyzing User Needs and Behavior",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Creating User Personas and Scenarios",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Wireframing and Prototyping",
+          "parts": [
+            {
+              "title": "Introduction to Wireframing Tools and Techniques",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Creating Low-Fidelity Wireframes",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Prototyping and Interactive Mockups",
+              "duration": "1 Hour",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Visual Design and Branding",
+          "parts": [
+            {
+              "title": "Color Theory and Typography in UI Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Visual Hierarchy and Layout Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Creating a Strong Brand Identity",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Usability Testing and Lteration",
+          "parts": [
+            {
+              "title": "Usability Testing Methods and Techniques",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Analyzing Usability Test Results",
+              "duration": "45 Minutes",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Iterating and Improving UX Designs",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "3",
@@ -39,14 +229,109 @@
       "duration": "8 Week",
       "level": "Intermediate",
       "author": "David Brown",
+      "images": ["three-1.jpg", "three-2.jpg", "three-3.jpg"],
       "curriculum": [
-        "Introduction to Mobile App Development",
-        "Fundamentals of Swift Programming (iOS)",
-        "Fundamentals of Kotlin Programming (Android)",
-        "Bulding User Interfaces",
-        "App Deploymen and Testing"
-      ],
-      "images": ["three-1.jpg", "three-2.jpg", "three-3.jpg"]
+        {
+          "title": "Introduction to Mobile App Development",
+          "parts": [
+            {
+              "title": "Understanding UI/UX Design Principles",
+              "duration": "45 Minutes",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Importance of User-Centered Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "The Role of UI/UX Design in Product Development",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Fundamentals of Swift Programming (iOS)",
+          "parts": [
+            {
+              "title": "Conducting User Research and Interviews",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Analyzing User Needs and Behavior",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Creating User Personas and Scenarios",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Fundamentals of Kotlin Programming (Android)",
+          "parts": [
+            {
+              "title": "Introduction to Wireframing Tools and Techniques",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Creating Low-Fidelity Wireframes",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Prototyping and Interactive Mockups",
+              "duration": "1 Hour",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Bulding User Interfaces",
+          "parts": [
+            {
+              "title": "Color Theory and Typography in UI Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Visual Hierarchy and Layout Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Creating a Strong Brand Identity",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "App Deploymen and Testing",
+          "parts": [
+            {
+              "title": "Usability Testing Methods and Techniques",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Analyzing Usability Test Results",
+              "duration": "45 Minutes",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Iterating and Improving UX Designs",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "4",
@@ -55,14 +340,109 @@
       "duration": "10 Week",
       "level": "Beginner",
       "author": "Sarah Thompson",
+      "images": ["four-1.jpg", "four-2.jpg", "four-3.jpg"],
       "curriculum": [
-        "Introduction to Grapgic Design",
-        "Typography and Color Theory",
-        "Layout Design and Composition",
-        "Image Editing and Manipulation",
-        "Designing for Print and Digital Media"
-      ],
-      "images": ["four-1.jpg", "four-2.jpg", "four-3.jpg"]
+        {
+          "title": "Introduction to Grapgic Design",
+          "parts": [
+            {
+              "title": "Understanding UI/UX Design Principles",
+              "duration": "45 Minutes",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Importance of User-Centered Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "The Role of UI/UX Design in Product Development",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Typography and Color Theory",
+          "parts": [
+            {
+              "title": "Conducting User Research and Interviews",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Analyzing User Needs and Behavior",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Creating User Personas and Scenarios",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Layout Design and Composition",
+          "parts": [
+            {
+              "title": "Introduction to Wireframing Tools and Techniques",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Creating Low-Fidelity Wireframes",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Prototyping and Interactive Mockups",
+              "duration": "1 Hour",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Image Editing and Manipulation",
+          "parts": [
+            {
+              "title": "Color Theory and Typography in UI Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Visual Hierarchy and Layout Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Creating a Strong Brand Identity",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Designing for Print and Digital Media",
+          "parts": [
+            {
+              "title": "Usability Testing Methods and Techniques",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Analyzing Usability Test Results",
+              "duration": "45 Minutes",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Iterating and Improving UX Designs",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5",
@@ -71,14 +451,109 @@
       "duration": "10 Week",
       "level": "Intermediate",
       "author": "Michael Adams",
+      "images": ["five-1.jpg", "five-2.jpg", "five-3.jpg"],
       "curriculum": [
-        "HTML Fundamintals",
-        "CSS Styling and Layouts",
-        "JavaScript Basics",
-        "Bulding Responsive Websites",
-        "Introduction to Bootsrap and React"
-      ],
-      "images": ["five-1.jpg", "five-2.jpg", "five-3.jpg"]
+        {
+          "title": "HTML Fundamintals",
+          "parts": [
+            {
+              "title": "Understanding UI/UX Design Principles",
+              "duration": "45 Minutes",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Importance of User-Centered Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "The Role of UI/UX Design in Product Development",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "CSS Styling and Layouts",
+          "parts": [
+            {
+              "title": "Conducting User Research and Interviews",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Analyzing User Needs and Behavior",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Creating User Personas and Scenarios",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "JavaScript Basics",
+          "parts": [
+            {
+              "title": "Introduction to Wireframing Tools and Techniques",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Creating Low-Fidelity Wireframes",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Prototyping and Interactive Mockups",
+              "duration": "1 Hour",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Bulding Responsive Websites",
+          "parts": [
+            {
+              "title": "Color Theory and Typography in UI Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Visual Hierarchy and Layout Design",
+              "duration": "1 Hour",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Creating a Strong Brand Identity",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        },
+        {
+          "title": "Introduction to Bootsrap and React",
+          "parts": [
+            {
+              "title": "Usability Testing Methods and Techniques",
+              "duration": "1 Hour",
+              "numbering": "lesson 01"
+            },
+            {
+              "title": "Analyzing Usability Test Results",
+              "duration": "45 Minutes",
+              "numbering": "lesson 02"
+            },
+            {
+              "title": "Iterating and Improving UX Designs",
+              "duration": "45 Minutes",
+              "numbering": "lesson 03"
+            }
+          ]
+        }
+      ]
     }
   ],
   "testimonials": [
@@ -137,46 +612,65 @@
   ],
   "blogs": [
     {
+      "id": "1",
+      "author": "youssef wagdy",
       "image": "one-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "April 24, 2022 - 5 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "id": "5e54"
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     },
     {
+      "id": "2",
+      "author": "youssef wagdy",
       "image": "two-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "April 03, 2022 - 4 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "id": "c617"
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non  posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     },
     {
+      "id": "3",
+      "author": "youssef wagdy",
       "image": "three-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "March 12, 2022 - 6 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "id": "b14f"
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     },
     {
+      "id": "4",
+      "author": "youssef wagdy",
       "image": "four-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "April 24, 2022 - 5 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "id": "59a4"
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuer econsectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     },
     {
+      "id": "5",
+      "author": "youssef wagdy",
       "image": "five-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "April 03, 2022 - 4 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "id": "832d"
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     },
     {
+      "id": "6",
+      "author": "youssef wagdy",
       "image": "six-1.jpg",
       "title": "Lorem ipsum dolor ",
       "date": "March 12, 2022 - 6 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "id": "d5bd"
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }
+  ],
+  "users": [
+    {
+      "token": "TOKEN",
+      "userData": {
+        "id": "1",
+        "name": "youssef",
+        "email": "wego@test.com",
+        "password": "Wego@123123",
+        "profilePicture": "https://www.viverefermo.it/images/user.png",
+        "role": "admin"
+      }
     }
   ]
 }

@@ -8,3 +8,5 @@ export const testmonialsAPI = "testimonials";
 export const tracksAPI = "tracks";
 
 export const blogsAPI = "blogs";
+
+export const usersAPI = "users";

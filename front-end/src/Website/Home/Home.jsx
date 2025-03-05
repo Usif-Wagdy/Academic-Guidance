@@ -19,17 +19,18 @@ export default function Home() {
     <Col className=" mb-4  " key={i}>
       <div className="p-3 p-md-4 bg-white h-100 d-flex flex-column justify-content-between">
         <div>
-          <Card key={i} className=" p-2 border-0">
+          <Card key={i} className=" border-0">
             <Card.Img
               variant="top"
               src={require(`../../Assets/courses/${course.images[0]}`)}
-              style={{ maxWidth: "560px", maxHeight: "176px" }}
+              style={{
+                maxHeight: "300px",
+              }}
             />
           </Card>
 
-          <div className="between-flex flex-wrap p-2">
+          <div className="between-flex flex-wrap py-2">
             <div className="py-2">
-              -
               <span className="me-2 py-2 px-3 border rounded-3 fs-14px">
                 {course.duration}
               </span>
@@ -47,7 +48,7 @@ export default function Home() {
             <h3 className="w-100 ">{course.name}</h3>
             <p className="my-1 ">{course.description}</p>
           </div>
-          <Link to="/" className="my-3 ">
+          <Link to={`courses/${course.id}`} className="my-3 ">
             <Button className="bg-info border w-sm-100 w-md-100">
               Get it Now
             </Button>

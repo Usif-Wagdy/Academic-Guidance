@@ -1,0 +1,5 @@
+.course-card {
+  @media (min-width: 768px) {
+    width: 48% !important;
+  }
+}

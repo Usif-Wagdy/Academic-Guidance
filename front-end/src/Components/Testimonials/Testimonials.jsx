@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import { Card, Button, Container, Row, Col, Modal } from "react-bootstrap";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import testimonialsData from "../../Data/testimonialsData";
-import ReusableModal from "./TestiModal";
+import TestiModal from "./TestiModal";
 
 const MAX_TEXT_LENGTH = 100;
 
@@ -170,7 +170,7 @@ export default function Testimonials({ layout = "slider" }) {
       </Modal>
 
       {/* Infinite Scroll Modal (View All) */}
-      <ReusableModal
+      <TestiModal
         show={showModal}
         onClose={handleModalClose}
         title="All Testimonials"
