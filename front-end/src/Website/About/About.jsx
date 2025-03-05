@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 export default function About() {
   return (
     <Container>
-      <Row>
+      <Row id="company">
         <div className="d-flex justify-content-between align-items-center my-5 flex-wrap text-center text-md-start">
           <h1 className="col-md-6 col-12">About Skillbridge</h1>
           <p className="col-md-6 col-12">
@@ -28,7 +28,7 @@ export default function About() {
       </Row>
 
       {/* Achievements */}
-      <Row className="mt-5 center-flex">
+      <Row className="mt-5 center-flex" id="achievements">
         <div className="text-center text-md-start">
           <h1>Achievements</h1>
           <p>
@@ -99,7 +99,7 @@ export default function About() {
       </Row>
 
       {/* Goals */}
-      <Row className="mt-5 center-flex">
+      <Row className="mt-5 center-flex" id="goal">
         <div className="text-center text-md-start">
           <h1>Our Goals</h1>
           <p>
