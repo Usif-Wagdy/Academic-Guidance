@@ -136,7 +136,9 @@ export default function Courses() {
                           <Card.Title className="fs-1 fw-bold">{`0${
                             i + 1
                           }`}</Card.Title>
-                          <Card.Text className="fs-16px">{step}</Card.Text>
+                          <Card.Text className="fs-16px">
+                            {step.title}
+                          </Card.Text>
                         </Card.Body>
                       </Card>
                     ))}

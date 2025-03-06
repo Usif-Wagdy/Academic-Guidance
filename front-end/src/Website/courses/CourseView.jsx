@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { motion } from "framer-motion";
 import "./courses.css";
+import Breadcrumbs from "../../Components/BreadCrumbs/BreadCrumbs";
 
 export default function CourseView() {
   const [currCourse, setCurrCourse] = useState([]);
@@ -15,13 +16,13 @@ export default function CourseView() {
     Axios(`${coursesAPI}/${id}`)
       .then((res) => {
         setCurrCourse(res.data);
-        console.log(1);
       })
       .catch((error) => console.log(error));
   }, [id]);
 
   return (
-    <Container>
+    <Container className="my-5">
+      <Breadcrumbs title={currCourse.name} />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
