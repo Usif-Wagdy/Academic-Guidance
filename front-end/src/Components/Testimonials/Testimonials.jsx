@@ -56,7 +56,6 @@ export default function Testimonials({ layout = "slider" }) {
             }}
             pagination={{ clickable: true }}
             autoplay={{ delay: 3000 }}
-            loop
             className="pb-5"
           >
             {limitedTestimonials.map(
