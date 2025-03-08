@@ -27,8 +27,8 @@ export default function Header() {
       setActiveLink("/tracks");
     } else if (location.pathname.startsWith("/courses")) {
       setActiveLink("/courses");
-    } else if (location.pathname.startsWith("/internship")) {
-      setActiveLink("/internship");
+    } else if (location.pathname.startsWith("/internshipss")) {
+      setActiveLink("/internshipss");
     } else if (location.pathname.startsWith("/cvbuilder")) {
       setActiveLink("/cvbuilder");
     } else if (location.pathname.startsWith("/about")) {
@@ -78,7 +78,7 @@ export default function Header() {
               { path: "/", label: "Home" },
               { path: "/tracks", label: "Tracks" },
               { path: "/courses", label: "Courses" },
-              { path: "/internship", label: "Internship" },
+              { path: "/internships", label: "internships" },
               { path: "/blogs", label: "Blog" },
               { path: "/cvbuilder", label: "CV Builder" },
               { path: "/about", label: "About Us" },

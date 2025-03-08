@@ -35,6 +35,7 @@ import Blogs from "./Website/blogs/Blogs";
 import BlogView from "./Website/blogs/BlogView";
 import About from "./Website/About/About";
 import CourseView from "./Website/courses/CourseView";
+import Internships from "./Website/internship/Internship";
 
 // Layout with header and footer
 const MainLayout = () => (
@@ -66,6 +67,7 @@ root.render(
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blogs/:id" element={<BlogView />} />
             <Route path="/about" element={<About />} />
+            <Route path="/internships" element={<Internships />} />
           </Route>
           <Route
             path="/dashboard"

@@ -592,21 +592,25 @@
     {
       "id": "1",
       "name": "Track 1",
+      "image": "roadmap.jpg",
       "description": "A track is a path or route used for various activities such as transportation, racing, or recreation. It can refer to a physical trail for walking, running, or cycling, a racing circuit for cars or athletes, or even the path laid out for trains. Tracks can be natural, like forest trails, or man-made, like stadium tracks or train lines, and are often designed to facilitate specific activities"
     },
     {
       "id": "2",
       "name": "Track 2",
+      "image": "roadmap.jpg",
       "description": "A track is a path or route used for various activities such as transportation, racing, or recreation. It can refer to a physical trail for walking, running, or cycling, a racing circuit for cars or athletes, or even the path laid out for trains. Tracks can be natural, like forest trails, or man-made, like stadium tracks or train lines, and are often designed to facilitate specific activities"
     },
     {
       "id": "3",
       "name": "Track 3",
+      "image": "roadmap.jpg",
       "description": "A track is a path or route used for various activities such as transportation, racing, or recreation. It can refer to a physical trail for walking, running, or cycling, a racing circuit for cars or athletes, or even the path laid out for trains. Tracks can be natural, like forest trails, or man-made, like stadium tracks or train lines, and are often designed to facilitate specific activities"
     },
     {
       "id": "4",
       "name": "Track 4",
+      "image": "roadmap.jpg",
       "description": "A track is a path or route used for various activities such as transportation, racing, or recreation. It can refer to a physical trail for walking, running, or cycling, a racing circuit for cars or athletes, or even the path laid out for trains. Tracks can be natural, like forest trails, or man-made, like stadium tracks or train lines, and are often designed to facilitate specific activities"
     }
   ],
@@ -712,6 +716,116 @@
       "id": "6",
       "title": "Interactive Learning Environment",
       "description": "Collaborate with fellow learners, exchanging ideas and feedback to enhance your understanding."
+    }
+  ],
+  "internships": [
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+    },
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+    },
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+    },
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+    },
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+    },
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+    },
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+    },
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+    },
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+    },
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+    },
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+    },
+    {
+      "image": "dell.png",
+      "sponser": "VOX",
+      "company": "Ferrari",
+      "place": "NEW YOURK CITY,NEW YOURK",
+      "price": "$275.43-$293.01",
+      "ranking": "7d",
+      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
     }
   ]
 }

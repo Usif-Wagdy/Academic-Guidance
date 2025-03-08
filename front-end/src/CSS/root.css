@@ -28,6 +28,23 @@
   width: 100px !important;
 }
 
+@media (min-width: 768px) {
+  .w-md-25px {
+    width: 25px !important;
+  }
+
+  .w-md-50px {
+    width: 50px !important;
+  }
+
+  .w-md-75px {
+    width: 75px !important;
+  }
+
+  .w-md-100px {
+    width: 100px !important;
+  }
+}
 /* Custom Font Size */
 .fs-12px {
   font-size: 12px !important;
@@ -67,6 +84,9 @@
 
 .fs-30px {
   font-size: 30px !important;
+}
+.fs-60px {
+  font-size: 60px !important;
 }
 
 @media (min-width: 768px) {
@@ -109,6 +129,9 @@
   .fs-md-30px {
     font-size: 30px !important;
   }
+  .fs-md-60px {
+    font-size: 60px !important;
+  }
 }
 
 /* Custom flex */
@@ -142,3 +165,6 @@
   font-style: normal;
 }
 
+.z-10 {
+  z-index: 10;
+}

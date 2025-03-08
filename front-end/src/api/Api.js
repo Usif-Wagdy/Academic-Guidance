@@ -14,3 +14,5 @@ export const usersAPI = "users";
 export const BrandsImagesAPI = "brands";
 
 export const benefitsDataAPI = "benefits";
+
+export const internshipsAPI = "internships";
