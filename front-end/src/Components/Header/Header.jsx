@@ -7,6 +7,7 @@ import {
   Button,
   OverlayTrigger,
   Tooltip,
+  Dropdown,
 } from "react-bootstrap";
 import { FaBars, FaSignOutAlt } from "react-icons/fa";
 import logo from "../../Assets/Logo.png";
@@ -100,37 +101,43 @@ export default function Header() {
           {/* Login & Signup (Inside the Collapsible Menu) */}
           {auth ? (
             <Nav className="d-lg-none flex-row gap-4 center-flex">
-              <OverlayTrigger
-                placement="bottom"
-                overlay={<Tooltip id="logout-tooltip">Profile</Tooltip>}
-              >
-                <Button
-                  as={Link}
-                  to="/profile"
-                  variant="link"
-                  onClick={() => setExpanded(false)}
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="light"
+                  className="d-flex align-items-center  border-0"
                 >
                   <img
-                    src={auth.user.profilePicture}
+                    src={
+                      auth?.user.profilePicture ||
+                      "https://www.viverefermo.it/images/user.png"
+                    }
                     alt="Profile"
-                    style={{ width: "40px", height: "40px" }}
                     className="rounded-circle"
+                    width="40"
+                    height="40"
                   />
-                </Button>
-              </OverlayTrigger>
-
-              <OverlayTrigger
-                placement="bottom"
-                overlay={<Tooltip id="logout-tooltip">Logout</Tooltip>}
-              >
-                <Button
-                  variant="link"
-                  className="logout-btn p-0 border-0"
-                  onClick={handleLogout}
-                >
-                  <FaSignOutAlt className="logout-icon" />
-                </Button>
-              </OverlayTrigger>
+                  <div className="ms-2 text-start me-2">
+                    <div className="fw-bold fs-14px">
+                      {auth?.user.name.toString().toUpperCase() || "Admin"}
+                    </div>
+                    <small className="text-primary">
+                      {auth?.user.isAdmin ? "Administrator" : "Student"}
+                    </small>
+                  </div>
+                </Dropdown.Toggle>
+                <Dropdown.Menu align="end" className="p-2">
+                  <Dropdown.Item className="p-1">Profile</Dropdown.Item>
+                  <Dropdown.Item className="p-1">Settings</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item
+                    className="p-1 logout-btn"
+                    onClick={handleLogout}
+                  >
+                    Logout{" "}
+                    <FaSignOutAlt size={18} className="ms-2 logout-icon" />
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </Nav>
           ) : (
             <Nav className="d-lg-none flex-column text-center">
@@ -165,32 +172,42 @@ export default function Header() {
         {/* Desktop View - Login & Signup (Outside the Collapse) */}
         {auth ? (
           <Nav className="ms-auto d-none gap-3 d-lg-flex align-items-center">
-            <OverlayTrigger
-              placement="bottom"
-              overlay={<Tooltip id="logout-tooltip">Profile</Tooltip>}
-            >
-              <Button as={Link} to="/profile" variant="link">
-                <img
-                  src={auth.user.profilePicture}
-                  alt="Profile"
-                  style={{ width: "40px", height: "40px" }}
-                  className="rounded-circle"
-                />
-              </Button>
-            </OverlayTrigger>
-
-            <OverlayTrigger
-              placement="bottom"
-              overlay={<Tooltip id="logout-tooltip">Logout</Tooltip>}
-            >
-              <Button
-                variant="link"
-                className="logout-btn p-0 border-0"
-                onClick={handleLogout}
+            <Dropdown>
+              <Dropdown.Toggle
+                variant="light"
+                className="d-flex align-items-center border-0"
               >
-                <FaSignOutAlt className="logout-icon" />
-              </Button>
-            </OverlayTrigger>
+                <img
+                  src={
+                    auth?.user.profilePicture ||
+                    "https://www.viverefermo.it/images/user.png"
+                  }
+                  alt="Profile"
+                  className="rounded-circle"
+                  width="40"
+                  height="40"
+                />
+                <div className="ms-2 text-start me-2">
+                  <div className="fw-bold fs-14px">
+                    {auth?.user.name.toString().toUpperCase() || "Admin"}
+                  </div>
+                  <small className="text-primary">
+                    {auth?.user.isAdmin ? "Administrator" : "Student"}
+                  </small>
+                </div>
+              </Dropdown.Toggle>
+              <Dropdown.Menu align="end" className="p-2">
+                <Dropdown.Item className="p-1">Profile</Dropdown.Item>
+                <Dropdown.Item className="p-1">Settings</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  className="p-1 logout-btn"
+                  onClick={handleLogout}
+                >
+                  Logout <FaSignOutAlt size={18} className="ms-2 logout-icon" />
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </Nav>
         ) : (
           <Nav className="ms-auto d-none d-lg-flex">

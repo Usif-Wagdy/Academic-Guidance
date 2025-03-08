@@ -1,18 +1,27 @@
-import { useAuth } from "../../Context/AuthProvider";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import Sidebar from "../../Components/Admin/Sidebar";
+import NavBar from "../../Components/Admin/Navbar";
 
 export default function Dashboard() {
-  const { auth } = useAuth();
-
-  if (!auth || !auth.user) {
-    return <p>Loading...</p>; // Or redirect to login
-  }
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <div className="container">
-      <p>Hello, {auth.user.name}</p>
-      <p>your email is {auth.user.email}</p>
-      <p>your password is {auth.user.password}</p>
-      <img src={auth.user.profilePicture} width={32} height={32} alt="" />
+    <div className="d-flex vh-100">
+      <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+      <div
+        className="d-flex flex-column flex-grow-1"
+        style={{
+          marginLeft: isCollapsed ? "82px" : "302px",
+          transition: "margin-left 0.3s ease",
+        }}
+      >
+        <NavBar isCollapsed={isCollapsed} />
+
+        <div className="p-3">
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 }

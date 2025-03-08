@@ -60,7 +60,8 @@ export default function Login() {
 
       setAuth({ token: token, user: userData });
       // Redirect to home
-      navigate("/");
+      userData.isAdmin ? navigate("/dashboard") : navigate("/");
+      
     } catch (error) {
       setErrorMessage(error.message);
     } finally {

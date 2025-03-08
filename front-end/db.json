@@ -673,7 +673,8 @@
         "email": "wego@test.com",
         "password": "Wego@123123",
         "profilePicture": "https://www.viverefermo.it/images/user.png",
-        "role": "admin"
+        "role": "admin",
+        "isAdmin": true
       }
     }
   ],
