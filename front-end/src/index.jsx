@@ -36,6 +36,7 @@ import Blogs from "./Website/blogs/Blogs";
 import BlogView from "./Website/blogs/BlogView";
 import About from "./Website/About/About";
 import Internships from "./Website/internship/Internship";
+import CVBuilder from "./Website/CV Builder/CVBuilder";
 
 // Dashboard pages
 import Dashboard from "./Website/Admin/Dashboard";
@@ -78,6 +79,7 @@ root.render(
             <Route path="/blogs/:id" element={<BlogView />} />
             <Route path="/about" element={<About />} />
             <Route path="/internships" element={<Internships />} />
+            <Route path="/cvbuilder" element={<CVBuilder />} />
           </Route>
 
           <Route
