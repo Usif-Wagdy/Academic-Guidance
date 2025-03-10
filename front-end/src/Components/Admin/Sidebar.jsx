@@ -94,22 +94,19 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
             }
           >
             <span className={isCollapsed ? "" : "me-3"}>{icon}</span>
-            {!isCollapsed && (
-              <span
-                style={{
-                  opacity: isCollapsed ? 0 : 1,
-                  transform: isCollapsed
-                    ? "translateX(-20px)"
-                    : "translateX(0)",
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
-                  transition:
-                    "opacity 0.3s ease, transform 0.3s ease, max-width 0.3s ease",
-                }}
-              >
-                {label}
-              </span>
-            )}
+            <span
+              style={{
+                opacity: isCollapsed ? 0 : 1,
+                transform: isCollapsed ? "translateX(-50px)" : "translateX(0)",
+                maxWidth: isCollapsed ? "0px" : "200px",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                transition:
+                  "opacity 0.3s ease, transform 0.3s ease, max-width 0.3s ease",
+              }}
+            >
+              {label}
+            </span>
             {!isCollapsed && <MdArrowForwardIos className="ms-auto" />}
           </NavLink>
         ))}
