@@ -23,7 +23,6 @@ export default function Blogs() {
       })
       .catch((error) => {
         console.error("Error fetching blogs:", error);
-        setLoading(false);
       });
   }, []);
 
