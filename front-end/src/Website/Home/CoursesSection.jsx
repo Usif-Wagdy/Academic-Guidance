@@ -18,7 +18,7 @@ export default function CoursesSection() {
           <Card key={i} className=" border-0">
             <Card.Img
               variant="top"
-              src={require(`../../Assets/courses/${course.images[0]}`)}
+              src={course.images[0]}
               style={{
                 maxHeight: "300px",
               }}
@@ -56,22 +56,6 @@ export default function CoursesSection() {
 
   return (
     <div className="mt-5">
-      {/* <div className="center-flex flex-wrap" id="courses">
-        <div className="d-flex flex-column col-md-10 col-12 mb-4">
-          <h2 className="w-100">Our Courses</h2>
-          <p className="my-1 text-muted">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-            eaque vero quidem quisquam porro sint asperiores veritatis ipsum.
-            Qua
-          </p>
-        </div>
-        <Link
-          to="/courses"
-          className=" col-md-2 col-12 d-flex justify-content-md-end justify-content-center my-3 pe-3 "
-        >
-          <Button className="bg-white border w-sm-100">View All</Button>
-        </Link>
-      </div> */}
       <SectionsHeads
         id="courses"
         title="Our Courses"

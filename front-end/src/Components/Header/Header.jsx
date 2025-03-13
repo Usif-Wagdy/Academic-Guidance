@@ -79,7 +79,7 @@ export default function Header() {
               { path: "/", label: "Home" },
               { path: "/tracks", label: "Tracks" },
               { path: "/courses", label: "Courses" },
-              { path: "/internships", label: "internships" },
+              { path: "/internships", label: "Internships" },
               { path: "/blogs", label: "Blog" },
               { path: "/cvbuilder", label: "CV Builder" },
               { path: "/about", label: "About Us" },

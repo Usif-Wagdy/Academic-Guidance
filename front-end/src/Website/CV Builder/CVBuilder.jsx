@@ -45,7 +45,7 @@ export default function CVBuilder() {
             </Row>
             <Row>
               <div className="col-12 col-md-6 center-flex">
-                <Button variant="dark" className="fs-30px px-3">
+                <Button variant="dark" className="fs-30px px-3 mb-3">
                   Download CV
                 </Button>
               </div>
@@ -84,7 +84,7 @@ export default function CVBuilder() {
             </Row>
             <Row>
               <div className="col-12 col-md-6 center-flex">
-                <Button variant="dark" className="fs-30px px-3">
+                <Button variant="dark" className="fs-30px px-3 mb-3">
                   Upload my CV
                 </Button>
               </div>

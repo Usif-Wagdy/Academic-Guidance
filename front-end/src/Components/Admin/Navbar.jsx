@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { FaSignOutAlt } from "react-icons/fa";
 
-export default function NavBar() {
+export default function NavBar({ isCollapsed }) {
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
 
@@ -26,8 +26,14 @@ export default function NavBar() {
 
   return (
     <Navbar
+      fixed="top"
       bg="light"
-      className="px-3 shadow-sm d-flex justify-content-between align-items-center"
+      className="px-3 shadow-sm d-flex justify-content-between align-items-center "
+      style={{
+        marginLeft: isCollapsed ? "82px" : "302px",
+        width: `calc(100% - ${isCollapsed ? "82px" : "302px"})`,
+        transition: "margin-left 0.3s ease, width 0.3s ease",
+      }}
     >
       {/* Search Field */}
       <Form className="d-flex">

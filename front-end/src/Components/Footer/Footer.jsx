@@ -186,7 +186,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <p className="mb-0 mt-4 text-muted">
-          © 2024 Your Website. All Rights Reserved.
+          © 2024 Skillbridge. All Rights Reserved.
         </p>
       </Container>
     </footer>

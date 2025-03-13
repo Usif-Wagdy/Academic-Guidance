@@ -47,3 +47,7 @@ img {
 .logout-btn:hover .logout-icon {
   color: red;
 }
+
+.card {
+  overflow: hidden;
+}

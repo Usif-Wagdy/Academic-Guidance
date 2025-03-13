@@ -33,7 +33,7 @@ export default function BlogView() {
             {blog.date}
           </p>
           <img
-            src={require(`../../Assets/blogs/${blog.image}`)}
+            src={blog.image}
             alt="blog"
             className="w-100 rounded-4 "
             style={{ width: "100%", height: "700px" }}

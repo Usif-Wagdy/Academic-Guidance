@@ -51,7 +51,7 @@ export default function Blogs() {
       {loading && (
         <motion.div className="row g-4">
           {Array.from({ length: 6 }).map((_, i) => (
-            <motion.div key={i} className="col-12 col-lg-6 col-xl-4">
+            <motion.div key={i} className="col-12 col-lg-6 ">
               <Card className="border-0 bg-light shadow-sm rounded-4">
                 <Skeleton height={316} className="rounded-4" />
                 <Card.Body>
@@ -76,24 +76,24 @@ export default function Blogs() {
           {blogs.map((blog) => (
             <motion.div
               key={blog.id}
-              className="col-12 col-lg-6 col-xl-4"
+              className="col-12 col-lg-6 "
               variants={itemVariants}
             >
               <Link to={`/blogs/${blog.id}`} className="text-decoration-none">
-                <Card className="border-0 bg-info shadow-sm rounded-4">
+                <Card className="border-0 bg-info shadow-sm rounded-4 h-100">
                   <Card.Img
                     variant="top"
-                    src={require(`../../Assets/blogs/${blog.image}`)}
+                    src={blog.image}
                     className="rounded-4"
                     loading="lazy"
-                    style={{ maxWidth: "100%", height: "316px" }}
+                    style={{ minWidth: "326px", height: "300px" }}
                   />
                   <Card.Body>
                     <Card.Title className="text-center fw-bold fs-22px">
                       {blog.title}
                     </Card.Title>
                     <Card.Title className="text-center fs-18px">
-                      {blog.date}
+                      {blog.date} {blog.duration ? "- " + blog.duration : ""}
                     </Card.Title>
                     <Card.Text className="text-center fs-16px fs-md-18px">
                       {blog.description.length > MAX_TEXT_LENGTH

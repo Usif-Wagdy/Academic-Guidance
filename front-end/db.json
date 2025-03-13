@@ -4,10 +4,14 @@
       "id": "1",
       "name": "Web Design Fundamentals",
       "description": "Learn the fundamentals of web design, including HTML, CSS, and responsive design principles. Develop the skills to create visually appealing and user-friendly websites",
-      "duration": "4 Week",
+      "duration": "4 Weeks",
       "level": "Beginner",
       "author": "John Smith",
-      "images": ["one-1.jpg", "one-2.jpg", "one-3.jpg"],
+      "images": [
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image"
+      ],
       "curriculum": [
         {
           "title": "Introduction to HTML",
@@ -115,10 +119,14 @@
       "id": "2",
       "name": "UI/UX Design",
       "description": "Master the art of creating intuitive user interfaces (UI) and enhancing user experiences (UX). Learn design principles, wireframing, prototyping, and usability testing techniques.",
-      "duration": "6 Week",
+      "duration": "6 Weeks",
       "level": "Intermediate",
       "author": "Emily Johanson",
-      "images": ["two-1.jpg", "two-2.jpg", "two-3.jpg"],
+      "images": [
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image"
+      ],
       "curriculum": [
         {
           "title": "Introduction to UI/UX Design",
@@ -226,10 +234,14 @@
       "id": "3",
       "name": "Mobile App Development",
       "description": "Dive into the world of mobile app development. Learn to build native iOS and Android applications using industry-leading frameworks like Swift and Kotlin industry-leading frameworks like Swift and Kotlin .",
-      "duration": "8 Week",
+      "duration": "6 Weeks",
       "level": "Intermediate",
       "author": "David Brown",
-      "images": ["three-1.jpg", "three-2.jpg", "three-3.jpg"],
+      "images": [
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image"
+      ],
       "curriculum": [
         {
           "title": "Introduction to Mobile App Development",
@@ -337,10 +349,14 @@
       "id": "4",
       "name": "Graphic Design for Beginners",
       "description": "  Discover the fundamentals of graphic design, including typography, color theory, layout design, and image manipulation techniques. Create visually stunning designs for print and digital media.",
-      "duration": "10 Week",
+      "duration": "10 Weeks",
       "level": "Beginner",
       "author": "Sarah Thompson",
-      "images": ["four-1.jpg", "four-2.jpg", "four-3.jpg"],
+      "images": [
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image"
+      ],
       "curriculum": [
         {
           "title": "Introduction to Grapgic Design",
@@ -448,10 +464,14 @@
       "id": "5",
       "name": "Front-End Web Development",
       "description": "Become proficient in front-end web development. Learn HTML, CSS, JavaScript, and popular frameworks like Bootstrap and React. Build interactive and responsive websites.",
-      "duration": "10 Week",
+      "duration": "10 Weeks",
       "level": "Intermediate",
       "author": "Michael Adams",
-      "images": ["five-1.jpg", "five-2.jpg", "five-3.jpg"],
+      "images": [
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image"
+      ],
       "curriculum": [
         {
           "title": "HTML Fundamintals",
@@ -554,6 +574,20 @@
           ]
         }
       ]
+    },
+    {
+      "id": "d660",
+      "name": "TEST",
+      "description": "LIVE SESSION TEST",
+      "duration": "7 Months",
+      "level": "Advanced",
+      "author": "youssef",
+      "images": [
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
+        "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image"
+      ],
+      "curriculum": []
     }
   ],
   "testimonials": [
@@ -618,50 +652,65 @@
     {
       "id": "1",
       "author": "youssef wagdy",
-      "image": "one-1.jpg",
+      "image": "https://dummyimage.com/300x200/dfdfdfdf/ffffff&text=Blog+Image",
       "title": "Lorem ipsum dolor ",
-      "date": "April 24, 2022 - 5 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "date": "April 24, 2022",
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "duration": "4 min read"
     },
     {
       "id": "2",
       "author": "youssef wagdy",
-      "image": "two-1.jpg",
+      "image": "https://dummyimage.com/300x200/dfdfdfdf/ffffff&text=Blog+Image",
       "title": "Lorem ipsum dolor ",
-      "date": "April 03, 2022 - 4 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non  posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "date": "April 03, 2022",
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non  posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "duration": "6 min read"
     },
     {
       "id": "3",
       "author": "youssef wagdy",
-      "image": "three-1.jpg",
+      "image": "https://dummyimage.com/300x200/dfdfdfdf/ffffff&text=Blog+Image",
       "title": "Lorem ipsum dolor ",
-      "date": "March 12, 2022 - 6 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "date": "March 12, 2022",
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "duration": "2 min read"
     },
     {
       "id": "4",
       "author": "youssef wagdy",
-      "image": "four-1.jpg",
+      "image": "https://dummyimage.com/300x200/dfdfdfdf/ffffff&text=Blog+Image",
       "title": "Lorem ipsum dolor ",
-      "date": "April 24, 2022 - 5 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuer econsectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "date": "April 24, 2022",
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuer econsectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "duration": "10 min read"
     },
     {
       "id": "5",
       "author": "youssef wagdy",
-      "image": "five-1.jpg",
+      "image": "https://dummyimage.com/300x200/dfdfdfdf/ffffff&text=Blog+Image",
       "title": "Lorem ipsum dolor ",
-      "date": "April 03, 2022 - 4 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "date": "April 03, 2022",
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "duration": "6 min read"
     },
     {
       "id": "6",
       "author": "youssef wagdy",
-      "image": "six-1.jpg",
+      "image": "https://dummyimage.com/300x200/dfdfdfdf/ffffff&text=Blog+Image",
       "title": "Lorem ipsum dolor ",
-      "date": "March 12, 2022 - 6 min read",
-      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "date": "March 12, 2022",
+      "description": "Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "duration": "8 min read"
+    },
+    {
+      "id": "6343",
+      "title": "Wego",
+      "author": "youssef",
+      "image": "https://dummyimage.com/600x400/dfdfdfdf/ffffff&text=Blog+Image",
+      "duration": "6 min read",
+      "date": "Thu Mar 13 2025",
+      "description": "aaaaaaaaaaa"
     }
   ],
   "users": [
@@ -675,17 +724,39 @@
         "profilePicture": "https://www.viverefermo.it/images/user.png",
         "role": "admin",
         "isAdmin": true
-      }
+      },
+      "id": "81a2"
     }
   ],
   "brands": [
-    { "image": "brand-1.png" },
-    { "image": "brand-2.png" },
-    { "image": "brand-3.png" },
-    { "image": "brand-4.png" },
-    { "image": "brand-5.png" },
-    { "image": "brand-6.png" },
-    { "image": "brand-7.png" }
+    {
+      "image": "brand-1.png",
+      "id": "e96a"
+    },
+    {
+      "image": "brand-2.png",
+      "id": "b1e6"
+    },
+    {
+      "image": "brand-3.png",
+      "id": "05fd"
+    },
+    {
+      "image": "brand-4.png",
+      "id": "ef75"
+    },
+    {
+      "image": "brand-5.png",
+      "id": "294d"
+    },
+    {
+      "image": "brand-6.png",
+      "id": "9ca1"
+    },
+    {
+      "image": "brand-7.png",
+      "id": "a808"
+    }
   ],
   "benefits": [
     {
@@ -727,7 +798,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "09df"
     },
     {
       "image": "dell.png",
@@ -736,7 +814,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "8117"
     },
     {
       "image": "dell.png",
@@ -745,7 +830,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "ae36"
     },
     {
       "image": "dell.png",
@@ -754,7 +846,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "01d1"
     },
     {
       "image": "dell.png",
@@ -763,7 +862,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "704a"
     },
     {
       "image": "dell.png",
@@ -772,7 +878,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "972e"
     },
     {
       "image": "dell.png",
@@ -781,7 +894,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "4151"
     },
     {
       "image": "dell.png",
@@ -790,7 +910,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "1991"
     },
     {
       "image": "dell.png",
@@ -799,7 +926,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "1fe6"
     },
     {
       "image": "dell.png",
@@ -808,7 +942,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "28c5"
     },
     {
       "image": "dell.png",
@@ -817,7 +958,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "4363"
     },
     {
       "image": "dell.png",
@@ -826,7 +974,14 @@
       "place": "NEW YOURK CITY,NEW YOURK",
       "price": "$275.43-$293.01",
       "ranking": "7d",
-      "keywords": ["JAVASCRIPT", "REACT", "NODE", "SENIOR", "JAVASCRIPT"]
+      "keywords": [
+        "JAVASCRIPT",
+        "REACT",
+        "NODE",
+        "SENIOR",
+        "JAVASCRIPT"
+      ],
+      "id": "8f81"
     }
   ]
 }

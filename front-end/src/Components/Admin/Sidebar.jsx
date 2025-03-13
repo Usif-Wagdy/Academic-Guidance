@@ -27,7 +27,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
       label: "Roadmap",
       icon: <FaRoad size={22} />,
     },
-    { path: "/dashboard/blog", label: "Blog", icon: <FaBlogger size={22} /> },
+    { path: "/dashboard/blogs", label: "Blog", icon: <FaBlogger size={22} /> },
     {
       path: "/dashboard/internship",
       label: "Internship",

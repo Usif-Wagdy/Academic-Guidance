@@ -87,11 +87,22 @@ export default function Courses() {
               </div>
 
               <div className="between-flex p-2">
+                <Card key={i} className="col-12 p-2 border-0  d-lg-none">
+                  <Card.Img
+                    variant="top"
+                    src={course.images[0]}
+                    style={{ minWidth: "326px", height: "300px" }}
+                  />
+                </Card>
                 {course.images.map((img, i) => (
-                  <Card key={i} className="col-4 p-2 border-0">
+                  <Card
+                    key={i}
+                    className="col-4 p-2 border-0 d-none d-lg-block"
+                  >
                     <Card.Img
                       variant="top"
-                      src={require(`../../Assets/courses/${img}`)}
+                      src={img}
+                      style={{ minWidth: "326px", height: "300px" }}
                     />
                   </Card>
                 ))}
@@ -99,14 +110,16 @@ export default function Courses() {
 
               <div className="between-flex flex-wrap p-2">
                 <div className="py-2">
-                  <span className="me-2 py-2 px-3 border rounded-3">
+                  <span className="me-2 py-2 px-3 border rounded-3 text-capitalize">
                     {course.duration}
                   </span>
                   <span className="py-2 px-3 border rounded-3">
                     {course.level}
                   </span>
                 </div>
-                <div className="fw-bold p-2">By {course.author}</div>
+                <div className="fw-bold p-2 text-capitalize">
+                  By {course.author}
+                </div>
               </div>
 
               <div className="d-flex flex-column border rounded-3 mt-5">
@@ -115,7 +128,7 @@ export default function Courses() {
                   Curriculum
                   <Button
                     variant="secondary"
-                    className="d-lg-none"
+                    className="d-xl-none"
                     style={{ cursor: "pointer" }}
                     onClick={() => setOpen(!open)}
                   >
@@ -125,7 +138,7 @@ export default function Courses() {
 
                 {/* Mobile View: Collapsible */}
                 {open && (
-                  <div className="d-lg-none py-3">
+                  <div className="d-xl-none py-3">
                     {course.curriculum.map((step, i) => (
                       <Card
                         key={i}
@@ -146,7 +159,7 @@ export default function Courses() {
                 )}
 
                 {/* Desktop View: Row Layout */}
-                <div className="d-none d-lg-flex justify-content-between py-3 flex-wrap">
+                <div className="d-none d-xl-flex justify-content-between py-3 flex-wrap">
                   {course.curriculum.map((step, i) => (
                     <Card
                       key={i}

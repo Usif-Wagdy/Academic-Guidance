@@ -36,8 +36,8 @@ export default function CourseView() {
         <div className="w-100 mb-5">
           <img
             style={{ maxHeight: "600px" }}
-            src={require(`../../Assets/courses/two-2.jpg`)}
-            alt="coursing"
+            src={currCourse.images}
+            alt={currCourse.name}
             className="w-100"
           />
         </div>
