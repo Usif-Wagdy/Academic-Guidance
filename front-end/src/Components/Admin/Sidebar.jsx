@@ -9,6 +9,7 @@ import {
   FaBriefcase,
 } from "react-icons/fa";
 import { MdArrowForwardIos, MdDashboard } from "react-icons/md";
+import { LuWaypoints } from "react-icons/lu";
 
 export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   const menuItems = [
@@ -27,9 +28,14 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
       label: "Roadmap",
       icon: <FaRoad size={22} />,
     },
+    {
+      path: "/dashboard/tracks",
+      label: "Tracks",
+      icon: <LuWaypoints size={22} />,
+    },
     { path: "/dashboard/blogs", label: "Blog", icon: <FaBlogger size={22} /> },
     {
-      path: "/dashboard/internship",
+      path: "/dashboard/intern-ships",
       label: "Internship",
       icon: <FaBriefcase size={22} />,
     },

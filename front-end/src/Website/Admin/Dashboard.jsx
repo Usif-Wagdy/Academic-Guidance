@@ -18,7 +18,7 @@ export default function Dashboard() {
       >
         <NavBar isCollapsed={isCollapsed} />
 
-        <div className="p-3 my-5 py-5">
+        <div className="p-1 px-md-3 my-5 py-5">
           <Outlet />
         </div>
       </div>

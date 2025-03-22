@@ -13,6 +13,7 @@ export default function BlogForm() {
   const { id } = useParams();
   const isEditing = Boolean(id);
   const { showNotification } = useNotification();
+  console.log(isEditing);
 
   const [blog, setBlog] = useState({
     title: "",
