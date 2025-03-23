@@ -44,14 +44,21 @@ import Dashboard from "./Website/Admin/Dashboard";
 import Insights from "./Website/Admin/DashboardPages/Insights";
 import CVTemplate from "./Website/Admin/DashboardPages/CVTemplate";
 import Roadmap from "./Website/Admin/DashboardPages/Roadmap";
-import Intern from "./Website/Admin/DashboardPages/Intern";
-import Instructors from "./Website/Admin/DashboardPages/Instructors";
 import CoursePage from "./Website/Admin/DashboardPages/Workshop/CoursePage";
 import CourseList from "./Website/Admin/DashboardPages/Workshop/CourseList";
 import CourseForm from "./Website/Admin/DashboardPages/Workshop/CourseForm";
 import BlogsPage from "./Website/Admin/DashboardPages/Blogs/BlogsPage";
 import BlogsList from "./Website/Admin/DashboardPages/Blogs/BlogsList";
 import BlogsForm from "./Website/Admin/DashboardPages/Blogs/BlogsForm";
+import Intern from "./Website/Admin/DashboardPages/InternShips/Intern";
+import EditIntern from "./Website/Admin/DashboardPages/InternShips/EditIntern";
+import AddIntern from "./Website/Admin/DashboardPages/InternShips/AddIntern";
+import Instructors from "./Website/Admin/DashboardPages/Instructors/Instructors";
+import EditInstructors from "./Website/Admin/DashboardPages/Instructors/EditInstructors";
+import AddInstructors from "./Website/Admin/DashboardPages/Instructors/AddInstructors";
+import EditTrack from "./Website/Admin/DashboardPages/Tracks/EditTrack";
+import AddTrack from "./Website/Admin/DashboardPages/Tracks/AddTrack";
+import AllTracks from "./Website/Admin/DashboardPages/Tracks/Tracks";
 
 // Layout with header and footer
 const MainLayout = () => (
@@ -101,8 +108,10 @@ root.render(
               <Route path="insights" element={<Insights />} />
               <Route path="cv-template" element={<CVTemplate />} />
               <Route path="roadmap" element={<Roadmap />} />
-              <Route path="internship" element={<Intern />} />
-              <Route path="instructors" element={<Instructors />} />
+
+              <Route path="tracks" element={<AllTracks />} />
+              <Route path="tracks/:id" element={<EditTrack />} />
+              <Route path="track/add" element={<AddTrack />} />
 
               <Route path="blogs" element={<BlogsPage />}>
                 <Route index element={<BlogsList />} />
@@ -115,6 +124,14 @@ root.render(
                 <Route path="add" element={<CourseForm />} />
                 <Route path=":id" element={<CourseForm />} />
               </Route>
+
+              <Route path="intern-ships" element={<Intern />} />
+              <Route path="intern-ships/:id" element={<EditIntern />} />
+              <Route path="intern-ship/add" element={<AddIntern />} />
+
+              <Route path="instructors" element={<Instructors />} />
+              <Route path="instructors/:id" element={<EditInstructors />} />
+              <Route path="instructor/add" element={<AddInstructors />} />
             </Route>
 
             {/* Redirect unknown routes to Home */}

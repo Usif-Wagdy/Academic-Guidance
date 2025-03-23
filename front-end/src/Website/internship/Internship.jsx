@@ -38,13 +38,16 @@ export default function Internships() {
         </div>
 
         <div className="d-flex flex-column align-items-center align-items-sm-start">
-          <span className="fs-20px ">{intern.sponser}</span>
-          <h2 className="m-0  fw-bold" style={{ letterSpacing: "5px" }}>
-            {intern.company}
+          <span className="fs-20px ">{intern.company}</span>
+          <h2
+            className="m-0 fw-bold text-center text-md-start fs-22px fs-md-30px"
+            style={{ letterSpacing: "5px" }}
+          >
+            {intern.track}
           </h2>
           <div className="d-flex flex-wrap flex-column flex-sm-row align-items-center align-items-sm-start">
             <span className="p-2 shadow-sm rounded-4 me-sm-4 fs-18px text-center">
-              {intern.place}
+              {intern.address}
             </span>
             <span className="p-2 shadow-sm rounded-4 fs-18px fw-bold">
               <FaSackDollar className="text-warning " /> {intern.price}
@@ -54,12 +57,12 @@ export default function Internships() {
       </div>
 
       <div className="between-flex flex-wrap flex-column flex-sm-row  ">
-        {intern.keywords.map((keyword, i) => (
+        {intern.skills.map((skill, i) => (
           <span
             key={i}
-            className="border px-2 py-1 mb-3 fs-20px rounded-4 me-3"
+            className="border px-2 py-1 mb-3 fs-20px rounded-4 me-md-3"
           >
-            {keyword}
+            {skill}
           </span>
         ))}
       </div>
@@ -112,13 +115,15 @@ export default function Internships() {
             key={i}
             height={20}
             width={60 + i * 20}
-            className="border px-2 py-1 mb-3 fs-20px rounded-4 me-3"
+            className="px-2 py-1 mb-3  rounded-4 me-md-3"
           />
         ))}
       </div>
 
-      <span className="fw-bold m-3">
-        <Skeleton height={20} width={50} />
+      <span className="m-3 d-flex">
+        {[...Array(3)].map((_, i) => (
+          <Skeleton key={i} className="me-1" height={20} width={50} />
+        ))}
       </span>
 
       <Skeleton height={40} width={120} className="rounded-4 ms-2 " />
