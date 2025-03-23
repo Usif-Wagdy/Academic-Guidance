@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     },
     isAdmin: {
         type: Boolean,
-        default: false // Explicit admin flag
+        default: false 
     },
     profilePic: {
         type: String,
@@ -30,7 +30,10 @@ const UserSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    age :{type : Number},
+    country : {type : String}
 });
+
 
 module.exports = mongoose.model("User", UserSchema);

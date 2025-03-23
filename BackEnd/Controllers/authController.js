@@ -3,9 +3,6 @@ const bcrypt = require('bcrypt');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const sendEmail = require('./../utils/email');
-const crypto = require('crypto');
-const mongoose = require('mongoose');
-
 const signToken = (user) => {
   return jwt.sign(
     {
@@ -21,71 +18,54 @@ const signToken = (user) => {
   );
 };
 
+
+
 exports.addUser = async (req, res) => {
-
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, age, country } = req.body;
 
-    if (!name || name.trim() === '') {
-      throw new Error('Name is required');
-    }
+    if (!name?.trim()) return res.status(400).json({ error: 'Name is required' });
+    if (!email || !validator.isEmail(email)) return res.status(400).json({ error: 'A valid email is required' });
+    if (!password || password.length < 8) return res.status(400).json({ error: 'Password must be at least 8 characters long' });
+    if (!age || isNaN(parseInt(age, 10)) || parseInt(age, 10) <= 0) return res.status(400).json({ error: 'A valid age is required' });
+    if (!country?.trim()) return res.status(400).json({ error: 'Country is required' });
 
-    if (!email || !validator.isEmail(email)) {
-      throw new Error('A valid email is required');
-    }
-
-    if (
-      !password     ) {
-      throw new Error(
-        'Password required ',
-      );
-    }
-
-    const existingUser = await User.findOne({
-      email,
-    });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
-      throw new Error(
-        `The email ${email} is already registered.`,
-      );
+      return res.status(400).json({ error: `The email ${email} is already registered.` });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
 
     const newUser = new User({
       name: name.trim(),
       email: email.toLowerCase(),
       password: hashedPassword,
-     
+      age: parseInt(age, 10),
+      country: country.trim(),
     });
 
     await newUser.save();
 
-
     res.status(201).json({
-      message:
-        'User registered successfully. ',
+      message: 'User registered successfully.',
       user: {
         id: newUser._id,
         name: newUser.name,
         email: newUser.email,
+        age: newUser.age,
+        country: newUser.country,
       },
     });
   } catch (error) {
-   
+    if (error.code === 11000) {
+      return res.status(400).json({ error: `The email is already registered.` });
+    }
 
-
-    res.status(500).json({
-      message: 'Error registering user',
-      error: error.message,
-    });
-    console.error(
-      `Error during user registration: ${error}`,
-    );
+    console.error(`Error during user registration: ${error}`);
+    res.status(500).json({ message: 'Error registering user', error: error.message });
   }
 };
-
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;

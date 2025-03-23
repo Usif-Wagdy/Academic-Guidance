@@ -37,9 +37,10 @@ exports.addImage = async (req, res) => {
 
 exports.updateUserPhoto = async (userId, imageUrl) => {
   try {
+    
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { image: imageUrl },
+      { profilePic: imageUrl },
       { new: true },
     );
 
@@ -56,57 +57,8 @@ exports.updateUserPhoto = async (userId, imageUrl) => {
     throw error;
   }
 };
-exports.addPhoneNumber = async (req, res) => {
-  try {
-    const { userId, PhoneNumber } = req.body;
 
-    if (!validator.isMobilePhone(PhoneNumber, 'any')) {
-      return res.status(400).send('Invalid phone number');
-    }
 
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).send('User not found');
-    }
-    user.PhoneNumber = PhoneNumber;
-    await user.save();
-    res.status(200).json({
-      message: 'PhoneNumber added successfully',
-      user,
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .send('Server error: ' + escapeHtml(error.message));
-  }
-};
-
-exports.updateName = async (req, res) => {
-  try {
-    const { userId, name } = req.body;
-
-    if (!name) {
-      return res.status(400).send('Name is required');
-    }
-
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).send('User not found');
-    }
-
-    user.name = name;
-    await user.save();
-
-    res.status(200).json({
-      message: 'Name updated successfully',
-      user,
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .send('Server error: ' + escapeHtml(error.message));
-  }
-};
 
 const escapeHtml = (str) => {
   return str
@@ -117,36 +69,43 @@ const escapeHtml = (str) => {
     .replace(/'/g, '&#039;');
 };
 
-exports.updateEmail = async (req, res) => {
+
+exports.updateUser = async (req, res) => {
   try {
-    const { userId, email } = req.body;
+    const userId  = req.params.id; 
+    const updateData = req.body; 
 
-    if (!email || !validator.isEmail(email)) {
-      return res.status(400).send('Invalid email format');
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: 'Invalid user ID format' });
     }
 
-    const emailExists = await User.findOne({ email });
-    if (emailExists) {
-      return res
-        .status(400)
-        .send('This email is already in use');
+    const restrictedFields = ['password', '_id', 'createdAt', 'isAdmin'];
+    restrictedFields.forEach(field => delete updateData[field]);
+
+    if (updateData.email && !validator.isEmail(updateData.email)) {
+      return res.status(400).json({ error: 'Invalid email format' });
     }
 
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).send('User not found');
+  
+
+    if ( updateData.age < 0) {
+      return res.status(400).json({ error: 'Invalid age' });
     }
 
-    user.email = email;
-    await user.save();
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
 
     res.status(200).json({
-      message: 'Email updated successfully',
-      user,
+      message: 'User updated successfully',
+      user: updatedUser,
     });
+
   } catch (error) {
+    console.error('Error updating user:', error.message);
     res
-      .status(500)
-      .send('Server error: ' + escapeHtml(error.message));
-  }
+    .status(500)
+    .send('Server error: ' + escapeHtml(error.message));  }
 };
