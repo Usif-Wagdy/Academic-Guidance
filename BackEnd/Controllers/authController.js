@@ -22,13 +22,14 @@ const signToken = (user) => {
 
 exports.addUser = async (req, res) => {
   try {
-    const { name, email, password, age, country } = req.body;
+    const { name, email, password, age, country, gender } = req.body;
 
     if (!name?.trim()) return res.status(400).json({ error: 'Name is required' });
     if (!email || !validator.isEmail(email)) return res.status(400).json({ error: 'A valid email is required' });
     if (!password || password.length < 8) return res.status(400).json({ error: 'Password must be at least 8 characters long' });
     if (!age || isNaN(parseInt(age, 10)) || parseInt(age, 10) <= 0) return res.status(400).json({ error: 'A valid age is required' });
     if (!country?.trim()) return res.status(400).json({ error: 'Country is required' });
+    if (!gender?.trim()) return res.status(400).json({ error: 'Gender is required' });
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -43,6 +44,7 @@ exports.addUser = async (req, res) => {
       password: hashedPassword,
       age: parseInt(age, 10),
       country: country.trim(),
+      gender: gender.trim()
     });
 
     await newUser.save();
@@ -55,6 +57,7 @@ exports.addUser = async (req, res) => {
         email: newUser.email,
         age: newUser.age,
         country: newUser.country,
+        gender: newUser.gender
       },
     });
   } catch (error) {

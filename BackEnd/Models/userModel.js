@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     },
     isAdmin: {
         type: Boolean,
-        default: false 
+        default: false
     },
     profilePic: {
         type: String,
@@ -31,8 +31,12 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    age :{type : Number},
-    country : {type : String}
+    age: { type: Number },
+    country: { type: String },
+    gender: {
+        type: String,
+        enum: ["male", "female"]
+    }
 });
 
 
