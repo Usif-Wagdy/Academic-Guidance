@@ -48,16 +48,12 @@ exports.addUser = async (req, res) => {
     });
 
     await newUser.save();
-
+    signToken(newUser);
     res.status(201).json({
       message: 'User registered successfully.',
+      AcessToken: signToken(newUser),
       user: {
-        id: newUser._id,
-        name: newUser.name,
-        email: newUser.email,
-        age: newUser.age,
-        country: newUser.country,
-        gender: newUser.gender
+        newUser
       },
     });
   } catch (error) {
