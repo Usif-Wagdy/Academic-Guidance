@@ -15,12 +15,12 @@ const blog = new mongoose.Schema({
     date: {
         type: String,
     },
+    duration: {
+        type: String,
+    },
     content: {
         type: String,
     },
-    duration: {
-        type: String,
-    }
 })
 
 
