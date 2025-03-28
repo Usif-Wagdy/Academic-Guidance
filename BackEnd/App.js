@@ -7,6 +7,7 @@ const testimonialRouter = require('./Routes/testimonialRoutes');
 const internRouter = require('./Routes/internRoutes');
 const userRouter = require('./Routes/userRoutes');
 const blogRouter = require('./Routes/blogRoutes');
+const trackRouter = require('./Routes/trackRoutes');
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use("/testimonials", testimonialRouter);
 app.use("/users", userRouter);
 app.use("/interns", internRouter);
 app.use("/blogs", blogRouter);
+app.use("/tracks", trackRouter);
 
 module.exports = app;
