@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const internController = require('../Controllers/interController');
-const authMiddleware = require('../Middlewares/authMiddleware');
+const { authMiddleware, allwedTo } = require('../Middlewares/authMiddleware');
 
 router.get('/', internController.getAllInterns);
 router.get('/:id', internController.getInternById);
