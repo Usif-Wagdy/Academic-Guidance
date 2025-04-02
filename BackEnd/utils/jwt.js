@@ -8,6 +8,5 @@ const generateAccessToken = (id, role) =>
 
 module.exports = {
   generateAccessToken,
-  generateRefreshToken,
-  verifyRefreshToken,
+
 };

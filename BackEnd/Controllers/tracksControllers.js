@@ -1,8 +1,9 @@
-const track = require("../Models/trackModel");
+const Track = require("../Models/trackModel");
+
 
 const getAllTracks = async (req, res) => {
     try {
-        const tracks = await track.find();
+        const tracks = await Track.find();
         res.status(200).json({
             status: "success",
             results: tracks.length,
@@ -15,33 +16,47 @@ const getAllTracks = async (req, res) => {
 
 const addTrack = async (req, res) => {
     try {
-        const { name, description, image } = req.body
-        if (!name || !description || !image) {
+        const { name, description, sections } = req.body;
+
+        if (!Array.isArray(sections)) {
             return res.status(400).json({
-                status: "fail",
-                message: "Please provide name, description and image",
+                message: 'Sections must be an array',
             });
         }
-        const existingTrack = await track.findOne({ name });
-        if (existingTrack) {
+
+        const isValidSections = sections.every(
+            (section) => section.title && section.content
+        );
+
+        if (!isValidSections) {
             return res.status(400).json({
-                status: "fail",
-                message: "Track already exists",
+                message: 'Each section must have a title and content',
             });
         }
-        const newTrack = await track.create({ name, description, image });
-        res.status(201).json({
-            status: "success",
-            data: { track: newTrack },
+
+        const newTrack = new Track({
+            name,
+            description,
+            sections,
         });
-    } catch (err) {
-        res.status(400).json({ status: "fail", message: err.message });
+
+        const savedTrack = await newTrack.save();
+
+        res.status(201).json({
+            message: 'Track added successfully',
+            track: savedTrack,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Failed to add track',
+            error: error.message,
+        });
     }
 };
 
 const deleteTrack = async (req, res) => {
     try {
-        await track.findByIdAndDelete(req.params.id);
+        await Track.findByIdAndDelete(req.params.id);
         res.status(200).json({
             status: "success",
             data: "Track deleted successfully",

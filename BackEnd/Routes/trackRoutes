@@ -1,9 +1,0 @@
-const express = require("express");
-const router = express.Router();
-
-const tracksControllers = require("../Controllers/tracksControllers");
-
-router.route("/").get(tracksControllers.getAllTracks).post(tracksControllers.addTrack);
-router.route("/:id").delete(tracksControllers.deleteTrack);
-
-module.exports = router;
