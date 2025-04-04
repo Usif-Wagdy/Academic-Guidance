@@ -37,7 +37,7 @@ exports.addImage = async (req, res) => {
 
 exports.updateUserPhoto = async (userId, imageUrl) => {
   try {
-    
+
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { profilePic: imageUrl },
@@ -58,8 +58,6 @@ exports.updateUserPhoto = async (userId, imageUrl) => {
   }
 };
 
-
-
 const escapeHtml = (str) => {
   return str
     .replace(/&/g, '&amp;')
@@ -69,11 +67,10 @@ const escapeHtml = (str) => {
     .replace(/'/g, '&#039;');
 };
 
-
 exports.updateUser = async (req, res) => {
   try {
-    const userId  = req.params.id; 
-    const updateData = req.body; 
+    const userId = req.params.id;
+    const updateData = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).json({ error: 'Invalid user ID format' });
@@ -86,9 +83,9 @@ exports.updateUser = async (req, res) => {
       return res.status(400).json({ error: 'Invalid email format' });
     }
 
-  
 
-    if ( updateData.age < 0) {
+
+    if (updateData.age < 0) {
       return res.status(400).json({ error: 'Invalid age' });
     }
 
@@ -106,6 +103,59 @@ exports.updateUser = async (req, res) => {
   } catch (error) {
     console.error('Error updating user:', error.message);
     res
-    .status(500)
-    .send('Server error: ' + escapeHtml(error.message));  }
+      .status(500)
+      .send('Server error: ' + escapeHtml(error.message));
+  }
 };
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}).select('-password');
+    res.status(200).json({
+      message: 'Users retrieved successfully',
+      users,
+    });
+  } catch (error) {
+    console.error('Error retrieving users:', error.message);
+    res.status(500).json({ error: 'Failed to retrieve users' });
+  }
+}
+
+
+
+exports.getInstructors = async (req, res) => {
+  try {
+    const instructors = await User.find({ role: 'instructor' }).select('-password');
+
+    if (!instructors || instructors.length === 0) {
+      return res.status(404).json({ message: 'No instructors found' });
+    }
+
+    res.status(200).json({
+      message: 'Instructors retrieved successfully',
+      instructors,
+    });
+  } catch (error) {
+    console.error('Error retrieving instructors:', error.message);
+    res.status(500).json({ error: 'Failed to retrieve instructors' });
+  }
+}
+
+
+exports.getStudents = async (req, res) => {
+  try {
+    const students = await User.find({ role: 'student' }).select('-password');
+
+    if (!students || students.length === 0) {
+      return res.status(404).json({ message: 'No students found' });
+    }
+
+    res.status(200).json({
+      message: 'Students retrieved successfully',
+      students,
+    });
+  } catch (error) {
+    console.error('Error retrieving students:', error.message);
+    res.status(500).json({ error: 'Failed to retrieve students' });
+  }
+}
