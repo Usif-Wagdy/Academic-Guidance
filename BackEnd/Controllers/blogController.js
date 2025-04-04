@@ -22,25 +22,45 @@ exports.getBlogById = async (req, res) => {
     }
 }
 exports.createBlog = async (req, res) => {
-
     try {
-        const { author, image, title, date, content, duration } = req.body;
-        if (!author || !image || !title || !date || !content || !duration) {
-            res.status(400).json({
-                sucess: "false ", message: 'All fields are required.'
-            });
 
+        const imageUrl = req.file.path;
+        console.log(req.file);
+        const { author, title, date, content, duration } = req.body;
+
+        if (!author || !title || !date || !content || !duration || !req.file) {
+            return res.status(400).json({
+                success: false,
+                message: 'All fields are required, including an image.'
+            });
         }
-        const newBlog = new Blog({ author, image, title, date, content, duration });
+
+        // Get the image URL
+
+        const newBlog = new Blog({
+            author,
+            image: imageUrl,
+            title,
+            date,
+            content,
+            duration
+        });
+
         await newBlog.save();
+
         res.status(201).json({
-            success: true, message: 'Blog created successfully.', Blog: newBlog
+            success: true,
+            message: 'Blog created successfully.',
+            blog: newBlog
         });
     } catch (error) {
         console.error('Error creating Blog:', error);
-        res.status(500).json({ success: false, message: 'Failed to create Blog. Please try again.' });
+        res.status(500).json({
+            success: false,
+            message: 'Failed to create Blog. Please try again.'
+        });
     }
-}
+};
 exports.deleteBlog = async (req, res) => {
     try {
         const id = req.params.id;

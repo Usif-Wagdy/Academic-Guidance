@@ -107,9 +107,6 @@ const addDemoVideo = async (courseId, curriculumIndex, partIndex, video_url) => 
     }
 };
 
-
-
-
 exports.addImage = async (req, res) => {
     try {
         const courseId = req.params.id;

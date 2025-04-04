@@ -4,7 +4,7 @@ const router = express.Router();
 const userController = require('../Controllers/userContrtoller');
 const authController = require('../Controllers/authController');
 const { authMiddleware, allowedTo } = require('../Middlewares/authMiddleware');
-const { imageUpload, videoUpload } = require('../Config/cloudinaryConfig');
+const { imageUpload } = require('../Config/cloudinaryConfig');
 router.post('/signUp', authController.addUser);
 router.post('/signIn', authController.login);
 
