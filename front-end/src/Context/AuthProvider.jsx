@@ -14,6 +14,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = Cookies.get("authToken");
     const userData = Cookies.get("userData");
+    console.log(token);
+    console.log(userData);
 
     if (token && userData) {
       setAuth({ token, user: JSON.parse(userData) });

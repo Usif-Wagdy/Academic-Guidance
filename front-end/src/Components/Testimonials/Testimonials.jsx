@@ -8,7 +8,7 @@ import { Card, Button, Container, Row, Col, Modal } from "react-bootstrap";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import TestiModal from "./TestiModal";
 import { Axios } from "../../api/axios";
-import { testmonialsAPI } from "../../api/Api";
+import { testimonialsAPI } from "../../api/Api";
 
 const MAX_TEXT_LENGTH = 100;
 
@@ -37,7 +37,9 @@ export default function Testimonials({ layout = "slider" }) {
   };
 
   useEffect(() => {
-    Axios(`${testmonialsAPI}`).then((res) => setTestimonials(res.data));
+    Axios.get(testimonialsAPI).then((res) =>
+      setTestimonials(res.data.testimonials)
+    );
   }, []);
 
   return (
@@ -59,8 +61,8 @@ export default function Testimonials({ layout = "slider" }) {
             className="pb-5"
           >
             {limitedTestimonials.map(
-              ({ id, name, profilePic, testimonial }) => (
-                <SwiperSlide key={id}>
+              ({ _id, name, profilePic, testimonial }) => (
+                <SwiperSlide key={_id}>
                   <Card className="p-4 shadow-sm text-start h-100">
                     <Card.Text className="text-muted mb-4">
                       {testimonial.length > MAX_TEXT_LENGTH
@@ -81,7 +83,7 @@ export default function Testimonials({ layout = "slider" }) {
                       <Button
                         className="bg-info border w-sm-100"
                         onClick={() =>
-                          openModal({ id, name, profilePic, testimonial })
+                          openModal({ _id, name, profilePic, testimonial })
                         }
                       >
                         Read More
@@ -108,8 +110,8 @@ export default function Testimonials({ layout = "slider" }) {
       ) : layout === "grid" ? (
         // Grid Layout (4 Cards Max)
         <Row xs={1} lg={2}>
-          {limitedTestimonials.map(({ id, name, profilePic, testimonial }) => (
-            <Col key={id} className="mb-4">
+          {limitedTestimonials.map(({ _id, name, profilePic, testimonial }) => (
+            <Col key={_id} className="mb-4">
               <Card className="p-4 shadow-sm text-start h-100 border-0">
                 <Card.Text className="text-muted mb-4 text-center text-md-start">
                   {testimonial.length > MAX_TEXT_LENGTH
@@ -130,7 +132,7 @@ export default function Testimonials({ layout = "slider" }) {
                   <Button
                     className="bg-info border w-sm-100"
                     onClick={() =>
-                      openModal({ id, name, profilePic, testimonial })
+                      openModal({ _id, name, profilePic, testimonial })
                     }
                   >
                     Read More
@@ -160,7 +162,7 @@ export default function Testimonials({ layout = "slider" }) {
         <Modal.Header closeButton>
           <Modal.Title>{selectedTestimonial?.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="text-center">
+        <Modal.Body className="center-flex flex-column">
           <img
             src={selectedTestimonial?.profilePic}
             alt={selectedTestimonial?.name}

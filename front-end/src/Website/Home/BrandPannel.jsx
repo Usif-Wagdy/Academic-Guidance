@@ -1,21 +1,10 @@
-import { useEffect, useState } from "react";
-import { Axios } from "../../api/axios";
-import { BrandsImagesAPI } from "../../api/Api";
+import brandImagesData from "../../Data/brandImagesData";
 import { Col, Row } from "react-bootstrap";
 
 export default function BrandPannel() {
-  const [brandsImages, setBrandsImages] = useState([]);
-
-  useEffect(() => {
-    Axios.get(`${BrandsImagesAPI}`).then((res) => setBrandsImages(res.data));
-  }, []);
-
-  const showBrands = brandsImages.map((img, i) => (
-    <Col key={i}>
-      <img
-        src={require(`../../Assets/brands/${img.image}`)}
-        alt={`brand ${img.id}`}
-      />
+  const showBrands = brandImagesData.map((brand, id) => (
+    <Col key={id}>
+      <img src={`/Assets/brands/${brand.image}`} alt={`brand ${brand.id}`} />
     </Col>
   ));
 

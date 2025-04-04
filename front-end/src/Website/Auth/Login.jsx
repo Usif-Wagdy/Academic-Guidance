@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { Button, Form, InputGroup, Alert, Spinner } from "react-bootstrap";
 import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import { Axios } from "../../api/axios";
-import { usersAPI } from "../../api/Api";
+import { loginAPI } from "../../api/Api";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthProvider";
@@ -24,14 +24,7 @@ export default function Login() {
       .string()
       .email("Invalid email address")
       .required("Email is required"),
-    password: yup
-      .string()
-      .min(8, "Password must be at least 8 characters")
-      .matches(/[A-Z]/, "Must contain at least one uppercase letter")
-      .matches(/[a-z]/, "Must contain at least one lowercase letter")
-      .matches(/\d/, "Must contain at least one number")
-      .matches(/[\W_]/, "Must contain at least one special character")
-      .required("Password is required"),
+    password: yup.string().required("Password is required"),
   });
 
   // Function to handle API login request
@@ -40,30 +33,29 @@ export default function Login() {
     setErrorMessage("");
 
     try {
-      const response = await Axios.get(`${usersAPI}`, values).then();
-
-      // console.log(response);
+      const response = await Axios.post(loginAPI, values);
 
       if (response.status !== 200) {
         throw new Error(errorMessage || "Login failed");
       }
 
-      const { token, userData } = response.data[0];
+      console.log(response.data.user);
 
-      // console.log("Login successful:", userData, token);
+      const { token, user } = response.data;
 
-      // **Store token in cookies**
+      // Store token in cookies
       Cookies.set("authToken", token, { expires: 7, secure: true });
 
       // Store user data
-      Cookies.set("userData", JSON.stringify(userData), { expires: 7 });
+      Cookies.set("userData", JSON.stringify(user), { expires: 7 });
 
-      setAuth({ token: token, user: userData });
+      // Store token & user in context (For UI updates)
+      setAuth({ token: token, user: user });
+
       // Redirect to home
-      userData.isAdmin ? navigate("/dashboard") : navigate("/");
-      
+      user.isAdmin ? navigate("/dashboard") : navigate("/");
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error.response.data);
     } finally {
       setLoading(false);
     }
@@ -86,7 +78,7 @@ export default function Login() {
           {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
 
           {/* Email Field */}
-          <Form.Group className="mb-4">
+          <Form.Group>
             <Form.Label>Email</Form.Label>
             <InputGroup hasValidation>
               <InputGroup.Text>
@@ -99,15 +91,20 @@ export default function Login() {
                 value={values.email}
                 onChange={handleChange}
                 isInvalid={touched.email && !!errors.email}
+                isValid={touched.email && !errors.email}
               />
-              <Form.Control.Feedback type="invalid" tooltip>
-                {errors.email}
-              </Form.Control.Feedback>
             </InputGroup>
+            <div style={{ minHeight: "25px", marginLeft: "42px" }}>
+              {errors.email && touched.email ? (
+                <small className="text-danger">{errors.email}</small>
+              ) : touched.email ? (
+                <small className="text-success">Looks good!</small>
+              ) : null}
+            </div>
           </Form.Group>
 
           {/* Password Field */}
-          <Form.Group className="mb-4">
+          <Form.Group>
             <Form.Label>Password</Form.Label>
             <InputGroup hasValidation>
               <InputGroup.Text>
@@ -120,6 +117,7 @@ export default function Login() {
                 value={values.password}
                 onChange={handleChange}
                 isInvalid={touched.password && !!errors.password}
+                isValid={touched.password && !errors.password}
               />
               <Button
                 variant="outline-secondary"
@@ -128,16 +126,20 @@ export default function Login() {
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </Button>
-              <Form.Control.Feedback type="invalid" tooltip>
-                {errors.password}
-              </Form.Control.Feedback>
             </InputGroup>
+            <div style={{ minHeight: "25px", marginLeft: "42px" }}>
+              {errors.password && touched.password ? (
+                <small className="text-danger">{errors.password}</small>
+              ) : touched.password ? (
+                <small className="text-success">Looks good!</small>
+              ) : null}
+            </div>
           </Form.Group>
 
           {/* Submit Button */}
           <Button
             type="submit"
-            className="w-100 fw-semibold"
+            className="w-100 fw-semibold my-3"
             disabled={loading}
           >
             {loading ? <Spinner animation="border" size="sm" /> : "Login"}

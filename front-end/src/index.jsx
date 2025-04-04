@@ -33,6 +33,7 @@ import Register from "./Website/Auth/Register";
 import Courses from "./Website/courses/Courses";
 import CourseView from "./Website/courses/CourseView";
 import Tracks from "./Website/tracks/Tracks";
+import TrackRoadmap from "./Website/tracks/Roadmap";
 import Blogs from "./Website/blogs/Blogs";
 import BlogView from "./Website/blogs/BlogView";
 import About from "./Website/About/About";
@@ -79,15 +80,25 @@ root.render(
         <Router>
           <ScrollToTop />
           <Routes>
+            {/* Main Routes */}
             <Route element={<MainLayout />}>
               <Route path="/" element={<Home />} />
-              <Route path="/auth" element={<Auth />}>
+              <Route
+                path="/auth"
+                element={
+                  <PrivateRoute type={"requireNoAuth"}>
+                    <Auth />
+                  </PrivateRoute>
+                }
+              >
+                <Route index element={<Navigate to="login" replace />} />
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
               </Route>
               <Route path="/courses" element={<Courses />} />
               <Route path="/courses/:id" element={<CourseView />} />
               <Route path="/tracks" element={<Tracks />} />
+              <Route path="/tracks/:id" element={<TrackRoadmap />} />
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/blogs/:id" element={<BlogView />} />
               <Route path="/about" element={<About />} />
@@ -95,10 +106,11 @@ root.render(
               <Route path="/cvbuilder" element={<CVBuilder />} />
             </Route>
 
+            {/* Dashboard Routes */}
             <Route
               path="/dashboard"
               element={
-                <PrivateRoute>
+                <PrivateRoute type={"admin"}>
                   <Dashboard />
                 </PrivateRoute>
               }

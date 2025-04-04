@@ -58,7 +58,7 @@ export default function NavBar({ isCollapsed }) {
           >
             <img
               src={
-                auth?.user.profilePicture ||
+                auth?.user.profilePic ||
                 "https://www.viverefermo.it/images/user.png"
               }
               alt="Profile"
@@ -67,8 +67,8 @@ export default function NavBar({ isCollapsed }) {
               height="40"
             />
             <div className="ms-2 text-start me-2">
-              <div className="fw-bold fs-14px">
-                {auth?.user.name.toString().toUpperCase() || "Admin"}
+              <div className="fw-bold fs-14px text-capitalize">
+                {auth?.user.name || "Admin"}
               </div>
               <small className="text-primary">
                 {auth?.user.role === "admin" ? "Administrator" : "Instructor"}

@@ -1,8 +1,9 @@
 import React from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import Testimonials from "../../Components/Testimonials/Testimonials";
+import { motion } from "framer-motion";
 import "./Auth.css";
+import Testimonials from "../../Components/Testimonials/Testimonials";
 
 function Auth() {
   // Location Controllers
@@ -11,7 +12,10 @@ function Auth() {
   const isLogin = location.pathname === "/auth/login";
 
   return (
-    <Container className="d-flex justify-content-around align-items-center min-vh-100 py-4">
+    <Container
+      className="d-flex justify-content-around align-items-center py-4"
+      style={{ height: " calc(100vh - 72px)" }}
+    >
       <Row className="w-100 justify-content-center align-items-center">
         <Col lg={7} className="d-none d-lg-block left fade-in">
           <Row className="align-items-center flex-column justify-content-start h-100 text-center testimonials ">
@@ -27,35 +31,44 @@ function Auth() {
             <Testimonials layout="slider" />
           </Row>
         </Col>
-
         <Col xs={11} md={8} lg={5} className="p-3 rounded-4 form-box fade-in">
-          <div>
-            <h2 className="text-start text-dark my-4 text-center">
-              {isLogin ? "Login" : "Create Account"}
-            </h2>
-            <p className="mb-3 text-center text-small">
-              {isLogin
-                ? "Welcome back! Please log in to access your account."
-                : "Create your account to unlock exclusive features."}
-            </p>
-          </div>
-
-          {/* Outlet to Render Login or Register */}
-          <Outlet />
-
-          {/* Toggle Between Forms */}
-          <p className="d-flex align-items-center justify-content-center gap-1">
-            {isLogin ? "Don't have an account?" : "Already have an account?"}
-            <Button
-              variant="link"
-              className="fw-semibold p-0"
-              onClick={() =>
-                navigate(isLogin ? "/auth/register" : "/auth/login")
-              }
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
             >
-              {isLogin ? "Register" : "Login"}
-            </Button>
-          </p>
+              <div>
+                <h2 className="text-start text-dark my-4 text-center">
+                  {isLogin ? "Login" : "Create Account"}
+                </h2>
+                <p className="mb-3 text-center text-small">
+                  {isLogin
+                    ? "Welcome back! Please log in to access your account."
+                    : "Create your account to unlock exclusive features."}
+                </p>
+              </div>
+
+              <Outlet />
+
+              {/* Toggle Between Forms */}
+              <p className="d-flex align-items-center justify-content-center gap-1">
+                {isLogin
+                  ? "Don't have an account?"
+                  : "Already have an account?"}
+                <Button
+                  variant="link"
+                  className="fw-semibold p-0"
+                  onClick={() =>
+                    navigate(isLogin ? "/auth/register" : "/auth/login")
+                  }
+                >
+                  {isLogin ? "Register" : "Login"}
+                </Button>
+              </p>
+            </motion.div>
+          </React.Suspense>
         </Col>
       </Row>
     </Container>
