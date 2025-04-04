@@ -107,4 +107,54 @@ const addDemoVideo = async (courseId, curriculumIndex, partIndex, video_url) => 
     }
 };
 
-module.exports.addDemoVideo = addDemoVideo;
+
+
+
+exports.addImage = async (req, res) => {
+    try {
+        const courseId = req.params.id;
+        const files = req.files; // .array('images') multer
+
+        if (!files || files.length === 0) {
+            return res.status(400).json({ success: false, message: "No photos uploaded" });
+        }
+
+        if (!mongoose.Types.ObjectId.isValid(courseId)) {
+            return res.status(400).json({ success: false, message: "Invalid course ID format" });
+        }
+
+        const course = await Course.findById(courseId);
+        if (!course) {
+            return res.status(404).json({ success: false, message: "Course not found" });
+        }
+
+        // Initialize image array if not present
+        if (!Array.isArray(course.images)) {
+            course.images = [];
+        }
+
+        // Add each image, keeping a max of 3
+        for (const file of files) {
+            course.images.push(file.path);
+
+            // If more than 3, remove oldest
+            if (course.images.length > 3) {
+                const removedImage = course.images.shift();
+
+
+            }
+        }
+
+        const updatedCourse = await course.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Photos uploaded successfully",
+            course: updatedCourse
+        });
+
+    } catch (error) {
+        console.error("Error uploading photos:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+};

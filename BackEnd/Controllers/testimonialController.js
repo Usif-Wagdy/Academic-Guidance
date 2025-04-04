@@ -1,15 +1,14 @@
 const Testimonial = require("../Models/TestimonialModel");
 
-// Create a new testimonial
 exports.createTestimonial = async (req, res) => {
     try {
-        const { name, profilePic, testimonial , courseId} = req.body;
-        
+        const { name, profilePic, testimonial, courseId } = req.body;
+
         if (!name || !profilePic || !testimonial || !courseId) {
             return res.status(400).json({ success: false, message: "All fields are required." });
         }
 
-        const newTestimonial = new Testimonial({ name, profilePic, testimonial , courseId });
+        const newTestimonial = new Testimonial({ name, profilePic, testimonial, courseId });
         await newTestimonial.save();
         res.status(201).json({ success: true, message: "Testimonial added successfully.", testimonial: newTestimonial });
     } catch (error) {
@@ -45,7 +44,7 @@ exports.deleteTestimonial = async (req, res) => {
 exports.getTestimonialsByCourse = async (req, res) => {
     try {
         const { courseId } = req.params;
-        
+
         if (!courseId) {
             return res.status(400).json({ success: false, message: "Course ID is required." });
         }
