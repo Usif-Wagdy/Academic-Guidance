@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: "Be Vietnam Pro", serif;
+  font-display: swap;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
