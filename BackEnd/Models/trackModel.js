@@ -7,7 +7,6 @@ const sectionSchema = new mongoose.Schema({
     }]
 });
 
-
 const trackSchema = new mongoose.Schema({
     name: { type: String, required: true, trim: true, unique: true },
     description: { type: String, required: true, trim: true },
