@@ -24,16 +24,23 @@ const addTrack = async (req, res) => {
             });
         }
 
-        const isValidSections = sections.every(
-            (section) => section.title && section.content
-        );
+        const isValidSections = sections.every((section) => {
+            return (
+                section.name && // Section should have a name
+                Array.isArray(section.content) && // Content must be an array
+                section.content.every(
+                    (item) => item.title && item.link // Each content item should have title and link
+                )
+            );
+        });
 
         if (!isValidSections) {
             return res.status(400).json({
-                message: 'Each section must have a title and content',
+                message: 'Each section must have a title, content, and each content item must have a title and link',
             });
         }
 
+        // Create and save the new track
         const newTrack = new Track({
             name,
             description,
