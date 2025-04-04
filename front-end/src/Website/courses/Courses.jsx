@@ -87,14 +87,14 @@ export default function Courses() {
               </div>
 
               <div className="between-flex p-2">
-                <Card key={_id} className="col-12 p-2 border-0  d-lg-none">
+                <Card key={_id} className="col-12 p-2 border-0 d-lg-none">
                   <Card.Img
                     variant="top"
                     src={course.images[0]}
                     style={{ minWidth: "326px", height: "300px" }}
                   />
                 </Card>
-                {course.images.map((img, i) => (
+                {course.images.slice(0, 3).map((img, i) => (
                   <Card
                     key={i}
                     className="col-4 p-2 border-0 d-none d-lg-block"

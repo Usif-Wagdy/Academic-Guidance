@@ -1,3 +1,4 @@
+import React, { useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import {
   FaList,
@@ -11,45 +12,53 @@ import {
 import { MdArrowForwardIos, MdDashboard } from "react-icons/md";
 import { LuWaypoints } from "react-icons/lu";
 
-export default function Sidebar({ isCollapsed, setIsCollapsed }) {
-  const menuItems = [
-    {
-      path: "/dashboard/insights",
-      label: "Admin Dashboard",
-      icon: <MdDashboard size={22} />,
-    },
-    {
-      path: "/dashboard/cv-template",
-      label: "CV Template",
-      icon: <FaChalkboardTeacher size={22} />,
-    },
-    {
-      path: "/dashboard/roadmap",
-      label: "Roadmap",
-      icon: <FaRoad size={22} />,
-    },
-    {
-      path: "/dashboard/tracks",
-      label: "Tracks",
-      icon: <LuWaypoints size={22} />,
-    },
-    { path: "/dashboard/blogs", label: "Blog", icon: <FaBlogger size={22} /> },
-    {
-      path: "/dashboard/intern-ships",
-      label: "Internship",
-      icon: <FaBriefcase size={22} />,
-    },
-    {
-      path: "/dashboard/instructors",
-      label: "Instructor Accounts",
-      icon: <FaUsers size={22} />,
-    },
-    {
-      path: "/dashboard/workshop",
-      label: "Workshop",
-      icon: <FaUserTie size={22} />,
-    },
-  ];
+function Sidebar({ isCollapsed, setIsCollapsed }) {
+  // Memoize the menuItems to avoid recalculating them on every render
+  const menuItems = useMemo(
+    () => [
+      {
+        path: "/dashboard/insights",
+        label: "Admin Dashboard",
+        icon: <MdDashboard size={22} />,
+      },
+      {
+        path: "/dashboard/cv-template",
+        label: "CV Template",
+        icon: <FaChalkboardTeacher size={22} />,
+      },
+      {
+        path: "/dashboard/roadmap",
+        label: "Roadmap",
+        icon: <FaRoad size={22} />,
+      },
+      {
+        path: "/dashboard/tracks",
+        label: "Tracks",
+        icon: <LuWaypoints size={22} />,
+      },
+      {
+        path: "/dashboard/blogs",
+        label: "Blog",
+        icon: <FaBlogger size={22} />,
+      },
+      {
+        path: "/dashboard/intern-ships",
+        label: "Internship",
+        icon: <FaBriefcase size={22} />,
+      },
+      {
+        path: "/dashboard/instructors",
+        label: "Instructor Accounts",
+        icon: <FaUsers size={22} />,
+      },
+      {
+        path: "/dashboard/workshop",
+        label: "Workshop",
+        icon: <FaUserTie size={22} />,
+      },
+    ],
+    [] // Empty dependency array ensures the menuItems are only computed once
+  );
 
   return (
     <div
@@ -80,6 +89,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
         <button
           className="btn btn-primary btn-sm text-white ms-auto"
           onClick={() => setIsCollapsed(!isCollapsed)}
+          aria-label="Toggle sidebar collapse"
         >
           <FaList size={24} />
         </button>
@@ -120,3 +130,5 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
     </div>
   );
 }
+
+export default React.memo(Sidebar);

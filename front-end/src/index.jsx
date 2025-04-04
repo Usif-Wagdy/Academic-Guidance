@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import {
   BrowserRouter as Router,
@@ -20,46 +20,79 @@ import { AuthProvider } from "./Context/AuthProvider";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import ErrorPage from "./Website/Error/ErrorPage";
 import { NotificationProvider } from "./Context/Notification";
+import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
 
 // Components
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 
-// Website Pages
-import Home from "./Website/Home/Home";
-import Auth from "./Website/Auth/Auth";
-import Login from "./Website/Auth/Login";
-import Register from "./Website/Auth/Register";
-import Courses from "./Website/courses/Courses";
-import CourseView from "./Website/courses/CourseView";
-import Tracks from "./Website/tracks/Tracks";
-import TrackRoadmap from "./Website/tracks/Roadmap";
-import Blogs from "./Website/blogs/Blogs";
-import BlogView from "./Website/blogs/BlogView";
-import About from "./Website/About/About";
-import Internships from "./Website/internship/Internship";
-import CVBuilder from "./Website/CV Builder/CVBuilder";
+// Lazy-loaded Website Pages
+const Home = lazy(() => import("./Website/Home/Home"));
+const Auth = lazy(() => import("./Website/Auth/Auth"));
+const Login = lazy(() => import("./Website/Auth/Login"));
+const Register = lazy(() => import("./Website/Auth/Register"));
+const Courses = lazy(() => import("./Website/courses/Courses"));
+const CourseView = lazy(() => import("./Website/courses/CourseView"));
+const Tracks = lazy(() => import("./Website/tracks/Tracks"));
+const TrackRoadmap = lazy(() => import("./Website/tracks/Roadmap"));
+const Blogs = lazy(() => import("./Website/blogs/Blogs"));
+const BlogView = lazy(() => import("./Website/blogs/BlogView"));
+const About = lazy(() => import("./Website/About/About"));
+const Internships = lazy(() => import("./Website/internship/Internship"));
+const CVBuilder = lazy(() => import("./Website/CV Builder/CVBuilder"));
 
-// Dashboard pages
-import Dashboard from "./Website/Admin/Dashboard";
-import Insights from "./Website/Admin/DashboardPages/Insights";
-import CVTemplate from "./Website/Admin/DashboardPages/CVTemplate";
-import Roadmap from "./Website/Admin/DashboardPages/Roadmap";
-import CoursePage from "./Website/Admin/DashboardPages/Workshop/CoursePage";
-import CourseList from "./Website/Admin/DashboardPages/Workshop/CourseList";
-import CourseForm from "./Website/Admin/DashboardPages/Workshop/CourseForm";
-import BlogsPage from "./Website/Admin/DashboardPages/Blogs/BlogsPage";
-import BlogsList from "./Website/Admin/DashboardPages/Blogs/BlogsList";
-import BlogsForm from "./Website/Admin/DashboardPages/Blogs/BlogsForm";
-import Intern from "./Website/Admin/DashboardPages/InternShips/Intern";
-import EditIntern from "./Website/Admin/DashboardPages/InternShips/EditIntern";
-import AddIntern from "./Website/Admin/DashboardPages/InternShips/AddIntern";
-import Instructors from "./Website/Admin/DashboardPages/Instructors/Instructors";
-import EditInstructors from "./Website/Admin/DashboardPages/Instructors/EditInstructors";
-import AddInstructors from "./Website/Admin/DashboardPages/Instructors/AddInstructors";
-import EditTrack from "./Website/Admin/DashboardPages/Tracks/EditTrack";
-import AddTrack from "./Website/Admin/DashboardPages/Tracks/AddTrack";
-import AllTracks from "./Website/Admin/DashboardPages/Tracks/Tracks";
+// Lazy-loaded Dashboard Pages
+const Dashboard = lazy(() => import("./Website/Admin/Dashboard"));
+const Insights = lazy(() => import("./Website/Admin/DashboardPages/Insights"));
+const CVTemplate = lazy(() =>
+  import("./Website/Admin/DashboardPages/CVTemplate")
+);
+const Roadmap = lazy(() => import("./Website/Admin/DashboardPages/Roadmap"));
+const CoursePage = lazy(() =>
+  import("./Website/Admin/DashboardPages/Workshop/CoursePage")
+);
+const CourseList = lazy(() =>
+  import("./Website/Admin/DashboardPages/Workshop/CourseList")
+);
+const CourseForm = lazy(() =>
+  import("./Website/Admin/DashboardPages/Workshop/CourseForm")
+);
+const BlogsPage = lazy(() =>
+  import("./Website/Admin/DashboardPages/Blogs/BlogsPage")
+);
+const BlogsList = lazy(() =>
+  import("./Website/Admin/DashboardPages/Blogs/BlogsList")
+);
+const BlogsForm = lazy(() =>
+  import("./Website/Admin/DashboardPages/Blogs/BlogsForm")
+);
+const Intern = lazy(() =>
+  import("./Website/Admin/DashboardPages/InternShips/Intern")
+);
+const EditIntern = lazy(() =>
+  import("./Website/Admin/DashboardPages/InternShips/EditIntern")
+);
+const AddIntern = lazy(() =>
+  import("./Website/Admin/DashboardPages/InternShips/AddIntern")
+);
+const Instructors = lazy(() =>
+  import("./Website/Admin/DashboardPages/Instructors/Instructors")
+);
+const EditInstructors = lazy(() =>
+  import("./Website/Admin/DashboardPages/Instructors/EditInstructors")
+);
+const AddInstructors = lazy(() =>
+  import("./Website/Admin/DashboardPages/Instructors/AddInstructors")
+);
+const EditTrack = lazy(() =>
+  import("./Website/Admin/DashboardPages/Tracks/EditTrack")
+);
+const AddTrack = lazy(() =>
+  import("./Website/Admin/DashboardPages/Tracks/AddTrack")
+);
+const AllTracks = lazy(() =>
+  import("./Website/Admin/DashboardPages/Tracks/Tracks")
+);
 
 // Layout with header and footer
 const MainLayout = () => (
@@ -79,76 +112,78 @@ root.render(
       <AuthProvider>
         <Router>
           <ScrollToTop />
-          <Routes>
-            {/* Main Routes */}
-            <Route element={<MainLayout />}>
-              <Route path="/" element={<Home />} />
+          <Suspense fallback={<LoadingScreen />}>
+            <Routes>
+              {/* Main Routes */}
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route
+                  path="/auth"
+                  element={
+                    <PrivateRoute type={"requireNoAuth"}>
+                      <Auth />
+                    </PrivateRoute>
+                  }
+                >
+                  <Route index element={<Navigate to="login" replace />} />
+                  <Route path="login" element={<Login />} />
+                  <Route path="register" element={<Register />} />
+                </Route>
+                <Route path="/courses" element={<Courses />} />
+                <Route path="/courses/:id" element={<CourseView />} />
+                <Route path="/tracks" element={<Tracks />} />
+                <Route path="/tracks/:id" element={<TrackRoadmap />} />
+                <Route path="/blogs" element={<Blogs />} />
+                <Route path="/blogs/:id" element={<BlogView />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/internships" element={<Internships />} />
+                <Route path="/cvbuilder" element={<CVBuilder />} />
+              </Route>
+
+              {/* Dashboard Routes */}
               <Route
-                path="/auth"
+                path="/dashboard"
                 element={
-                  <PrivateRoute type={"requireNoAuth"}>
-                    <Auth />
+                  <PrivateRoute type={"admin"}>
+                    <Dashboard />
                   </PrivateRoute>
                 }
               >
-                <Route index element={<Navigate to="login" replace />} />
-                <Route path="login" element={<Login />} />
-                <Route path="register" element={<Register />} />
-              </Route>
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/courses/:id" element={<CourseView />} />
-              <Route path="/tracks" element={<Tracks />} />
-              <Route path="/tracks/:id" element={<TrackRoadmap />} />
-              <Route path="/blogs" element={<Blogs />} />
-              <Route path="/blogs/:id" element={<BlogView />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/internships" element={<Internships />} />
-              <Route path="/cvbuilder" element={<CVBuilder />} />
-            </Route>
+                <Route index element={<Navigate to="insights" replace />} />
 
-            {/* Dashboard Routes */}
-            <Route
-              path="/dashboard"
-              element={
-                <PrivateRoute type={"admin"}>
-                  <Dashboard />
-                </PrivateRoute>
-              }
-            >
-              <Route index element={<Navigate to="insights" replace />} />
+                <Route path="insights" element={<Insights />} />
+                <Route path="cv-template" element={<CVTemplate />} />
+                <Route path="roadmap" element={<Roadmap />} />
 
-              <Route path="insights" element={<Insights />} />
-              <Route path="cv-template" element={<CVTemplate />} />
-              <Route path="roadmap" element={<Roadmap />} />
+                <Route path="tracks" element={<AllTracks />} />
+                <Route path="tracks/:id" element={<EditTrack />} />
+                <Route path="track/add" element={<AddTrack />} />
 
-              <Route path="tracks" element={<AllTracks />} />
-              <Route path="tracks/:id" element={<EditTrack />} />
-              <Route path="track/add" element={<AddTrack />} />
+                <Route path="blogs" element={<BlogsPage />}>
+                  <Route index element={<BlogsList />} />
+                  <Route path="add" element={<BlogsForm />} />
+                  <Route path=":id" element={<BlogsForm />} />
+                </Route>
 
-              <Route path="blogs" element={<BlogsPage />}>
-                <Route index element={<BlogsList />} />
-                <Route path="add" element={<BlogsForm />} />
-                <Route path=":id" element={<BlogsForm />} />
+                <Route path="workshop" element={<CoursePage />}>
+                  <Route index element={<CourseList />} />
+                  <Route path="add" element={<CourseForm />} />
+                  <Route path=":id" element={<CourseForm />} />
+                </Route>
+
+                <Route path="intern-ships" element={<Intern />} />
+                <Route path="intern-ships/:id" element={<EditIntern />} />
+                <Route path="intern-ship/add" element={<AddIntern />} />
+
+                <Route path="instructors" element={<Instructors />} />
+                <Route path="instructors/:id" element={<EditInstructors />} />
+                <Route path="instructor/add" element={<AddInstructors />} />
               </Route>
 
-              <Route path="workshop" element={<CoursePage />}>
-                <Route index element={<CourseList />} />
-                <Route path="add" element={<CourseForm />} />
-                <Route path=":id" element={<CourseForm />} />
-              </Route>
-
-              <Route path="intern-ships" element={<Intern />} />
-              <Route path="intern-ships/:id" element={<EditIntern />} />
-              <Route path="intern-ship/add" element={<AddIntern />} />
-
-              <Route path="instructors" element={<Instructors />} />
-              <Route path="instructors/:id" element={<EditInstructors />} />
-              <Route path="instructor/add" element={<AddInstructors />} />
-            </Route>
-
-            {/* Redirect unknown routes to Home */}
-            <Route path="*" element={<ErrorPage />} />
-          </Routes>
+              {/* Redirect unknown routes to Home */}
+              <Route path="*" element={<ErrorPage />} />
+            </Routes>
+          </Suspense>
         </Router>
       </AuthProvider>
     </NotificationProvider>
