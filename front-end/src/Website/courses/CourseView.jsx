@@ -15,7 +15,7 @@ export default function CourseView() {
   useEffect(() => {
     Axios(`${coursesAPI}/${id}`)
       .then((res) => {
-        setCurrCourse(res.data);
+        setCurrCourse(res.data.course);
       })
       .catch((error) => console.log(error));
   }, [id]);

@@ -12,7 +12,7 @@ export default function BlogView() {
 
   useEffect(() => {
     Axios.get(`${blogsAPI}/${id}`)
-      .then((res) => setBlog(res.data))
+      .then((res) => setBlog(res.data.blog))
       .catch((err) => console.error(err));
   }, [id]);
 
@@ -39,7 +39,7 @@ export default function BlogView() {
             style={{ width: "100%", height: "700px" }}
           />
           <p className="text-start fs-16px fs-md-18px mt-5 px-4">
-            {blog.description}
+            {blog.content}
           </p>
         </div>
       </motion.div>

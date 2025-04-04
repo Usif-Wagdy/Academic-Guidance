@@ -21,11 +21,7 @@ export default function Home() {
 
         {/* Hero Video STATIC */}
         <Row className="mb-4">
-          <img
-            src={require("../../Assets/hero.png")}
-            alt="hero"
-            loading="lazy"
-          />
+          <img src={`/Assets/hero.png`} alt="hero" loading="lazy" />
         </Row>
 
         {/* Benefits Section API */}

@@ -16,10 +16,10 @@ export default function Courses() {
 
   useEffect(() => {
     Axios(`${coursesAPI}`).then((res) => {
-      setTimeout(() => {
-        setCourses(res.data);
-        setLoading(false);
-      }, 1000);
+      console.log(res.data.courses);
+
+      setCourses(res.data.courses);
+      setLoading(false);
     });
   }, []);
 
@@ -62,9 +62,9 @@ export default function Courses() {
           hasMore={visibleItems < courses.length}
           loader={<h4 className="mb-5 text-center">Loading...</h4>}
         >
-          {courses.slice(0, visibleItems).map((course, i) => (
+          {courses.slice(0, visibleItems).map((course, _id) => (
             <motion.div
-              key={i}
+              key={_id}
               className="p-3 p-md-5 bg-white mb-5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export default function Courses() {
                 </div>
 
                 <Link
-                  to={`${course.id}`}
+                  to={`${course._id}`}
                   className="col-lg-2 col-12 d-flex justify-content-lg-end justify-content-center my-3"
                 >
                   <Button className="bg-info border w-sm-100">
@@ -87,7 +87,7 @@ export default function Courses() {
               </div>
 
               <div className="between-flex p-2">
-                <Card key={i} className="col-12 p-2 border-0  d-lg-none">
+                <Card key={_id} className="col-12 p-2 border-0  d-lg-none">
                   <Card.Img
                     variant="top"
                     src={course.images[0]}

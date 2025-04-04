@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Col, Container, Nav, Row, Accordion } from "react-bootstrap";
-import logo from "../../Assets/Logo.png";
 import { useNavigate } from "react-router-dom";
 import {
   FaEnvelope,
@@ -37,7 +36,7 @@ export default function Footer() {
           {/* Logo and Contact (Reach For Us) */}
           <Col lg={3} className="mb-4 mb-lg-0">
             <div className="d-flex justify-content-center justify-content-lg-start">
-              <img src={logo} alt="Logo" width="50" height="50" />
+              <img src={`/Assets/Logo.png`} alt="Logo" width="50" height="50" />
             </div>
             <h6 className="fw-bold mt-3">Reach For Us</h6>
             <div className="d-flex flex-column gap-2 text-muted">

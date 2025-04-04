@@ -194,7 +194,7 @@ export default function About() {
             <img
               style={{ zIndex: "-1", height: "240px" }}
               className="position-absolute top-0 start-50 d-none d-lg-block "
-              src={require("../../Assets/about-us/Abstract Design.png")}
+              src={`/Assets/about-us/Abstract Design.png`}
               alt=""
             />
             <div>

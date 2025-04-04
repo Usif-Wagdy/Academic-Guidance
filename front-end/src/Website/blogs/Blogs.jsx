@@ -16,10 +16,9 @@ export default function Blogs() {
   useEffect(() => {
     Axios.get(blogsAPI)
       .then((res) => {
-        setTimeout(() => {
-          setBlogs(res.data);
-          setLoading(false);
-        }, 1500);
+        setBlogs(res.data.Blogs);
+        console.log(res.data.Blogs);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching blogs:", error);
@@ -75,11 +74,11 @@ export default function Blogs() {
         >
           {blogs.map((blog) => (
             <motion.div
-              key={blog.id}
+              key={blog._id}
               className="col-12 col-lg-6 "
               variants={itemVariants}
             >
-              <Link to={`/blogs/${blog.id}`} className="text-decoration-none">
+              <Link to={`/blogs/${blog._id}`} className="text-decoration-none">
                 <Card className="border-0 bg-info shadow-sm rounded-4 h-100">
                   <Card.Img
                     variant="top"
@@ -96,9 +95,9 @@ export default function Blogs() {
                       {blog.date} {blog.duration ? "- " + blog.duration : ""}
                     </Card.Title>
                     <Card.Text className="text-center fs-16px fs-md-18px">
-                      {blog.description.length > MAX_TEXT_LENGTH
-                        ? `${blog.description.substring(0, MAX_TEXT_LENGTH)}...`
-                        : blog.description}
+                      {blog.content.length > MAX_TEXT_LENGTH
+                        ? `${blog.content.substring(0, MAX_TEXT_LENGTH)}...`
+                        : blog.content}
                     </Card.Text>
                   </Card.Body>
                 </Card>

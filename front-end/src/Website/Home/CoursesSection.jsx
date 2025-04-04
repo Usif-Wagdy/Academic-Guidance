@@ -8,14 +8,14 @@ import SectionsHeads from "./SectionsHeads";
 export default function CoursesSection() {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
-    Axios.get(`${coursesAPI}`).then((res) => setCourses(res.data));
+    Axios.get(`${coursesAPI}`).then((res) => setCourses(res.data.courses));
   }, []);
 
-  const coursesShow = courses.slice(0, 4).map((course, i) => (
-    <Col className="mb-4" key={i}>
+  const coursesShow = courses.slice(0, 4).map((course, _id) => (
+    <Col className="mb-4" key={_id}>
       <div className="p-3 p-md-4 bg-white h-100 d-flex flex-column justify-content-between">
         <div>
-          <Card key={i} className=" border-0">
+          <Card key={_id} className=" border-0">
             <Card.Img
               variant="top"
               src={course.images[0]}
@@ -44,7 +44,7 @@ export default function CoursesSection() {
             <h3 className="w-100 ">{course.name}</h3>
             <p className="my-1 ">{course.description}</p>
           </div>
-          <Link to={`courses/${course.id}`} className="my-3 ">
+          <Link to={`courses/${course._id}`} className="my-3 ">
             <Button className="bg-info border w-sm-100 w-md-100">
               Get it Now
             </Button>

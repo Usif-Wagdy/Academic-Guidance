@@ -1,16 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  Navbar,
-  Nav,
-  Container,
-  Button,
-  OverlayTrigger,
-  Tooltip,
-  Dropdown,
-} from "react-bootstrap";
+import { Navbar, Nav, Container, Button, Dropdown } from "react-bootstrap";
 import { FaBars, FaSignOutAlt } from "react-icons/fa";
-import logo from "../../Assets/Logo.png";
 import Cookies from "js-cookie";
 import { useAuth } from "../../Context/AuthProvider";
 
@@ -28,8 +19,8 @@ export default function Header() {
       setActiveLink("/tracks");
     } else if (location.pathname.startsWith("/courses")) {
       setActiveLink("/courses");
-    } else if (location.pathname.startsWith("/internshipss")) {
-      setActiveLink("/internshipss");
+    } else if (location.pathname.startsWith("/internships")) {
+      setActiveLink("/internships");
     } else if (location.pathname.startsWith("/cvbuilder")) {
       setActiveLink("/cvbuilder");
     } else if (location.pathname.startsWith("/about")) {
@@ -60,7 +51,7 @@ export default function Header() {
       <Container>
         {/* Logo (Left) */}
         <Navbar.Brand as={Link} to="/">
-          <img src={logo} alt="Logo" width="40" height="40" />
+          <img src={`/Assets/Logo.png`} alt="Logo" width="40" height="40" />
         </Navbar.Brand>
 
         {/* Toggle Button for Mobile */}
@@ -108,7 +99,7 @@ export default function Header() {
                 >
                   <img
                     src={
-                      auth?.user.profilePicture ||
+                      auth?.user.profilePic ||
                       "https://www.viverefermo.it/images/user.png"
                     }
                     alt="Profile"
@@ -117,11 +108,11 @@ export default function Header() {
                     height="40"
                   />
                   <div className="ms-2 text-start me-2">
-                    <div className="fw-bold fs-14px">
-                      {auth?.user.name.toString().toUpperCase() || "Admin"}
+                    <div className="fw-bold fs-14px text-capitalize">
+                      {auth?.user.name || "User"}
                     </div>
-                    <small className="text-primary">
-                      {auth?.user.isAdmin ? "Administrator" : "Student"}
+                    <small className="text-primary text-capitalize">
+                      {auth?.user.isAdmin ? auth.user.role : "Student"}
                     </small>
                   </div>
                 </Dropdown.Toggle>
@@ -179,7 +170,7 @@ export default function Header() {
               >
                 <img
                   src={
-                    auth?.user.profilePicture ||
+                    auth?.user.profilePic ||
                     "https://www.viverefermo.it/images/user.png"
                   }
                   alt="Profile"
@@ -188,17 +179,19 @@ export default function Header() {
                   height="40"
                 />
                 <div className="ms-2 text-start me-2">
-                  <div className="fw-bold fs-14px">
-                    {auth?.user.name.toString().toUpperCase() || "Admin"}
+                  <div className="fw-bold fs-14px text-capitalize">
+                    {auth?.user.name || "User"}
                   </div>
-                  <small className="text-primary">
-                    {auth?.user.isAdmin ? "Administrator" : "Student"}
+                  <small className="text-primary text-capitalize">
+                    {auth?.user.isAdmin ? auth.user.role : "Student"}
                   </small>
                 </div>
               </Dropdown.Toggle>
               <Dropdown.Menu align="end" className="p-2">
-                <Dropdown.Item className="p-1">Profile</Dropdown.Item>
-                <Dropdown.Item className="p-1">Settings</Dropdown.Item>
+                <Dropdown.Item className="p-2 rounded-3">Profile</Dropdown.Item>
+                <Dropdown.Item className="p-2 rounded-3">
+                  Settings
+                </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item
                   className="p-1 logout-btn"

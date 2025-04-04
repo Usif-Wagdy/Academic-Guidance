@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import { Axios } from "../../api/axios";
 import { internshipsAPI } from "../../api/Api";
 import { Button } from "react-bootstrap";
-import { FaSackDollar } from "react-icons/fa6";
+import { FaSackDollar, FaCirclePlus } from "react-icons/fa6";
 import { GiPin } from "react-icons/gi";
 import Skeleton from "react-loading-skeleton";
 import { motion } from "framer-motion";
-import { FaCirclePlus } from "react-icons/fa6";
 
 export default function Internships() {
   const [internships, setInternships] = useState([]);
@@ -15,24 +14,22 @@ export default function Internships() {
   useEffect(() => {
     Axios.get(`${internshipsAPI}`)
       .then((res) => {
-        setTimeout(() => {
-          setInternships(res.data);
-          setLoading(false);
-        }, 1500);
+        setInternships(res.data.interns);
+        setLoading(false);
       })
       .catch((error) => console.log(error));
   }, []);
 
-  const showInternships = internships.map((intern, i) => (
+  const showInternships = internships.map((intern, _id) => (
     <div
-      key={i}
+      key={_id}
       className="w-100 bg-info mb-4 p-3 border rounded-4 between-flex shadow-sm flex-column flex-md-row"
     >
       <div className="d-flex mb-sm-4 flex-md-row flex-column align-items-center align-items-sm-start">
         <div>
           <img
             className="w-75px w-md-100px rounded-circle me-md-3"
-            src={`/Assets/internships/${intern.image}`}
+            src={`/Assets/internships/shopify.png`}
             alt="internImg"
           />
         </div>
@@ -47,17 +44,17 @@ export default function Internships() {
           </h2>
           <div className="d-flex flex-wrap flex-column flex-sm-row align-items-center align-items-sm-start">
             <span className="p-2 shadow-sm rounded-4 me-sm-4 fs-18px text-center">
-              {intern.address}
+              {intern.place}
             </span>
             <span className="p-2 shadow-sm rounded-4 fs-18px fw-bold">
-              <FaSackDollar className="text-warning " /> {intern.price}
+              <FaSackDollar className="text-warning " /> {intern.salary}
             </span>
           </div>
         </div>
       </div>
 
       <div className="between-flex flex-wrap flex-column flex-sm-row  ">
-        {intern.skills.map((skill, i) => (
+        {intern.keywords.map((skill, i) => (
           <span
             key={i}
             className="border px-2 py-1 mb-3 fs-20px rounded-4 me-md-3"
@@ -68,7 +65,7 @@ export default function Internships() {
       </div>
       <span className="fw-bold m-3">
         <GiPin className="text-danger" />
-        {intern.ranking}
+        {intern.duration}
       </span>
 
       <Button
