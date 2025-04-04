@@ -13,7 +13,6 @@ export default function Tracks() {
 
   useEffect(() => {
     Axios.get(`${tracksAPI}`).then((res) => {
-      console.log(res.data.data.tracks);
       setTracks(res.data.data.tracks);
       setLoading(false);
     });

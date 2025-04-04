@@ -16,8 +16,6 @@ export default function Courses() {
 
   useEffect(() => {
     Axios(`${coursesAPI}`).then((res) => {
-      console.log(res.data.courses);
-
       setCourses(res.data.courses);
       setLoading(false);
     });
