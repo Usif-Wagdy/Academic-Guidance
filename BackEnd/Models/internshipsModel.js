@@ -24,8 +24,8 @@ const internships = new mongoose.Schema({
         type: [String],
         required: true
     },
-    Image: {
-        type: String,
+    image: {
+        type: String, required: true
     },
 
 })
