@@ -5,15 +5,16 @@ import { Outlet } from "react-router-dom";
 
 const CoursesPage = () => {
   const [courses, setCourses] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     fetchCourses();
-  }, []);
+  }, [refreshKey]);
 
   const fetchCourses = async () => {
     try {
       const res = await Axios.get(coursesAPI);
-      setCourses(res.data);
+      setCourses(res.data.courses);
     } catch (error) {
       console.error("Error fetching courses:", error);
     }
@@ -28,10 +29,12 @@ const CoursesPage = () => {
     }
   };
 
+  console.log(courses);
+
   return (
     <div className="container mt-4">
       {/* Default view is CourseList */}
-      <Outlet context={{ courses, handleDelete }} />
+      <Outlet context={{ courses, handleDelete, setRefreshKey }} />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 export default function AllTracks() {
   const [tracks, setTracks] = useState([]);
   const nav = useNavigate();
+
   useEffect(() => {
     Axios.get(`${tracksAPI}`).then((res) => setTracks(res.data));
   }, []);
