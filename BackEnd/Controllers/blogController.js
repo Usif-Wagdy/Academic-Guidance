@@ -27,6 +27,7 @@ exports.createBlog = async (req, res) => {
         const imageUrl = req.file.path;
         console.log(req.file);
         const { author, title, date, content, duration } = req.body;
+        const instructorId = req.user.id;
 
         if (!author || !title || !date || !content || !duration || !req.file) {
             return res.status(400).json({
@@ -43,7 +44,8 @@ exports.createBlog = async (req, res) => {
             title,
             date,
             content,
-            duration
+            duration,
+            instructorId
         });
 
         await newBlog.save();
@@ -78,6 +80,17 @@ exports.updateBlog = async (req, res) => {
     try {
         const id = req.params.id;
         const { author, image, title, date, content, duration } = req.body;
+        const instructorId = req.user.id;
+        const existingBlog = await Blog.findById(id);
+        if (!existingBlog) {
+            return res.status(404).json({ success: false, message: 'Blog not found.' });
+        }
+        // console.log(existingBlog)
+        // console.log(existingBlog.instructorId)
+        // console.log(instructorId)
+        if (req.user.role !== 'superAdmin' && req.user.role !== 'superInstructor' && existingBlog.instructorId.toString() !== req.user.id.toString()) {
+            return res.status(403).json({ success: false, message: "Not authorized to update this course." });
+        }
         const newdata = { author, image, title, date, content, duration };
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ success: false, message: 'Invalid Blog ID format.' });
@@ -90,5 +103,6 @@ exports.updateBlog = async (req, res) => {
         res.json({ success: true, message: 'Blog updated successfully.', Blog: updatedBlog });
     } catch (error) {
         res.status(500).json({ success: false, message: 'Error updating Blog.' });
+        console.error('Error updating Blog:', error);
     }
 }

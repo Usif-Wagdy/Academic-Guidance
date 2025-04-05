@@ -10,17 +10,25 @@ const validateCourse = (data) => {
         errors.push("Course level must be Beginner, Intermediate, or Advanced.");
     }
     if (!data.author) errors.push("Author name is required.");
+
+
     return errors;
+
 };
+
 
 exports.createCourse = async (req, res) => {
     try {
+        const instructorId = req.user.id;
+        console.log(instructorId);
+        const courseData = { ...req.body, instructorId };
+
         const errors = validateCourse(req.body);
         if (errors.length > 0) {
             return res.status(400).json({ success: false, errors });
         }
 
-        const newCourse = new Course(req.body);
+        const newCourse = new Course(courseData);
         await newCourse.save();
         res.status(201).json({ success: true, message: "Course created successfully.", course: newCourse });
     } catch (error) {
@@ -52,12 +60,21 @@ exports.getCourseById = async (req, res) => {
 };
 exports.updateCourse = async (req, res) => {
     try {
+        const existingCourse = await Course.findById(req.params.id);
+        if (!existingCourse) {
+            return res.status(404).json({ success: false, message: "Course not found." });
+        }
+
+        if (req.user.role !== 'superAdmin' && req.user.role !== 'superInstructor' && existingCourse.instructorId.toString() !== req.user.id.toString()) {
+            return res.status(403).json({ success: false, message: "Not authorized to update this course." });
+        }
+
         const course = await Course.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!course) return res.status(404).json({ success: false, message: "Course not found." });
 
         res.status(200).json({ success: true, message: "Course updated successfully.", course });
     } catch (error) {
         res.status(500).json({ success: false, message: "Error updating course." });
+        console.error("Error updating course:", error);
     }
 }
 exports.deleteCourse = async (req, res) => {

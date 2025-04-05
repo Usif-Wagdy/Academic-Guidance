@@ -5,7 +5,7 @@ const { authMiddleware, allowedTo } = require("../Middlewares/authMiddleware");
 
 const tracksControllers = require("../Controllers/tracksControllers");
 
-router.route("/").get(tracksControllers.getAllTracks).post(authMiddleware, allowedTo('admin'), tracksControllers.addTrack);
+router.route("/").get(tracksControllers.getAllTracks).post(authMiddleware, allowedTo('superAdmin', 'trackAdmin'), tracksControllers.addTrack);
 router.route("/:id").delete(authMiddleware, allowedTo('admin'), tracksControllers.deleteTrack);
 
 module.exports = router;

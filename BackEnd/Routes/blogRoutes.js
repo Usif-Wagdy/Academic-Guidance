@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const blogController = require('../Controllers/blogController');
-const { authMiddleware, allwedTo } = require('../Middlewares/authMiddleware');
+const { authMiddleware, allwedTo, allowedTo } = require('../Middlewares/authMiddleware');
 const { imageUpload } = require('../Config/cloudinaryConfig');
 
 router.get('/', blogController.getAllBlogs);
 router.get('/:id', blogController.getBlogById);
-router.post('/', authMiddleware, imageUpload.single('image'), blogController.createBlog);
+router.post('/', authMiddleware, authMiddleware,
+    allowedTo('superAdmin', 'superInstructor', 'instructor'), imageUpload.single('image'), blogController.createBlog);
 router.delete('/:id', authMiddleware, blogController.deleteBlog);
-router.patch('/:id', authMiddleware, blogController.updateBlog);
+router.patch('/:id', authMiddleware, allowedTo('superAdmin', 'superInstructor', 'instructor'), blogController.updateBlog);
 
 module.exports = router;

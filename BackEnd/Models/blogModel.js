@@ -21,6 +21,11 @@ const blog = new mongoose.Schema({
     content: {
         type: String,
     },
+    instructorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
 })
 
 
