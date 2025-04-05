@@ -17,7 +17,6 @@ export default function Blogs() {
     Axios.get(blogsAPI)
       .then((res) => {
         setBlogs(res.data.Blogs);
-        console.log(res.data.Blogs);
         setLoading(false);
       })
       .catch((error) => {
