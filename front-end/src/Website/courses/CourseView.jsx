@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Axios } from "../../api/axios";
 import { coursesAPI } from "../../api/Api";
-import { Container } from "react-bootstrap";
+import { Container, Accordion } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -9,13 +9,25 @@ import "./courses.css";
 import Breadcrumbs from "../../Components/BreadCrumbs/BreadCrumbs";
 
 export default function CourseView() {
-  const [currCourse, setCurrCourse] = useState([]);
+  const [currCourse, setCurrCourse] = useState({});
+  const [videoList, setVideoList] = useState([]);
+  const [currentVideo, setCurrentVideo] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
     Axios(`${coursesAPI}/${id}`)
       .then((res) => {
-        setCurrCourse(res.data.course);
+        const course = res.data.course;
+        setCurrCourse(course);
+
+        // Flatten parts into one list grouped by section
+        const groupedVideos = course.curriculum?.map((section) => ({
+          sectionTitle: section.title,
+          videos: section.parts || [],
+        }));
+
+        setVideoList(groupedVideos);
+        setCurrentVideo(groupedVideos?.[0]?.videos?.[0] || null); // set the first video as default
       })
       .catch((error) => console.log(error));
   }, [id]);
@@ -23,53 +35,71 @@ export default function CourseView() {
   return (
     <Container className="my-5">
       <Breadcrumbs title={currCourse.name} />
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="between-flex p-5 flex-wrap text-center text-md-start">
-          <h2 className="col-12 col-md-5 fs-1">{currCourse.name}</h2>
-          <p className="col-12 col-md-6">{currCourse.description}</p>
+        <div className="mb-4 text-center text-md-start">
+          <h2 className="fs-1">{currCourse.name}</h2>
+          <p>{currCourse.description}</p>
         </div>
 
-        <div className="w-100 mb-5">
-          <img
-            style={{ maxHeight: "600px" }}
-            src={currCourse.images}
-            alt={currCourse.name}
-            className="w-100"
-          />
-        </div>
-
-        <div className="d-flex justify-content-between flex-wrap ">
-          {currCourse.curriculum?.map((section, i) => (
-            <div
-              className="course-card bg-white col-12 p-4 mb-5 rounded-3"
-              key={i}
-            >
-              <h1 className="text-end fs-1 fw-bold">{`0${i + 1}`}</h1>
-              <div className="p-2 fs-20px fw-bold mb-4">{section.title}</div>
-
-              <div className="d-flex flex-column">
-                {section.parts?.map((part, j) => (
-                  <div
-                    key={j}
-                    className="between-flex flex-md-row flex-column border p-3 mb-3 rounded"
-                  >
-                    <div className="mb-2">
-                      <div>{part.title}</div>
-                      <div>{part.numbering}</div>
-                    </div>
-                    <div className="p-2 bg-info rounded ms-2 fs-14px w-sm-100 text-center text-md-start">
-                      <MdOutlineWatchLater className="me-1" />
-                      {part.duration}
-                    </div>
-                  </div>
-                ))}
+        {/* Video and List */}
+        <div className="d-flex flex-column flex-md-row gap-4">
+          {/* Video Player */}
+          <div className="flex-grow-1 w-100">
+            {currentVideo?.demoVideo ? (
+              <video
+                key={currentVideo._id} // Use _id here to uniquely identify the video
+                controls
+                className="w-100 rounded shadow"
+                style={{ maxHeight: "600px" }}
+              >
+                <source src={currentVideo.demoVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <div className="text-center p-5 bg-light rounded">
+                Select a video to play
               </div>
-            </div>
-          ))}
+            )}
+            <h4 className="mt-3">{currentVideo?.title}</h4>
+          </div>
+
+          {/* Video List */}
+          <div className="col-md-4 bg-white rounded shadow-sm p-3">
+            <h5 className="fw-bold mb-3">Course Videos</h5>
+            <Accordion defaultActiveKey="0">
+              {videoList?.map((section, idx) => (
+                <Accordion.Item key={idx} eventKey={idx.toString()}>
+                  <Accordion.Header>{section.sectionTitle}</Accordion.Header>
+                  <Accordion.Body>
+                    <div className="d-flex flex-column gap-2">
+                      {section.videos?.map((video) => (
+                        <div
+                          key={video._id} // Use _id here as well
+                          onClick={() => setCurrentVideo(video)}
+                          className={`lesson-item p-2 rounded ${
+                            currentVideo?._id === video._id
+                              ? "bg-primary text-white"
+                              : "bg-light"
+                          }`}
+                        >
+                          <div className="fw-semibold">{video.title}</div>
+                          <div className="d-flex align-items-center gap-2 text-muted small">
+                            <MdOutlineWatchLater />
+                            {video.duration}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </Accordion.Body>
+                </Accordion.Item>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </motion.div>
     </Container>

@@ -15,6 +15,7 @@ import Breadcrumbs from "../../../../Components/BreadCrumbs/BreadCrumbs";
 import { useNotification } from "../../../../Context/Notification";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useAuth } from "../../../../Context/AuthProvider";
+import { useOutletContext } from "react-router-dom";
 
 export default function CourseForm() {
   const { auth } = useAuth();
@@ -22,6 +23,7 @@ export default function CourseForm() {
   const { id } = useParams();
   const isEditing = Boolean(id);
   const { showNotification } = useNotification();
+  const { setRefreshKey } = useOutletContext();
 
   const [course, setCourse] = useState({
     name: "",
@@ -40,7 +42,7 @@ export default function CourseForm() {
   useEffect(() => {
     if (isEditing) {
       Axios.get(`${coursesAPI}/${id}`)
-        .then((res) => setCourse(res.data))
+        .then((res) => setCourse(res.data.course))
         .catch((err) => console.error("Error fetching course:", err));
     }
   }, [id, isEditing]);
@@ -81,6 +83,7 @@ export default function CourseForm() {
       title: "",
       duration: "",
       numbering: `Lesson ${updatedCurriculum[sectionIndex].parts.length + 1}`,
+      demoVideo: "",
     });
     setCourse({ ...course, curriculum: updatedCurriculum });
   };
@@ -101,14 +104,14 @@ export default function CourseForm() {
     e.preventDefault();
     try {
       if (isEditing) {
-        await Axios.put(`${coursesAPI}/${id}`, course);
+        await Axios.patch(`${coursesAPI}/${id}`, course);
         showNotification("Course updated successfully!", "success");
       } else {
         await Axios.post(`${coursesAPI}`, course);
         showNotification("New course added!", "success");
       }
+      setRefreshKey((prev) => prev + 1); // Trigger a refresh
       navigate("/dashboard/workshop");
-      window.location.reload();
     } catch (error) {
       showNotification("Failed to save course!", "danger");
       console.error("Error saving course:", error);
@@ -306,16 +309,16 @@ export default function CourseForm() {
                             <Form.Control
                               type="text"
                               placeholder="e.g., https://www.youtube..."
-                              value={lesson.video}
+                              value={lesson.demoVideo}
                               onChange={(e) =>
                                 handleLessonChange(
                                   sectionIndex,
                                   lessonIndex,
-                                  "video",
+                                  "demoVideo",
                                   e.target.value
                                 )
                               }
-                              // required
+                              required
                             />
                           </Form.Group>
                         </div>

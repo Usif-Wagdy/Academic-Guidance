@@ -2,7 +2,7 @@
 export const baseURL = `http://localhost:3000/`;
 
 // Courses
-export const coursesAPI = "courses";
+export const coursesAPI = "courses"; //get all
 
 // Blogs
 export const blogsAPI = "blogs"; // get all
