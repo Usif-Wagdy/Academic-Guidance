@@ -1,0 +1,6 @@
+flask
+spacy
+pdfminer.six
+fuzzywuzzy
+transformers
+pandas
