@@ -24,7 +24,10 @@ export default function Footer() {
     setTimeout(() => {
       const element = document.getElementById(section);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        const yOffset = -80; // Adjust this based on navbar height
+        const y =
+          element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
       }
     }, 100);
   };

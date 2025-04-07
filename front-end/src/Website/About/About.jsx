@@ -34,7 +34,7 @@ export default function About() {
         </Row>
 
         {/* Achievements */}
-        <Row className="mt-5 center-flex">
+        <Row className="mt-5 center-flex" id="achievements">
           <div className="text-center text-md-start">
             <h1>Achievements</h1>
             <p>
@@ -105,7 +105,7 @@ export default function About() {
         </Row>
 
         {/* Goals */}
-        <Row className="mt-5 center-flex">
+        <Row className="mt-5 center-flex" id="goal">
           <div className="text-center text-md-start">
             <h1>Our Goals</h1>
             <p>
