@@ -13,7 +13,7 @@ export default function EditIntern() {
     duration: "",
     sponser: "",
     image: "dell.png",
-    keywords: [], // <-- هنا ضفنا الـkeywords جوه internForm
+    keywords: [],
   });
 
   const { id } = useParams();
@@ -167,7 +167,7 @@ export default function EditIntern() {
           />
 
           <Button variant="primary" type="submit" className="mt-4 w-100">
-            Submit Intern
+            Edit Intern
           </Button>
         </Form>
       </Card>
