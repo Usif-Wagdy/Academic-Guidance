@@ -13,7 +13,7 @@ router.patch(
   imageUpload.single('photo'),
   userController.addImage
 );
-
+router.patch('/update-user/:id', authMiddleware, userController.updateUser);
 router.get('/', authMiddleware, allowedTo('admin'), userController.getAllUsers);
 router.get('/getStudents', authMiddleware, allowedTo('admin'), userController.getStudents);
 router.get('/getInstructors', authMiddleware, allowedTo('admin'), userController.getInstructors);
