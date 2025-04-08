@@ -83,7 +83,7 @@ export default function CourseView() {
                           onClick={() => setCurrentVideo(video)}
                           className={`lesson-item p-2 rounded ${
                             currentVideo?._id === video._id
-                              ? "bg-primary text-white"
+                              ? "bg-primary bg-opacity-25 text-primary"
                               : "bg-light"
                           }`}
                         >

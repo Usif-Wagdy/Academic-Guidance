@@ -133,7 +133,7 @@ export default function Internships() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="bg-secondary pb-3">
+      <div className="bg-secondary p-0 my-5 rounded-4 pb-3 container">
         <div className="bg-light between-flex flex-wrap p-2 p-sm-5">
           <div className="center-flex  col-md-7 col-12 ">
             <h1 className="fs-md-60px fs-30px w-75 fw-bold">
