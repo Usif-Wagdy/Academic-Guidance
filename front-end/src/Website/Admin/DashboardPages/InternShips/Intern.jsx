@@ -12,8 +12,8 @@ export default function Intern() {
 
   useEffect(() => {
     Axios.get(`${internshipsAPI}`).then((res) => {
-      setInternShips(res.data);
-      setNumOfInterns(res.data.length);
+      setInternShips(res.data.interns);
+      setNumOfInterns(res.data.interns.length);
     });
   }, [numOfInterns]);
 
@@ -42,17 +42,16 @@ export default function Intern() {
         </div>
         <div>
           <p className="fw-bold mb-1">{`Company: ${intern.company}`}</p>
-          <p className="fw-bold mb-1">{`Track: ${intern.track}`}</p>
-          <p className="mb-1">{`Address: ${intern.address}`}</p>
-          <p className="mb-1">{`Price: ${intern.price}`}</p>
+          <p className="mb-1">{`Address: ${intern.place}`}</p>
+          <p className="mb-1">{`Price: ${intern.salary}`}</p>
           <div className="d-flex flex-wrap my-2">
             <span className="me-2 mb-2 mb-md-0">Skills:</span>
-            {intern.skills.map((skill, i) => (
+            {intern.keywords.map((keyword, i) => (
               <span
                 key={i}
                 className="me-2 mb-2 mb-md-0 rounded-3 px-1 fs-12px border border-dark"
               >
-                {skill}
+                {keyword}
               </span>
             ))}
           </div>
@@ -61,17 +60,18 @@ export default function Intern() {
 
       <div className="between-flex mt-3 text-light">
         <Button
-          variant="success me-2 "
-          onClick={() => navigate(`${intern.id}`)}
+          variant="success me-2"
+          onClick={() => navigate(`${intern._id}`)}
         >
           Edit
         </Button>
-        <Button variant="danger" onClick={() => handleDelete(intern.id)}>
+        <Button variant="danger" onClick={() => handleDelete(intern._id)}>
           <FaRegTrashAlt />
         </Button>
       </div>
     </div>
   ));
+
   return (
     <div className="d-flex flex-wrap">
       <Link

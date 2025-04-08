@@ -5,54 +5,50 @@ import { internshipsAPI } from "../../../../api/Api";
 import { Button, Card, Container, Form } from "react-bootstrap";
 
 export default function EditIntern() {
-  const [internFrom, setInternFrom] = useState({
+  const [internForm, setInternForm] = useState({
     id: "",
-    track: "",
     company: "",
-    address: "",
-    price: "",
-    ranking: "",
+    place: "",
+    salary: "",
+    duration: "",
+    sponser: "",
     image: "dell.png",
+    keywords: [], // <-- هنا ضفنا الـkeywords جوه internForm
   });
-  const [skills, setSkills] = useState([]);
+
+  const { id } = useParams();
 
   // Handle Form Changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
     if (type === "checkbox") {
-      setSkills((prevSkills) =>
-        checked
-          ? [...prevSkills, value]
-          : prevSkills.filter((skill) => skill !== value)
-      );
+      setInternForm((prev) => ({
+        ...prev,
+        keywords: checked
+          ? [...prev.keywords, value]
+          : prev.keywords.filter((skill) => skill !== value),
+      }));
     } else {
-      setInternFrom((prev) => ({
+      setInternForm((prev) => ({
         ...prev,
         [name]: value,
       }));
     }
   };
 
-  const { id } = useParams();
-
   // Get Intern Data
   useEffect(() => {
     Axios(`${internshipsAPI}/${id}`).then((res) => {
-      setInternFrom(res.data);
-      setSkills(res.data.skills || []);
+      setInternForm(res.data.inter);
     });
   }, [id]);
 
   // Handle Submit Form
   async function handleSubmit(e) {
     e.preventDefault();
-    setInternFrom((prev) => ({ ...prev, skills }));
     try {
-      await Axios.put(`${internshipsAPI}/${id}`, {
-        ...internFrom,
-        skills,
-      });
+      await Axios.patch(`${internshipsAPI}/${id}`, internForm);
       window.location.pathname = "/dashboard/intern-ships";
     } catch (error) {
       console.log(error);
@@ -70,84 +66,103 @@ export default function EditIntern() {
             <Form.Control
               type="text"
               name="company"
-              value={internFrom.company}
+              value={internForm.company}
               onChange={handleChange}
               required
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="track">
-            <Form.Label>Track</Form.Label>
+          <Form.Group className="mb-3" controlId="place">
+            <Form.Label>Place</Form.Label>
             <Form.Control
               type="text"
-              name="track"
-              value={internFrom.track}
+              name="place"
+              value={internForm.place}
               onChange={handleChange}
               required
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="address">
-            <Form.Label>Address</Form.Label>
+          <Form.Group className="mb-3" controlId="duration">
+            <Form.Label>Duration</Form.Label>
             <Form.Control
               type="text"
-              name="address"
-              value={internFrom.address}
+              name="duration"
+              value={internForm.duration}
               onChange={handleChange}
               required
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="ranking">
-            <Form.Label>Ranking</Form.Label>
+          <Form.Group className="mb-3" controlId="sponser">
+            <Form.Label>Sponser</Form.Label>
             <Form.Control
               type="text"
-              name="ranking"
-              value={internFrom.ranking}
+              name="sponser"
+              value={internForm.sponser}
               onChange={handleChange}
               required
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="price">
-            <Form.Label>Price</Form.Label>
+          <Form.Group className="mb-3" controlId="salary">
+            <Form.Label>Salary</Form.Label>
             <Form.Control
               type="text"
-              name="price"
-              value={internFrom.price}
+              name="salary"
+              value={internForm.salary}
               onChange={handleChange}
               required
             />
           </Form.Group>
 
+          {/* Checkboxes */}
           <Form.Check
             label="HTML"
-            checked={skills.includes("HTML")}
+            checked={internForm.keywords.includes("HTML")}
             value="HTML"
             onChange={handleChange}
           />
           <Form.Check
             label="CSS"
-            checked={skills.includes("CSS")}
+            checked={internForm.keywords.includes("CSS")}
             value="CSS"
             onChange={handleChange}
           />
           <Form.Check
             label="JAVASCRIPT"
-            checked={skills.includes("JAVASCRIPT")}
+            checked={internForm.keywords.includes("JAVASCRIPT")}
             value="JAVASCRIPT"
             onChange={handleChange}
           />
           <Form.Check
             label="REACT"
-            checked={skills.includes("REACT")}
+            checked={internForm.keywords.includes("REACT")}
             value="REACT"
             onChange={handleChange}
           />
           <Form.Check
             label="NODE"
-            checked={skills.includes("NODE")}
+            checked={internForm.keywords.includes("NODE")}
             value="NODE"
+            onChange={handleChange}
+          />
+          <Form.Check
+            label="AI"
+            checked={internForm.keywords.includes("AI")}
+            value="AI"
+            onChange={handleChange}
+          />
+          <Form.Check
+            label="Software"
+            checked={internForm.keywords.includes("Software")}
+            value="Software"
+            onChange={handleChange}
+          />
+          <Form.Check
+            label="Internship"
+            checked={internForm.keywords.includes("Internship")}
+            value="Internship"
             onChange={handleChange}
           />
 
