@@ -7,10 +7,12 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
-import "./CSS/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./CSS/custom.css";
 import "./CSS/root.css";
+import "./CSS/index.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Authentication
 import PrivateRoute from "./Website/Auth/PrivateRoute";
@@ -25,6 +27,10 @@ import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
 // Components
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
+import Profile from "./Website/Profile/Profile";
+import UsersPage from "./Website/Admin/DashboardPages/Users/UsersPage";
+import UsersTable from "./Website/Admin/DashboardPages/Users/UsersTable";
+import UsersForm from "./Website/Admin/DashboardPages/Users/UsersForm";
 
 // Lazy-loaded Website Pages
 const Home = lazy(() => import("./Website/Home/Home"));
@@ -47,7 +53,6 @@ const Insights = lazy(() => import("./Website/Admin/DashboardPages/Insights"));
 const CVTemplate = lazy(() =>
   import("./Website/Admin/DashboardPages/CVTemplate")
 );
-const Roadmap = lazy(() => import("./Website/Admin/DashboardPages/Roadmap"));
 const CoursePage = lazy(() =>
   import("./Website/Admin/DashboardPages/Workshop/CoursePage")
 );
@@ -75,15 +80,6 @@ const EditIntern = lazy(() =>
 const AddIntern = lazy(() =>
   import("./Website/Admin/DashboardPages/InternShips/AddIntern")
 );
-const Instructors = lazy(() =>
-  import("./Website/Admin/DashboardPages/Instructors/Instructors")
-);
-const EditInstructors = lazy(() =>
-  import("./Website/Admin/DashboardPages/Instructors/EditInstructors")
-);
-const AddInstructors = lazy(() =>
-  import("./Website/Admin/DashboardPages/Instructors/AddInstructors")
-);
 const EditTrack = lazy(() =>
   import("./Website/Admin/DashboardPages/Tracks/EditTrack")
 );
@@ -109,6 +105,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <NotificationProvider>
+      <ToastContainer />
       <AuthProvider>
         <Router>
           <ScrollToTop />
@@ -117,6 +114,7 @@ root.render(
               {/* Main Routes */}
               <Route element={<MainLayout />}>
                 <Route path="/" element={<Home />} />
+
                 <Route
                   path="/auth"
                   element={
@@ -129,15 +127,20 @@ root.render(
                   <Route path="login" element={<Login />} />
                   <Route path="register" element={<Register />} />
                 </Route>
+
                 <Route path="/courses" element={<Courses />} />
                 <Route path="/courses/:id" element={<CourseView />} />
+
                 <Route path="/tracks" element={<Tracks />} />
                 <Route path="/tracks/:id" element={<TrackRoadmap />} />
+
                 <Route path="/blogs" element={<Blogs />} />
                 <Route path="/blogs/:id" element={<BlogView />} />
+
                 <Route path="/about" element={<About />} />
                 <Route path="/internships" element={<Internships />} />
                 <Route path="/cvbuilder" element={<CVBuilder />} />
+                <Route path="/profile" element={<Profile />} />
               </Route>
 
               {/* Dashboard Routes */}
@@ -153,31 +156,60 @@ root.render(
 
                 <Route path="insights" element={<Insights />} />
                 <Route path="cv-template" element={<CVTemplate />} />
-                <Route path="roadmap" element={<Roadmap />} />
 
-                <Route path="tracks" element={<AllTracks />} />
+                <Route
+                  path="tracks"
+                  element={
+                    <PrivateRoute type="trackAdmin">
+                      <AllTracks />
+                    </PrivateRoute>
+                  }
+                />
                 <Route path="tracks/:id" element={<EditTrack />} />
                 <Route path="track/add" element={<AddTrack />} />
 
-                <Route path="blogs" element={<BlogsPage />}>
+                <Route
+                  path="blogs"
+                  element={
+                    <PrivateRoute type={"instructor"}>
+                      <BlogsPage />
+                    </PrivateRoute>
+                  }
+                >
                   <Route index element={<BlogsList />} />
                   <Route path="add" element={<BlogsForm />} />
                   <Route path=":id" element={<BlogsForm />} />
                 </Route>
 
-                <Route path="workshop" element={<CoursePage />}>
+                <Route
+                  path="workshop"
+                  element={
+                    <PrivateRoute type={"instructor"}>
+                      <CoursePage />
+                    </PrivateRoute>
+                  }
+                >
                   <Route index element={<CourseList />} />
                   <Route path="add" element={<CourseForm />} />
                   <Route path=":id" element={<CourseForm />} />
                 </Route>
 
+                <Route
+                  path="users"
+                  element={
+                    <PrivateRoute type={"superAdmin"}>
+                      <UsersPage />
+                    </PrivateRoute>
+                  }
+                >
+                  <Route index element={<UsersTable />} />
+                  <Route path="add" element={<UsersForm />} />
+                  <Route path=":id" element={<UsersForm />} />
+                </Route>
+
                 <Route path="intern-ships" element={<Intern />} />
                 <Route path="intern-ships/:id" element={<EditIntern />} />
                 <Route path="intern-ship/add" element={<AddIntern />} />
-
-                <Route path="instructors" element={<Instructors />} />
-                <Route path="instructors/:id" element={<EditInstructors />} />
-                <Route path="instructor/add" element={<AddInstructors />} />
               </Route>
 
               {/* Redirect unknown routes to Home */}

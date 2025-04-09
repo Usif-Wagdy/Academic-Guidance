@@ -2,12 +2,19 @@ import axios from "axios";
 import { baseURL } from "./Api";
 import Cookies from "js-cookie";
 
-// Cookies And Token
-const token = Cookies.get("authToken");
-
+// Create Axios instance
 export const Axios = axios.create({
   baseURL: baseURL,
-  headers: {
-    Authorization: "Bearer " + token,
-  },
 });
+
+// Add a request interceptor
+Axios.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get("authToken");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);

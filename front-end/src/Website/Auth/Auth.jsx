@@ -21,12 +21,10 @@ function Auth() {
           <Row className="align-items-center flex-column justify-content-start h-100 text-center testimonials ">
             <h2 className="mt-4 mb-2 text-start">Students Testimonials</h2>
             <p className="text-start text-muted mb-4">
-              At our academy, we take pride in the success and satisfaction of
-              our students. Read real experiences from learners who have
-              benefited from our courses, mentorship, and supportive community.
-              Whether they've landed their dream job, gained new skills, or
-              built confidence in their field, their stories reflect the impact
-              of our programs. Check out their testimonials below! 🚀
+              At our academy, we celebrate the success of our students. Read
+              real stories from learners who have gained new skills, built
+              confidence, and achieved their career goals through our courses
+              and mentorship. Check out their testimonials below!
             </p>
             <Testimonials layout="slider" />
           </Row>

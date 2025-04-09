@@ -8,14 +8,13 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 import { Axios } from "../../../../api/axios";
 import { coursesAPI } from "../../../../api/Api";
 import Breadcrumbs from "../../../../Components/BreadCrumbs/BreadCrumbs";
 import { useNotification } from "../../../../Context/Notification";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useAuth } from "../../../../Context/AuthProvider";
-import { useOutletContext } from "react-router-dom";
 
 export default function CourseForm() {
   const { auth } = useAuth();

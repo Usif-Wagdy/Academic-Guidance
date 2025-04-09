@@ -1,0 +1,80 @@
+import { useState, useEffect } from "react";
+import { Axios } from "../../../../api/axios";
+import { Outlet, useLocation } from "react-router-dom";
+import { usersAPI } from "../../../../api/Api";
+import { useAuth } from "../../../../Context/AuthProvider";
+
+export default function UsersPage() {
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [roleFilter, setRoleFilter] = useState("");
+  const [refreshKey, setRefreshKey] = useState(0);
+  const location = useLocation();
+  const { auth } = useAuth();
+  const currentUser = auth.user;
+
+  useEffect(() => {
+    fetchUsers();
+  }, [refreshKey]);
+
+  const fetchUsers = async () => {
+    try {
+      const res = await Axios.get(`${usersAPI}`);
+      let usersData = res.data.users;
+
+      // Remove the logged-in user from the list
+      if (currentUser) {
+        usersData = usersData.filter((user) => user._id !== currentUser._id);
+      }
+
+      setUsers(usersData);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
+  // Filter users based on role
+  useEffect(() => {
+    if (roleFilter) {
+      const filtered = users.filter((user) => user.role === roleFilter);
+      setFilteredUsers(filtered);
+    } else {
+      setFilteredUsers(users);
+    }
+  }, [roleFilter, users]);
+
+  const handleRoleChange = (e) => {
+    setRoleFilter(e.target.value);
+  };
+
+  // Check if we're on the main '/users' page (not child routes)
+  const isMainUsersPage = location.pathname === "/dashboard/users";
+
+  return (
+    <div className="container mt-4">
+      {isMainUsersPage && (
+        <div className="mb-3">
+          <label htmlFor="roleFilter" className="form-label">
+            Filter by Role
+          </label>
+          <select
+            id="roleFilter"
+            className="form-select"
+            value={roleFilter}
+            onChange={handleRoleChange}
+          >
+            <option value="">All Roles</option>
+            <option value="superAdmin">Super Admin</option>
+            <option value="superInstructor">Super Instructor</option>
+            <option value="instructor">Instructor</option>
+            <option value="cvAdmin">CV Admin</option>
+            <option value="trackAdmin">Track Admin</option>
+            <option value="student">Student</option>
+          </select>
+        </div>
+      )}
+      {/* Pass filtered data to Outlet context */}
+      <Outlet context={{ users: filteredUsers, setRefreshKey }} />
+    </div>
+  );
+}

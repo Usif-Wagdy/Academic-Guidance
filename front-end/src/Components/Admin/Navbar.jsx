@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Bell, Home, Maximize } from "react-feather";
+import { Bell, Maximize } from "react-feather";
 import { FaSignOutAlt } from "react-icons/fa";
 import Cookies from "js-cookie";
 import { useAuth } from "../../Context/AuthProvider";
@@ -29,11 +29,18 @@ const NavBar = ({ isCollapsed }) => {
     navigate("/auth/login");
   }, [setAuth, navigate]);
 
+  function formatRole(role) {
+    if (!role) return "Administrator";
+    const spaced = role.replace(/([A-Z])/g, " $1"); // 'trackAdmin' → 'track Admin'
+    return spaced.charAt(0).toUpperCase() + spaced.slice(1); // 'track Admin' → 'Track Admin'
+  }
+
+  // Usage
+
   const profilePic =
     auth?.user?.profilePic || "https://www.viverefermo.it/images/user.png";
   const userName = auth?.user?.name || "Admin";
-  const userRole =
-    auth?.user?.role === "admin" ? "Administrator" : "Instructor";
+  const userRole = formatRole(auth?.user?.role) || "Administrator";
 
   return (
     <Navbar
@@ -54,9 +61,6 @@ const NavBar = ({ isCollapsed }) => {
 
       {/* Right Section */}
       <div className="d-flex align-items-center gap-3">
-        <Button variant="light" className="p-2" onClick={() => navigate("/")}>
-          <Home size={20} />
-        </Button>
         <Button variant="light" className="p-2">
           <Bell size={20} />
         </Button>
@@ -85,8 +89,12 @@ const NavBar = ({ isCollapsed }) => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu align="end" className="p-2">
-            <Dropdown.Item className="p-1">Profile</Dropdown.Item>
-            <Dropdown.Item className="p-1">Settings</Dropdown.Item>
+            <Dropdown.Item className="p-2 rounded-3">Profile</Dropdown.Item>
+            {auth?.user.isAdmin && (
+              <Dropdown.Item as={Link} to="/" className="p-2 rounded-3">
+                Website
+              </Dropdown.Item>
+            )}
             <Dropdown.Divider />
             <Dropdown.Item className="p-1 logout-btn" onClick={handleLogout}>
               Logout <FaSignOutAlt size={18} className="ms-2 logout-icon" />

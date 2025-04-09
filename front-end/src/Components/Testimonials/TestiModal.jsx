@@ -9,6 +9,7 @@ export default function TestiModal({
   title,
   contentList,
   imageKey,
+  courseNames,
 }) {
   const [visibleItems, setVisibleItems] = useState(6); // Load 6 items initially
 
@@ -23,7 +24,7 @@ export default function TestiModal({
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="text-center">
+      <Modal.Body>
         <InfiniteScroll
           dataLength={visibleItems}
           next={loadMore}
@@ -32,33 +33,43 @@ export default function TestiModal({
         >
           {contentList
             .slice(0, visibleItems)
-            .map(({ name, testimonial, [imageKey]: image }, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="mb-3"
-              >
-                <Card className="shadow-sm p-3">
-                  <div className="d-flex align-items-center gap-3">
-                    {image && (
-                      <img
-                        src={image}
-                        alt={name}
-                        className="rounded-circle"
-                        width="50"
-                        height="50"
-                      />
+            .map(
+              ({ name, testimonial, courseId, [imageKey]: image }, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="mb-3"
+                >
+                  <Card className="shadow-sm p-3">
+                    <div className="d-flex align-items-center gap-3">
+                      {image && (
+                        <img
+                          src={image}
+                          alt={name}
+                          className="rounded-circle"
+                          width="50"
+                          height="50"
+                        />
+                      )}
+                      <Card.Title className="mb-0">{name}</Card.Title>
+                    </div>
+                    <Card.Text className="text-muted mt-2">
+                      {testimonial}
+                    </Card.Text>
+                    {courseId && (
+                      <div className="mt-2">
+                        <strong className="text-muted">Course: </strong>
+                        <span className="text-primary">
+                          {courseNames[courseId] || "Course name not found"}
+                        </span>
+                      </div>
                     )}
-                    <Card.Title className="mb-0">{name}</Card.Title>
-                  </div>
-                  <Card.Text className="text-muted mt-2">
-                    {testimonial}
-                  </Card.Text>
-                </Card>
-              </motion.div>
-            ))}
+                  </Card>
+                </motion.div>
+              )
+            )}
         </InfiniteScroll>
       </Modal.Body>
     </Modal>

@@ -4,61 +4,74 @@ import {
   FaList,
   FaChalkboardTeacher,
   FaBlogger,
-  FaRoad,
   FaUserTie,
   FaUsers,
   FaBriefcase,
 } from "react-icons/fa";
 import { MdArrowForwardIos, MdDashboard } from "react-icons/md";
 import { LuWaypoints } from "react-icons/lu";
+import { useAuth } from "../../Context/AuthProvider";
 
 function Sidebar({ isCollapsed, setIsCollapsed }) {
-  // Memoize the menuItems to avoid recalculating them on every render
-  const menuItems = useMemo(
-    () => [
+  const { auth } = useAuth();
+  const userRole = auth?.user?.role;
+
+  const menuItems = useMemo(() => {
+    // Base items for all roles
+    const items = [
       {
         path: "/dashboard/insights",
         label: "Admin Dashboard",
         icon: <MdDashboard size={22} />,
+        roles: [
+          "superAdmin",
+          "cvAdmin",
+          "trackAdmin",
+          "instructor",
+          "superInstructor",
+        ],
       },
       {
         path: "/dashboard/cv-template",
         label: "CV Template",
         icon: <FaChalkboardTeacher size={22} />,
-      },
-      {
-        path: "/dashboard/roadmap",
-        label: "Roadmap",
-        icon: <FaRoad size={22} />,
+        roles: ["cvAdmin", "superAdmin"],
       },
       {
         path: "/dashboard/tracks",
         label: "Tracks",
         icon: <LuWaypoints size={22} />,
+        roles: ["trackAdmin", "superAdmin"],
       },
       {
         path: "/dashboard/blogs",
         label: "Blog",
         icon: <FaBlogger size={22} />,
+        roles: ["instructor", "superInstructor", "superAdmin"],
       },
       {
         path: "/dashboard/intern-ships",
         label: "Internship",
         icon: <FaBriefcase size={22} />,
+        roles: ["cvAdmin", "superAdmin"],
       },
       {
-        path: "/dashboard/instructors",
-        label: "Instructor Accounts",
+        path: "/dashboard/users",
+        label: "Users Accounts",
         icon: <FaUsers size={22} />,
+        roles: ["superAdmin"],
       },
       {
         path: "/dashboard/workshop",
         label: "Workshop",
         icon: <FaUserTie size={22} />,
+        roles: ["instructor", "superInstructor", "superAdmin"],
       },
-    ],
-    [] // Empty dependency array ensures the menuItems are only computed once
-  );
+    ];
+
+    // Filter the menu items based on the user role
+    return items.filter((item) => item.roles.includes(userRole));
+  }, [userRole]);
 
   return (
     <div

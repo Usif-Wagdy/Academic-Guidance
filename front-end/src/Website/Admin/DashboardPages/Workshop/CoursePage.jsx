@@ -29,8 +29,6 @@ const CoursesPage = () => {
     }
   };
 
-  console.log(courses);
-
   return (
     <div className="container mt-4">
       {/* Default view is CourseList */}

@@ -11,7 +11,11 @@ export const blogsAPI = "blogs"; // get all
 export const testimonialsAPI = "testimonials"; // get all
 
 // Users
-export const usersAPI = "users"; // get all
+export const usersAPI = "users"; // get all or by ID
+
+export const updateUserApi = "users/update-user"; // patch id -- user token required
+
+export const updatePictureApi = "users/update-image"; // patch id -- user token required
 
 export const registerAPI = "users/SignUp"; // post
 

@@ -39,6 +39,12 @@ export default function Header() {
     setExpanded(false);
   };
 
+  function formatRole(role) {
+    if (!role) return "Administrator";
+    const spaced = role.replace(/([A-Z])/g, " $1");
+    return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+  }
+
   return (
     <Navbar
       expand="lg"
@@ -112,13 +118,24 @@ export default function Header() {
                       {auth?.user.name || "User"}
                     </div>
                     <small className="text-primary text-capitalize">
-                      {auth?.user.isAdmin ? auth.user.role : "Student"}
+                      {auth?.user.isAdmin
+                        ? formatRole(auth.user.role)
+                        : "Student"}
                     </small>
                   </div>
                 </Dropdown.Toggle>
                 <Dropdown.Menu align="end" className="p-2">
                   <Dropdown.Item className="p-1">Profile</Dropdown.Item>
-                  <Dropdown.Item className="p-1">Settings</Dropdown.Item>
+                  {auth?.user.isAdmin && (
+                    <Dropdown.Item
+                      as={Link}
+                      to="/dashboard"
+                      onClick={() => setExpanded(false)} // optional, closes menu on mobile
+                      className="p-2 rounded-3"
+                    >
+                      Settings
+                    </Dropdown.Item>
+                  )}
                   <Dropdown.Divider />
                   <Dropdown.Item
                     className="p-1 logout-btn"
@@ -183,15 +200,24 @@ export default function Header() {
                     {auth?.user.name || "User"}
                   </div>
                   <small className="text-primary text-capitalize">
-                    {auth?.user.isAdmin ? auth.user.role : "Student"}
+                    {auth?.user.isAdmin
+                      ? formatRole(auth.user.role)
+                      : "Student"}
                   </small>
                 </div>
               </Dropdown.Toggle>
               <Dropdown.Menu align="end" className="p-2">
                 <Dropdown.Item className="p-2 rounded-3">Profile</Dropdown.Item>
-                <Dropdown.Item className="p-2 rounded-3">
-                  Settings
-                </Dropdown.Item>
+                {auth?.user.isAdmin && (
+                  <Dropdown.Item
+                    as={Link}
+                    to="/dashboard"
+                    onClick={() => setExpanded(false)} // optional, closes menu on mobile
+                    className="p-2 rounded-3"
+                  >
+                    Settings
+                  </Dropdown.Item>
+                )}
                 <Dropdown.Divider />
                 <Dropdown.Item
                   className="p-1 logout-btn"
