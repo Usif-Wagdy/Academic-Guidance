@@ -19,5 +19,7 @@ router.get('/:id', authMiddleware, allowedTo('superAdmin'), userController.getUs
 
 router.get('/getStudents', authMiddleware, allowedTo('superAdmin'), userController.getStudents);
 router.get('/getInstructors', authMiddleware, allowedTo('superAdmin'), userController.getInstructors);
+router.delete('/:id', authMiddleware, allowedTo('superAdmin'), userController.deleteUser);
+
 
 module.exports = router;
