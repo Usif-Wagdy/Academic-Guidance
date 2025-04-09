@@ -11,6 +11,7 @@ router.post('/', authMiddleware, allowedTo('superAdmin', 'cvAdmin'), internContr
 router.delete('/:id', authMiddleware, internController.deleteIntern);
 router.post(
     '/add-image/:id',
+    authMiddleware, allowedTo('superAdmin', 'cvAdmin'),
     imageUpload.single('image'),
     internController.addImage
 );
