@@ -18,6 +18,7 @@ router.get('/getInstructors', authMiddleware, allowedTo('superAdmin'), userContr
 router.delete('/:id', authMiddleware, allowedTo('superAdmin'), userController.deleteUser);
 router.patch('/update-user/:id', authMiddleware, userController.updateUser);
 
+router.patch('/update-password', authMiddleware, userController.updatePassword);
 
 router.patch(
   '/update-image/:id',
