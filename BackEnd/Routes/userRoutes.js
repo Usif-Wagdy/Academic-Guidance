@@ -14,10 +14,10 @@ router.patch(
   userController.addImage
 );
 router.patch('/update-user/:id', authMiddleware, userController.updateUser);
-router.get('/', authMiddleware, allowedTo('admin'), userController.getAllUsers);
-router.get('/:id', authMiddleware, allowedTo('admin'), userController.getUser);
+router.get('/', authMiddleware, allowedTo('superAdmin'), userController.getAllUsers);
+router.get('/:id', authMiddleware, allowedTo('superAdmin'), userController.getUser);
 
-router.get('/getStudents', authMiddleware, allowedTo('admin'), userController.getStudents);
-router.get('/getInstructors', authMiddleware, allowedTo('admin'), userController.getInstructors);
+router.get('/getStudents', authMiddleware, allowedTo('superAdmin'), userController.getStudents);
+router.get('/getInstructors', authMiddleware, allowedTo('superAdmin'), userController.getInstructors);
 
 module.exports = router;
