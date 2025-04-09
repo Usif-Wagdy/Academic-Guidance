@@ -71,3 +71,21 @@ exports.updateIntern = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error updating intern.' });
     }
 }
+
+
+exports.addImage = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const image = req.file.path;
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ success: false, message: 'Invalid Intern ID format.' });
+        }
+        const updatedIntern = await Intern.findByIdAndUpdate(id, { image }, { new: true });
+        if (!updatedIntern) {
+            return res.status(404).json({ success: false, message: 'Intern not found.' });
+        }
+        res.json({ success: true, message: 'Image added successfully.', intern: updatedIntern });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Error adding image.' });
+    }
+}
