@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import { Button, Container, Table } from "react-bootstrap";
 import { FaUserEdit } from "react-icons/fa";

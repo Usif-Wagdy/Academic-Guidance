@@ -1,5 +1,5 @@
 import { Container, Card, Button, Row, Col } from "react-bootstrap";
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function BlogList() {

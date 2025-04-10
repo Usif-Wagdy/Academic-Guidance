@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { Card, Container, Button, Row, Col } from "react-bootstrap";
+import { Card, Container, Button } from "react-bootstrap";
 import { motion } from "framer-motion";
 import Breadcrumbs from "../../Components/BreadCrumbs/BreadCrumbs";
 

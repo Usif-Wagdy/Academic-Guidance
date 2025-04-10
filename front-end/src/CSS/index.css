@@ -45,3 +45,16 @@ img {
 .card {
   overflow: hidden;
 }
+
+.btn-info:hover {
+  background-color: #cbc8c8 !important; /* Darker shade for hover */
+  border-color: #afadad !important;
+}
+
+.btn-white {
+  background-color: white !important;
+}
+
+.btn-white:hover {
+  background-color: #efefef !important; /* Darker shade for hover */
+}
