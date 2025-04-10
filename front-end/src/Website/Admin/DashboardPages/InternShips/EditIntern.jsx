@@ -12,10 +12,11 @@ export default function EditIntern() {
     salary: "",
     duration: "",
     sponser: "",
-    image: "dell.png",
+    image: "",
     keywords: [],
   });
 
+  const [imageFile, setImageFile] = useState(null);
   const { id } = useParams();
 
   // Handle Form Changes
@@ -44,14 +45,25 @@ export default function EditIntern() {
     });
   }, [id]);
 
-  // Handle Submit Form
+  // Handle Submit
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       await Axios.patch(`${internshipsAPI}/${id}`, internForm);
+
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append("image", imageFile);
+        await Axios.post(`${internshipsAPI}/add-image/${id}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
+
       window.location.pathname = "/dashboard/intern-ships";
     } catch (error) {
-      console.log(error);
+      console.log("Error:", error);
     }
   }
 
@@ -113,6 +125,24 @@ export default function EditIntern() {
               value={internForm.salary}
               onChange={handleChange}
               required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Upload New Image</Form.Label>
+            <Form.Control
+              type="file"
+              accept="image/jpeg, image/png, image/jpg"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+                if (file && !allowedTypes.includes(file.type)) {
+                  alert("Only JPG, JPEG, and PNG formats are allowed.");
+                  e.target.value = null;
+                  return;
+                }
+                setImageFile(file);
+              }}
             />
           </Form.Group>
 

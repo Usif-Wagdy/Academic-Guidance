@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Axios } from "../../../../api/axios";
 import { internshipsAPI } from "../../../../api/Api";
 import { Button, Card, Container, Form } from "react-bootstrap";
-import { v4 as uuidv4 } from "uuid";
 
 export default function AddIntern() {
   const [internForm, setInternForm] = useState({
@@ -15,6 +14,7 @@ export default function AddIntern() {
     image: "dell.png",
     keywords: [],
   });
+  const [imageFile, setImageFile] = useState(null);
 
   // Handle Form Change
   const handleChange = (e) => {
@@ -38,16 +38,28 @@ export default function AddIntern() {
   // Submit Form
   async function handleSubmit(e) {
     e.preventDefault();
-    const newId = uuidv4();
 
     try {
-      await Axios.post(`${internshipsAPI}`, {
-        ...internForm,
-        id: newId,
-      });
+      const response = await Axios.post(`${internshipsAPI}`, internForm);
+      const newInternId = response.data?.intern._id;
+
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append("image", imageFile);
+        await Axios.post(
+          `${internshipsAPI}/add-image/${newInternId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      }
+
       window.location.pathname = "/dashboard/intern-ships";
     } catch (error) {
-      console.log(error);
+      console.log("Error:", error);
     }
   }
 
@@ -108,6 +120,25 @@ export default function AddIntern() {
               name="salary"
               value={internForm.salary}
               onChange={handleChange}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="image">
+            <Form.Label>Upload Image</Form.Label>
+            <Form.Control
+              type="file"
+              accept="image/jpeg, image/png, image/jpg"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+                if (file && !allowedTypes.includes(file.type)) {
+                  alert("Only JPG, JPEG, and PNG formats are allowed.");
+                  e.target.value = null;
+                  return;
+                }
+                setImageFile(file);
+              }}
               required
             />
           </Form.Group>

@@ -42,9 +42,9 @@ export default function Intern() {
           <div className="d-flex">
             <div className="me-2">
               <img
-                src={`/Assets/internships/${intern?.image}`}
+                src={intern?.image}
                 alt="intern"
-                className="w-75px w-md-100px rounded-circle me-md-3"
+                className="w-75px w-md-100px h-75px h-md-100px rounded-circle me-md-3"
               />
             </div>
             <div>
