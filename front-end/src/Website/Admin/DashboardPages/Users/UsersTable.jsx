@@ -1,18 +1,24 @@
 import { useState } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import { Button, Container, Table } from "react-bootstrap";
-import { FaUserEdit } from "react-icons/fa";
+import { FaTrashAlt, FaUserAlt, FaUserEdit } from "react-icons/fa";
 import { Img } from "react-image";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import CheckPasswordModal from "../../../../Helpers/CheckPasswordModal";
+import { toast } from "react-toastify";
 
 export default function UsersTable() {
-  const { users } = useOutletContext();
+  const { users, handleDelete } = useOutletContext();
   const navigate = useNavigate();
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 8; // Number of users to display per page
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedAction, setSelectedAction] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   // Format role function
   function formatRole(role) {
@@ -54,7 +60,7 @@ export default function UsersTable() {
             </tr>
           </thead>
           <tbody>
-            {[...Array(5)].map((_, index) => (
+            {[...Array(8)].map((_, index) => (
               <tr key={index} className="text-center">
                 {[...Array(9)].map((__, i) => (
                   <td key={i} className="p-1 p-md-2">
@@ -77,8 +83,20 @@ export default function UsersTable() {
   const showUsers = currentUsers.map((user, i) => {
     return (
       <tr className="text-center fs-8px fs-md-14px" key={i}>
-        <td className="p-1 p-md-2">{user._id}</td>
-        <td className="p-1 p-md-2 center-flex">
+        <td className="p-1 p-md-2">
+          <Button
+            variant="outline-dark"
+            size="sm"
+            onClick={() => {
+              setUserId(user?._id);
+              setSelectedAction("revealId");
+              setShowModal(true);
+            }}
+          >
+            <FaUserAlt />
+          </Button>
+        </td>
+        <td>
           <Img
             src={user?.profilePic}
             alt={user?.name}
@@ -90,17 +108,32 @@ export default function UsersTable() {
             className="rounded-circle"
           />
         </td>
-        <td className="p-1 p-md-2 text-capitalize">{user?.name}</td>
-        <td className="p-1 p-md-2">{user?.email}</td>
-        <td className="p-1 p-md-2 text-capitalize">{formatRole(user?.role)}</td>
-        <td className="p-1 p-md-2 text-capitalize">{user?.country}</td>
-        <td className="p-1 p-md-2 text-capitalize">{user?.gender}</td>
-        <td className="p-1 p-md-2">{user?.age}</td>
+        <td className="p-1 p-md-2 text-capitalize truncate">{user?.name}</td>
+        <td className="p-1 p-md-2 truncate">{user?.email}</td>
+        <td className="p-1 p-md-2 text-capitalize truncate">
+          {formatRole(user?.role)}
+        </td>
+        <td className="p-1 p-md-2 text-capitalize truncate">{user?.country}</td>
+        <td className="p-1 p-md-2 text-capitalize truncate">{user?.gender}</td>
+        <td className="p-1 p-md-2 truncate">{user?.age}</td>
         <td className="p-1 p-md-2">
           <FaUserEdit
-            className="pointer  text-success"
+            className="pointer text-success me-3"
             size={20}
-            onClick={() => navigate(`${user?._id}`)}
+            onClick={() => {
+              setUserId(user?._id);
+              setSelectedAction("edit");
+              setShowModal(true);
+            }}
+          />
+          <FaTrashAlt
+            className="pointer text-danger"
+            size={19}
+            onClick={() => {
+              setUserId(user?._id);
+              setSelectedAction("delete");
+              setShowModal(true);
+            }}
           />
         </td>
       </tr>
@@ -118,6 +151,7 @@ export default function UsersTable() {
           Add User
         </Button>
       </div>
+
       <Table striped bordered hover>
         <thead>
           <tr className="text-center fs-8px fs-md-14px">
@@ -129,7 +163,7 @@ export default function UsersTable() {
             <th className="bg-secondary p-1 p-md-2">Country</th>
             <th className="bg-secondary p-1 p-md-2">Gender</th>
             <th className="bg-secondary p-1 p-md-2">Age</th>
-            <th className="bg-secondary p-1 p-md-2">Action</th>
+            <th className="bg-secondary p-1 p-md-2">Actions</th>
           </tr>
         </thead>
         <tbody>{showUsers}</tbody>
@@ -152,6 +186,28 @@ export default function UsersTable() {
           Next
         </Button>
       </div>
+
+      {/* Verification Modal */}
+      <CheckPasswordModal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        onSuccess={() => {
+          if (selectedAction === "delete") {
+            handleDelete(userId);
+          } else if (selectedAction === "edit") {
+            navigate(`${userId}`);
+          } else if (selectedAction === "revealId") {
+            navigator.clipboard
+              .writeText(userId)
+              .then(() => {
+                toast.success("ID copied to clipboard!");
+              })
+              .catch((err) => {
+                toast.error("Failed to copy ID.");
+              });
+          }
+        }}
+      />
     </Container>
   );
 }

@@ -3,6 +3,7 @@ import { Axios } from "../../../../api/axios";
 import { Outlet, useLocation } from "react-router-dom";
 import { usersAPI } from "../../../../api/Api";
 import { useAuth } from "../../../../Context/AuthProvider";
+import { toast } from "react-toastify";
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
@@ -30,6 +31,17 @@ export default function UsersPage() {
       setUsers(usersData);
     } catch (error) {
       console.error("Error fetching users:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await Axios.delete(`${usersAPI}/${id}`);
+      fetchUsers();
+      toast.success("User deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting course:", error);
+      toast.error(error?.response?.data?.error || "Couldn't delete user.");
     }
   };
 
@@ -74,7 +86,7 @@ export default function UsersPage() {
         </div>
       )}
       {/* Pass filtered data to Outlet context */}
-      <Outlet context={{ users: filteredUsers, setRefreshKey }} />
+      <Outlet context={{ users: filteredUsers, handleDelete, setRefreshKey }} />
     </div>
   );
 }

@@ -23,6 +23,25 @@ img {
   background-position: center !important;
 }
 
+table td {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.truncate {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+table td img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .main {
   padding-top: 72px;
 }

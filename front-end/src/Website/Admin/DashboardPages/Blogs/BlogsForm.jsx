@@ -3,16 +3,15 @@ import { Form, Button, Card, Container } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { Axios } from "../../../../api/axios";
 import { blogsAPI } from "../../../../api/Api";
-import { useNotification } from "../../../../Context/Notification";
 import Breadcrumbs from "../../../../Components/BreadCrumbs/BreadCrumbs";
 import { useAuth } from "../../../../Context/AuthProvider";
+import { toast } from "react-toastify";
 
 export default function BlogForm() {
   const { auth } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();
   const isEditing = Boolean(id);
-  const { showNotification } = useNotification();
   console.log(isEditing);
 
   const [blog, setBlog] = useState({
@@ -46,15 +45,15 @@ export default function BlogForm() {
     try {
       if (isEditing) {
         await Axios.put(`${blogsAPI}/${id}`, blog);
-        showNotification("Blog updated successfully!", "success");
+        toast.success("Blog updated successfully!");
       } else {
         await Axios.post(blogsAPI, blog);
-        showNotification("New blog added!", "success");
+        toast.success("New blog added!");
       }
       navigate("/dashboard/blogs");
       window.location.reload();
     } catch (error) {
-      showNotification("Failed to save blog!", "danger");
+      toast.error("Failed to save blog!");
       console.error("Error saving blog:", error);
     }
   };
