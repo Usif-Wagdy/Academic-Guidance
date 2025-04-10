@@ -10,6 +10,8 @@ router.post('/signIn', authController.login);
 
 router.post('/role/:id', authMiddleware, allowedTo('superAdmin'), userController.addRole);
 
+router.post('/check-password', authMiddleware, userController.checkPassword);
+
 router.get('/', authMiddleware, allowedTo('superAdmin'), userController.getAllUsers);
 router.get('/:id', authMiddleware, allowedTo('superAdmin'), userController.getUser);
 router.get('/getStudents', authMiddleware, allowedTo('superAdmin'), userController.getStudents);
