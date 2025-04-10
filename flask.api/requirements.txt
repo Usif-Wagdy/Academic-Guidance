@@ -1,9 +1,0 @@
-flask
-spacy
-pdfminer.six
-fuzzywuzzy
-transformers
-pandas
-torch
-sentencepiece
-python-Levenshtein
