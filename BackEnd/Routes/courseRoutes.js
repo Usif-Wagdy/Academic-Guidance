@@ -3,6 +3,8 @@ const router = express.Router();
 const courseController = require("../Controllers/courseController");
 const { imageUpload, videoUpload } = require('../Config/cloudinaryConfig');
 const { authMiddleware, allowedTo } = require("../Middlewares/authMiddleware");
+
+
 router.get("/", courseController.getAllCourses);
 router.get("/:id", courseController.getCourseById);
 router.post("/", authMiddleware, allowedTo('superAdmin', 'instructor', 'superInstructor'), courseController.createCourse);

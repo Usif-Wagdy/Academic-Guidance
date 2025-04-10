@@ -78,7 +78,7 @@ exports.updateUser = async (req, res) => {
       return res.status(400).json({ error: 'Invalid user ID format' });
     }
 
-    const restrictedFields = ['password', '_id', 'createdAt', 'isAdmin'];
+    const restrictedFields = ['password', '_id', 'createdAt', 'isAdmin', 'role'];
     restrictedFields.forEach(field => delete updateData[field]);
 
     if (updateData.email && !validator.isEmail(updateData.email)) {

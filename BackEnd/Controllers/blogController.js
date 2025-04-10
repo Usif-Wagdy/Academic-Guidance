@@ -1,5 +1,3 @@
-
-
 const Blog = require("../Models/blogModel");
 const mongoose = require('mongoose');
 
@@ -23,24 +21,18 @@ exports.getBlogById = async (req, res) => {
 }
 exports.createBlog = async (req, res) => {
     try {
-
-        const imageUrl = req.file.path;
-        console.log(req.file);
         const { author, title, date, content, duration } = req.body;
         const instructorId = req.user.id;
 
-        if (!author || !title || !date || !content || !duration || !req.file) {
+        if (!author || !title || !date || !content || !duration) {
             return res.status(400).json({
                 success: false,
-                message: 'All fields are required, including an image.'
+                message: 'All fields are required.'
             });
         }
 
-        // Get the image URL
-
         const newBlog = new Blog({
             author,
-            image: imageUrl,
             title,
             date,
             content,
@@ -63,8 +55,46 @@ exports.createBlog = async (req, res) => {
         });
     }
 };
+
+exports.addImageToBlog = async (req, res) => {
+    try {
+        const blogId = req.params.id;
+
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: 'Image file is required.'
+            });
+        }
+        const imageUrl = req.file.path;
+
+        const blog = await Blog.findById(blogId);
+        if (!blog) {
+            return res.status(404).json({
+                success: false,
+                message: 'Blog not found.'
+            });
+        }
+
+        blog.image = imageUrl;
+        await blog.save();
+
+        res.json({
+            success: true,
+            message: 'Image added to Blog successfully.',
+            blog
+        });
+    } catch (error) {
+        console.error('Error adding image to Blog:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to add image to Blog. Please try again.'
+        });
+    }
+};
 exports.deleteBlog = async (req, res) => {
     try {
+
         const id = req.params.id;
         const deletedBlog = await Blog.findByIdAndDelete(id);
         if (!deletedBlog) {
@@ -81,28 +111,32 @@ exports.updateBlog = async (req, res) => {
         const id = req.params.id;
         const { author, image, title, date, content, duration } = req.body;
         const instructorId = req.user.id;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ success: false, message: 'Invalid Blog ID format.' });
+        }
+
         const existingBlog = await Blog.findById(id);
         if (!existingBlog) {
             return res.status(404).json({ success: false, message: 'Blog not found.' });
         }
-        // console.log(existingBlog)
-        // console.log(existingBlog.instructorId)
-        // console.log(instructorId)
+
+        if (!req.user.role || !existingBlog.instructorId) {
+            return res.status(403).json({ success: false, message: "Authorization data missing." });
+        }
+
         if (req.user.role !== 'superAdmin' && req.user.role !== 'superInstructor' && existingBlog.instructorId.toString() !== req.user.id.toString()) {
             return res.status(403).json({ success: false, message: "Not authorized to update this course." });
         }
         const newdata = { author, image, title, date, content, duration };
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ success: false, message: 'Invalid Blog ID format.' });
-        }
 
         const updatedBlog = await Blog.findByIdAndUpdate(id, newdata, { new: true });
         if (!updatedBlog) {
             return res.status(404).json({ success: false, message: 'Blog not found.' });
         }
-        res.json({ success: true, message: 'Blog updated successfully.', Blog: updatedBlog });
+        res.json({ success: true, message: 'Blog updated successfully.', blog: updatedBlog });
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Error updating Blog.' });
-        console.error('Error updating Blog:', error);
+        console.error('Error updating Blog:', error.stack);
+        res.status(500).json({ success: false, message: 'An unexpected error occurred while updating the blog.' });
     }
 }
