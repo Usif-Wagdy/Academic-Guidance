@@ -112,9 +112,8 @@ exports.updateBlog = async (req, res) => {
         const { author, image, title, date, content, duration } = req.body;
         const instructorId = req.user.id;
 
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ success: false, message: 'Invalid Blog ID format.' });
-        }
+
+
 
         const existingBlog = await Blog.findById(id);
         if (!existingBlog) {
@@ -125,7 +124,7 @@ exports.updateBlog = async (req, res) => {
             return res.status(403).json({ success: false, message: "Authorization data missing." });
         }
 
-        if (req.user.role !== 'superAdmin' && req.user.role !== 'superInstructor' && existingBlog.instructorId.toString() !== req.user.id.toString()) {
+        if (req.user.role !== 'superAdmin' && req.user.role !== 'superInstructor' && existingBlog.instructorId.toString() !== instructorId.toString()) {
             return res.status(403).json({ success: false, message: "Not authorized to update this course." });
         }
         const newdata = { author, image, title, date, content, duration };
