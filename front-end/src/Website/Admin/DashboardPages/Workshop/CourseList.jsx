@@ -1,16 +1,43 @@
 import { useOutletContext, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Img } from "react-image";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { Img } from "react-image";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import CheckPasswordModal from "../../../../Helpers/CheckPasswordModal";
+import { useAuth } from "../../../../Context/AuthProvider";
 
 export default function CourseList() {
-  const { courses, handleDelete } = useOutletContext();
+  const { courses, handleDelete } = useOutletContext(); // Assuming currentUser contains role and id
   const navigate = useNavigate();
+  const { auth } = useAuth();
+  const currentUser = auth.user;
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardPerPage = 6; // Number of cards to display per page
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedAction, setSelectedAction] = useState(null);
+  const [courseId, setCourseId] = useState(null);
+
+  // Filter courses based on user role
+  const filteredCourses =
+    currentUser.role === "superAdmin" || currentUser.role === "superInstructor"
+      ? courses
+      : courses.filter((course) => course.instructorId === currentUser._id);
+
+  // Calculate the index of the first and last course on the current page
+  const indexOfLastCourse = currentPage * cardPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - cardPerPage;
+  const currentCourses = filteredCourses.slice(
+    indexOfFirstCourse,
+    indexOfLastCourse
+  );
 
   // Show skeleton until courses are loaded
-  if (!courses || courses.length === 0) {
+  if (!filteredCourses || filteredCourses.length === 0) {
     return (
       <Container className="mt-5">
         <div className="center-flex justify-content-end ">
@@ -26,12 +53,12 @@ export default function CourseList() {
           {[...Array(3)].map((_, index) => (
             <Col lg={4} key={index} className="mb-4">
               <Card>
-                <Skeleton height={300} />
+                <Skeleton height={240} />
                 <Card.Body>
-                  <Skeleton height={20} width="60%" />
+                  <Skeleton width={200} height={20} />
                   <div className="between-flex mt-3 text-light">
-                    <Skeleton width={100} height={30} />
-                    <Skeleton width={30} height={30} />
+                    <Skeleton width={60} height={30} />
+                    <Skeleton width={40} height={30} />
                   </div>
                 </Card.Body>
               </Card>
@@ -43,7 +70,7 @@ export default function CourseList() {
   }
 
   return (
-    <Container className="mt-5">
+    <Container>
       <div className="center-flex justify-content-end ">
         <Button
           variant="primary text-light text-end"
@@ -54,29 +81,42 @@ export default function CourseList() {
         </Button>
       </div>
       <Row>
-        {courses.map((course) => (
-          <Col lg={4} key={course._id} className="mb-4">
-            <Card>
+        {currentCourses.map((course) => (
+          <Col lg={4} md={6} key={course._id} className="mb-4">
+            <Card className="h-100">
               <Img
                 src={course.images[0]}
                 alt={course.name}
-                className="card-img"
-                loader={<Skeleton width={300} height={300} />}
+                loader={<Skeleton height={240} />}
                 decoding="async"
                 loading="lazy"
+                style={{ height: "220px", objectFit: "cover" }}
               />
               <Card.Body>
-                <Card.Title>{course.name}</Card.Title>
+                <div className="between-flex">
+                  <Card.Title className="truncate">{course.name}</Card.Title>
+                  <span className="text-capitalize text-muted truncate">
+                    by: {course.author}
+                  </span>
+                </div>
                 <div className="between-flex mt-3 text-light">
                   <Button
                     variant="success"
-                    onClick={() => navigate(`${course._id}`)}
+                    onClick={() => {
+                      setCourseId(course._id);
+                      setSelectedAction("edit");
+                      setShowModal(true);
+                    }}
                   >
                     Edit
                   </Button>
                   <Button
                     variant="danger"
-                    onClick={() => handleDelete(course._id)}
+                    onClick={() => {
+                      setCourseId(course._id);
+                      setSelectedAction("delete");
+                      setShowModal(true);
+                    }}
                   >
                     <FaRegTrashAlt />
                   </Button>
@@ -85,7 +125,37 @@ export default function CourseList() {
             </Card>
           </Col>
         ))}
+        {/* Pagination Controls */}
+        <div className="d-flex justify-content-between">
+          <Button
+            variant="secondary"
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={indexOfLastCourse >= filteredCourses.length}
+          >
+            Next
+          </Button>
+        </div>
       </Row>
+
+      {/* Verification Modal */}
+      <CheckPasswordModal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        onSuccess={() => {
+          if (selectedAction === "delete") {
+            handleDelete(courseId);
+          } else if (selectedAction === "edit") {
+            navigate(`${courseId}`);
+          }
+        }}
+      />
     </Container>
   );
 }

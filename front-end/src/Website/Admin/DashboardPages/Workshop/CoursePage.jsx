@@ -30,7 +30,7 @@ const CoursesPage = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="mt-4">
       {/* Default view is CourseList */}
       <Outlet context={{ courses, handleDelete, setRefreshKey }} />
     </div>

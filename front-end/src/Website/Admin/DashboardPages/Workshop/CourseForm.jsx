@@ -12,16 +12,15 @@ import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 import { Axios } from "../../../../api/axios";
 import { coursesAPI } from "../../../../api/Api";
 import Breadcrumbs from "../../../../Components/BreadCrumbs/BreadCrumbs";
-import { useNotification } from "../../../../Context/Notification";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useAuth } from "../../../../Context/AuthProvider";
+import { toast } from "react-toastify";
 
 export default function CourseForm() {
   const { auth } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();
   const isEditing = Boolean(id);
-  const { showNotification } = useNotification();
   const { setRefreshKey } = useOutletContext();
 
   const [course, setCourse] = useState({
@@ -104,16 +103,16 @@ export default function CourseForm() {
     try {
       if (isEditing) {
         await Axios.patch(`${coursesAPI}/${id}`, course);
-        showNotification("Course updated successfully!", "success");
+        toast.success("Course updated successfully!");
       } else {
         await Axios.post(`${coursesAPI}`, course);
-        showNotification("New course added!", "success");
+        toast.success("New course added!");
       }
       setRefreshKey((prev) => prev + 1); // Trigger a refresh
       navigate("/dashboard/workshop");
     } catch (error) {
-      showNotification("Failed to save course!", "danger");
       console.error("Error saving course:", error);
+      toast.error("Failed to save course!");
     }
   };
 

@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { Axios } from "../../../../api/axios";
-import { usersAPI, updateUserApi, registerAPI } from "../../../../api/Api";
+import {
+  usersAPI,
+  updateUserApi,
+  registerAPI,
+  updateRoleApi,
+} from "../../../../api/Api";
 import {
   Button,
   Container,
@@ -67,17 +72,19 @@ export default function UserForm() {
       .string()
       .email("Invalid email address")
       .required("Email is required"),
-    password: yup
-      .string()
-      .min(8, "Password must be at least 8 characters")
-      .matches(/[A-Z]/, "Must contain at least one uppercase letter")
-      .matches(/[a-z]/, "Must contain at least one lowercase letter")
-      .matches(/\d/, "Must contain at least one number")
-      .matches(/[\W_]/, "Must contain at least one special character")
-      .required("Password is required"),
+    password: isEdit
+      ? yup.string() // No password validation for editing
+      : yup
+          .string()
+          .min(8, "Password must be at least 8 characters")
+          .matches(/[A-Z]/, "Must contain at least one uppercase letter")
+          .matches(/[a-z]/, "Must contain at least one lowercase letter")
+          .matches(/\d/, "Must contain at least one number")
+          .matches(/[\W_]/, "Must contain at least one special character")
+          .required("Password is required"),
     gender: yup
       .string()
-      .oneOf(["male", "female", "other"])
+      .oneOf(["male", "female"])
       .required("Gender is required"),
     age: yup
       .number()
@@ -88,13 +95,24 @@ export default function UserForm() {
 
   const handleSubmit = async (values) => {
     try {
+      const { role, isAdmin, ...userData } = values;
       if (isEdit) {
-        await Axios.patch(`${updateUserApi}/${id}`, values);
+        await Axios.patch(`${updateUserApi}/${id}`, userData);
         toast.success("User updated successfully!");
       } else {
-        await Axios.post(registerAPI, values);
+        await Axios.post(registerAPI, userData);
         toast.success("User added successfully!");
       }
+
+      if (values.role !== initialValues.role) {
+        const newRoleData = {
+          role: values.role,
+          isAdmin: values.role !== "student", // Determine isAdmin based on the role
+        };
+        await Axios.post(`${updateRoleApi}/${id}`, newRoleData);
+        toast.success("User role updated successfully!");
+      }
+
       setRefreshKey((prev) => prev + 1);
       navigate("/dashboard/users");
     } catch (error) {
@@ -120,17 +138,18 @@ export default function UserForm() {
             {({
               handleSubmit,
               handleChange,
+              setFieldValue,
               values,
               touched,
               errors,
-              setFieldValue,
             }) => (
               <Form noValidate onSubmit={handleSubmit}>
                 <Row className="mb-3">
                   <Col md={6}>
-                    <Form.Group controlId="name" className="mb-3">
+                    <Form.Group htmlFor="name" className="mb-3">
                       <Form.Label>Full Name</Form.Label>
                       <Form.Control
+                        id="name"
                         type="text"
                         name="name"
                         value={values.name}
@@ -144,9 +163,10 @@ export default function UserForm() {
                   </Col>
 
                   <Col md={6}>
-                    <Form.Group controlId="email" className="mb-3">
+                    <Form.Group htmlFor="email" className="mb-3">
                       <Form.Label>Email Address</Form.Label>
                       <Form.Control
+                        id="email"
                         type="email"
                         name="email"
                         value={values.email}
@@ -161,11 +181,12 @@ export default function UserForm() {
 
                   {!isEdit && (
                     <Col md={6}>
-                      <Form.Group controlId="password" className="mb-3">
+                      <Form.Group htmlFor="password" className="mb-3">
                         <Form.Label>Password</Form.Label>
                         <InputGroup>
                           <Form.Control
                             type={showPassword ? "text" : "password"}
+                            id="password"
                             name="password"
                             value={values.password}
                             onChange={handleChange}
@@ -187,9 +208,10 @@ export default function UserForm() {
 
                   {isEdit && (
                     <Col md={6}>
-                      <Form.Group controlId="role" className="mb-3">
+                      <Form.Group htmlFor="role" className="mb-3">
                         <Form.Label>User Role</Form.Label>
                         <Form.Select
+                          id="role"
                           name="role"
                           value={values.role}
                           onChange={handleChange}
@@ -213,9 +235,10 @@ export default function UserForm() {
                   )}
 
                   <Col md={6}>
-                    <Form.Group controlId="gender" className="mb-3">
+                    <Form.Group htmlFor="gender" className="mb-3">
                       <Form.Label>Gender</Form.Label>
                       <Form.Select
+                        id="gender"
                         name="gender"
                         value={values.gender}
                         onChange={handleChange}
@@ -232,9 +255,10 @@ export default function UserForm() {
                   </Col>
 
                   <Col md={6}>
-                    <Form.Group controlId="country" className="mb-3">
+                    <Form.Group htmlFor="country" className="mb-3">
                       <Form.Label>Country</Form.Label>
                       <Select
+                        id="country"
                         options={countryOptions}
                         name="country"
                         placeholder="Select your country"
@@ -260,7 +284,7 @@ export default function UserForm() {
                   </Col>
 
                   <Col md={6}>
-                    <Form.Group controlId="age" className="mb-3">
+                    <Form.Group htmlFor="age" className="mb-3">
                       <Form.Label>Age</Form.Label>
                       <Form.Control
                         type="number"
@@ -283,7 +307,7 @@ export default function UserForm() {
                   >
                     Cancel
                   </Button>
-                  <Button variant="primary" type="submit">
+                  <Button variant="success" type="submit">
                     {isEdit ? "Update User" : "Add User"}
                   </Button>
                 </div>

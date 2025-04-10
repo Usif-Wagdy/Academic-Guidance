@@ -94,9 +94,7 @@ export default function Register() {
 
       setShowSuccessModal(true);
 
-      setTimeout(() => {
-        navigate("/auth/login");
-      }, 1500);
+      navigate("/auth/login");
     } catch (error) {
       setErrorMessage(error.response.data.error);
     } finally {
