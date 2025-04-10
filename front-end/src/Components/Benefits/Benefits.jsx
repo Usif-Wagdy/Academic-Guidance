@@ -28,7 +28,7 @@ export default function Benefits({ layout = "grid" }) {
       {/* Modal Layout (View All Button) */}
       {layout === "modal" && (
         <Button
-          className="bg-white border w-sm-100"
+          className="btn-white border w-sm-100"
           onClick={() => setShowModal(true)}
         >
           View All

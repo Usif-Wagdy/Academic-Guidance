@@ -17,6 +17,8 @@ export const updateUserApi = "users/update-user"; // patch id -- user token requ
 
 export const updatePictureApi = "users/update-image"; // patch id -- user token required
 
+export const updatePasswordApi = "users/update-password"; // patch without id -- user token required
+
 export const registerAPI = "users/SignUp"; // post
 
 export const loginAPI = "users/signIn"; // post

@@ -45,7 +45,7 @@ export default function CoursesSection() {
             <p className="my-1 ">{course.description}</p>
           </div>
           <Link to={`courses/${course._id}`} className="my-3 ">
-            <Button className="bg-info border w-sm-100 w-md-100">
+            <Button className="btn-info border w-sm-100 w-md-100">
               Get it Now
             </Button>
           </Link>
@@ -61,7 +61,7 @@ export default function CoursesSection() {
         title="Our Courses"
         to="/courses"
         content={
-          <Button className="bg-white border w-sm-100 m-0">View All</Button>
+          <Button className="btn-white border w-sm-100 m-0">View All</Button>
         }
         description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam
             eaque vero quidem quisquam porro sint asperiores veritatis ipsum.

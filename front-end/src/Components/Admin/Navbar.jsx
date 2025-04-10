@@ -89,14 +89,19 @@ const NavBar = ({ isCollapsed }) => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu align="end" className="p-2">
-            <Dropdown.Item className="p-2 rounded-3">Profile</Dropdown.Item>
+            <Dropdown.Item as={Link} to="/profile" className="p-2 rounded-3">
+              Profile
+            </Dropdown.Item>
             {auth?.user.isAdmin && (
               <Dropdown.Item as={Link} to="/" className="p-2 rounded-3">
                 Website
               </Dropdown.Item>
             )}
             <Dropdown.Divider />
-            <Dropdown.Item className="p-1 logout-btn" onClick={handleLogout}>
+            <Dropdown.Item
+              className="p-1 rounded-3 logout-btn"
+              onClick={handleLogout}
+            >
               Logout <FaSignOutAlt size={18} className="ms-2 logout-icon" />
             </Dropdown.Item>
           </Dropdown.Menu>

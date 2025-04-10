@@ -78,7 +78,7 @@ export default function Courses() {
                   to={`${course._id}`}
                   className="col-lg-2 col-12 d-flex justify-content-lg-end justify-content-center my-3"
                 >
-                  <Button className="bg-info border w-sm-100">
+                  <Button className="btn-info border w-sm-100">
                     View Course
                   </Button>
                 </Link>

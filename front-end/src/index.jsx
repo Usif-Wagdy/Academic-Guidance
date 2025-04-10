@@ -21,16 +21,12 @@ import { AuthProvider } from "./Context/AuthProvider";
 // UX
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import ErrorPage from "./Website/Error/ErrorPage";
-import { NotificationProvider } from "./Context/Notification";
 import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
 
 // Components
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Profile from "./Website/Profile/Profile";
-import UsersPage from "./Website/Admin/DashboardPages/Users/UsersPage";
-import UsersTable from "./Website/Admin/DashboardPages/Users/UsersTable";
-import UsersForm from "./Website/Admin/DashboardPages/Users/UsersForm";
 
 // Lazy-loaded Website Pages
 const Home = lazy(() => import("./Website/Home/Home"));
@@ -53,6 +49,7 @@ const Insights = lazy(() => import("./Website/Admin/DashboardPages/Insights"));
 const CVTemplate = lazy(() =>
   import("./Website/Admin/DashboardPages/CVTemplate")
 );
+
 const CoursePage = lazy(() =>
   import("./Website/Admin/DashboardPages/Workshop/CoursePage")
 );
@@ -62,6 +59,7 @@ const CourseList = lazy(() =>
 const CourseForm = lazy(() =>
   import("./Website/Admin/DashboardPages/Workshop/CourseForm")
 );
+
 const BlogsPage = lazy(() =>
   import("./Website/Admin/DashboardPages/Blogs/BlogsPage")
 );
@@ -71,6 +69,17 @@ const BlogsList = lazy(() =>
 const BlogsForm = lazy(() =>
   import("./Website/Admin/DashboardPages/Blogs/BlogsForm")
 );
+
+const UsersPage = lazy(() =>
+  import("./Website/Admin/DashboardPages/Users/UsersPage")
+);
+const UsersTable = lazy(() =>
+  import("./Website/Admin/DashboardPages/Users/UsersTable")
+);
+const UsersForm = lazy(() =>
+  import("./Website/Admin/DashboardPages/Users/UsersForm")
+);
+
 const Intern = lazy(() =>
   import("./Website/Admin/DashboardPages/InternShips/Intern")
 );
@@ -80,6 +89,7 @@ const EditIntern = lazy(() =>
 const AddIntern = lazy(() =>
   import("./Website/Admin/DashboardPages/InternShips/AddIntern")
 );
+
 const EditTrack = lazy(() =>
   import("./Website/Admin/DashboardPages/Tracks/EditTrack")
 );
@@ -104,120 +114,125 @@ const MainLayout = () => (
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <NotificationProvider>
-      <ToastContainer />
-      <AuthProvider>
-        <Router>
-          <ScrollToTop />
-          <Suspense fallback={<LoadingScreen />}>
-            <Routes>
-              {/* Main Routes */}
-              <Route element={<MainLayout />}>
-                <Route path="/" element={<Home />} />
+    <ToastContainer />
+    <AuthProvider>
+      <Router>
+        <ScrollToTop />
+        <Suspense fallback={<LoadingScreen />}>
+          <Routes>
+            {/* Main Routes */}
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Home />} />
 
-                <Route
-                  path="/auth"
-                  element={
-                    <PrivateRoute type={"requireNoAuth"}>
-                      <Auth />
-                    </PrivateRoute>
-                  }
-                >
-                  <Route index element={<Navigate to="login" replace />} />
-                  <Route path="login" element={<Login />} />
-                  <Route path="register" element={<Register />} />
-                </Route>
-
-                <Route path="/courses" element={<Courses />} />
-                <Route path="/courses/:id" element={<CourseView />} />
-
-                <Route path="/tracks" element={<Tracks />} />
-                <Route path="/tracks/:id" element={<TrackRoadmap />} />
-
-                <Route path="/blogs" element={<Blogs />} />
-                <Route path="/blogs/:id" element={<BlogView />} />
-
-                <Route path="/about" element={<About />} />
-                <Route path="/internships" element={<Internships />} />
-                <Route path="/cvbuilder" element={<CVBuilder />} />
-                <Route path="/profile" element={<Profile />} />
-              </Route>
-
-              {/* Dashboard Routes */}
               <Route
-                path="/dashboard"
+                path="/auth"
                 element={
-                  <PrivateRoute type={"admin"}>
-                    <Dashboard />
+                  <PrivateRoute type={"requireNoAuth"}>
+                    <Auth />
                   </PrivateRoute>
                 }
               >
-                <Route index element={<Navigate to="insights" replace />} />
-
-                <Route path="insights" element={<Insights />} />
-                <Route path="cv-template" element={<CVTemplate />} />
-
-                <Route
-                  path="tracks"
-                  element={
-                    <PrivateRoute type="trackAdmin">
-                      <AllTracks />
-                    </PrivateRoute>
-                  }
-                />
-                <Route path="tracks/:id" element={<EditTrack />} />
-                <Route path="track/add" element={<AddTrack />} />
-
-                <Route
-                  path="blogs"
-                  element={
-                    <PrivateRoute type={"instructor"}>
-                      <BlogsPage />
-                    </PrivateRoute>
-                  }
-                >
-                  <Route index element={<BlogsList />} />
-                  <Route path="add" element={<BlogsForm />} />
-                  <Route path=":id" element={<BlogsForm />} />
-                </Route>
-
-                <Route
-                  path="workshop"
-                  element={
-                    <PrivateRoute type={"instructor"}>
-                      <CoursePage />
-                    </PrivateRoute>
-                  }
-                >
-                  <Route index element={<CourseList />} />
-                  <Route path="add" element={<CourseForm />} />
-                  <Route path=":id" element={<CourseForm />} />
-                </Route>
-
-                <Route
-                  path="users"
-                  element={
-                    <PrivateRoute type={"superAdmin"}>
-                      <UsersPage />
-                    </PrivateRoute>
-                  }
-                >
-                  <Route index element={<UsersTable />} />
-                  <Route path="add" element={<UsersForm />} />
-                  <Route path=":id" element={<UsersForm />} />
-                </Route>
-
-                <Route path="intern-ships" element={<Intern />} />
-                <Route path="intern-ships/:id" element={<EditIntern />} />
-                <Route path="intern-ship/add" element={<AddIntern />} />
+                <Route index element={<Navigate to="login" replace />} />
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
               </Route>
 
-              {/* Redirect unknown routes to Home */}
-              <Route path="*" element={<ErrorPage />} />
-            </Routes>
-          </Suspense>
-        </Router>
-      </AuthProvider>
-    </NotificationProvider>
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/courses/:id" element={<CourseView />} />
+
+              <Route path="/tracks" element={<Tracks />} />
+              <Route path="/tracks/:id" element={<TrackRoadmap />} />
+
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/blogs/:id" element={<BlogView />} />
+
+              <Route path="/about" element={<About />} />
+              <Route path="/internships" element={<Internships />} />
+              <Route path="/cvbuilder" element={<CVBuilder />} />
+              <Route
+                path="/profile"
+                element={
+                  <PrivateRoute type={"requireAuth"}>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
+            </Route>
+
+            {/* Dashboard Routes */}
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute type={"admin"}>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            >
+              <Route index element={<Navigate to="insights" replace />} />
+
+              <Route path="insights" element={<Insights />} />
+              <Route path="cv-template" element={<CVTemplate />} />
+
+              <Route
+                path="tracks"
+                element={
+                  <PrivateRoute type="trackAdmin">
+                    <AllTracks />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="tracks/:id" element={<EditTrack />} />
+              <Route path="track/add" element={<AddTrack />} />
+
+              <Route
+                path="blogs"
+                element={
+                  <PrivateRoute type={"instructor"}>
+                    <BlogsPage />
+                  </PrivateRoute>
+                }
+              >
+                <Route index element={<BlogsList />} />
+                <Route path="add" element={<BlogsForm />} />
+                <Route path=":id" element={<BlogsForm />} />
+              </Route>
+
+              <Route
+                path="workshop"
+                element={
+                  <PrivateRoute type={"instructor"}>
+                    <CoursePage />
+                  </PrivateRoute>
+                }
+              >
+                <Route index element={<CourseList />} />
+                <Route path="add" element={<CourseForm />} />
+                <Route path=":id" element={<CourseForm />} />
+              </Route>
+
+              <Route
+                path="users"
+                element={
+                  <PrivateRoute type={"superAdmin"}>
+                    <UsersPage />
+                  </PrivateRoute>
+                }
+              >
+                <Route index element={<UsersTable />} />
+                <Route path="add" element={<UsersForm />} />
+                <Route path=":id" element={<UsersForm />} />
+              </Route>
+
+              <Route path="intern-ships" element={<Intern />} />
+              <Route path="intern-ships/:id" element={<EditIntern />} />
+              <Route path="intern-ship/add" element={<AddIntern />} />
+            </Route>
+
+            {/* Redirect unknown routes to Home */}
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </AuthProvider>
   </React.StrictMode>
 );

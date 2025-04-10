@@ -125,7 +125,14 @@ export default function Header() {
                   </div>
                 </Dropdown.Toggle>
                 <Dropdown.Menu align="end" className="p-2">
-                  <Dropdown.Item className="p-1">Profile</Dropdown.Item>
+                  <Dropdown.Item
+                    as={Link}
+                    to="/profile"
+                    onClick={() => setExpanded(false)}
+                    className="p-2 rounded-3"
+                  >
+                    Profile
+                  </Dropdown.Item>
                   {auth?.user.isAdmin && (
                     <Dropdown.Item
                       as={Link}
@@ -138,7 +145,7 @@ export default function Header() {
                   )}
                   <Dropdown.Divider />
                   <Dropdown.Item
-                    className="p-1 logout-btn"
+                    className="p-1 rounded-3 logout-btn"
                     onClick={handleLogout}
                   >
                     Logout{" "}
@@ -207,7 +214,14 @@ export default function Header() {
                 </div>
               </Dropdown.Toggle>
               <Dropdown.Menu align="end" className="p-2">
-                <Dropdown.Item className="p-2 rounded-3">Profile</Dropdown.Item>
+                <Dropdown.Item
+                  as={Link}
+                  to="/profile"
+                  onClick={() => setExpanded(false)}
+                  className="p-2 rounded-3"
+                >
+                  Profile
+                </Dropdown.Item>
                 {auth?.user.isAdmin && (
                   <Dropdown.Item
                     as={Link}
@@ -220,7 +234,7 @@ export default function Header() {
                 )}
                 <Dropdown.Divider />
                 <Dropdown.Item
-                  className="p-1 logout-btn"
+                  className="p-1 rounded-3 logout-btn"
                   onClick={handleLogout}
                 >
                   Logout <FaSignOutAlt size={18} className="ms-2 logout-icon" />

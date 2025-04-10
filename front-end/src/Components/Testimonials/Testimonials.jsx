@@ -100,7 +100,7 @@ export default function Testimonials({ layout = "slider" }) {
                         <Card.Title>{name}</Card.Title>
                       </div>
                       <Button
-                        className="bg-info border w-sm-100"
+                        className="btn-info border w-sm-100"
                         onClick={() =>
                           openModal({
                             _id,
@@ -159,7 +159,7 @@ export default function Testimonials({ layout = "slider" }) {
                       <Card.Title>{name}</Card.Title>
                     </div>
                     <Button
-                      className="bg-info border w-sm-100"
+                      className="btn-info border w-sm-100"
                       onClick={() =>
                         openModal({
                           _id,
@@ -181,7 +181,7 @@ export default function Testimonials({ layout = "slider" }) {
       ) : layout === "modal" ? (
         // Button to Open Infinite Scroll Modal
         <Button
-          className="bg-white border w-sm-100"
+          className="btn-white border w-sm-100"
           onClick={() => setShowModal(true)}
         >
           View All
