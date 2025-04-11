@@ -25,7 +25,6 @@ const validateCourse = (data) => {
 exports.createCourse = async (req, res) => {
   try {
     const instructorId = req.user.id;
-    console.log(instructorId);
     const courseData = { ...req.body, instructorId };
 
     const errors = validateCourse(req.body);
@@ -98,7 +97,7 @@ exports.updateCourse = async (req, res) => {
       req.user.role !== 'superAdmin' &&
       req.user.role !== 'superInstructor' &&
       existingCourse.instructorId.toString() !==
-        req.user.id.toString()
+      req.user.id.toString()
     ) {
       return res.status(403).json({
         success: false,
