@@ -14,11 +14,7 @@ import { coursesAPI } from "../../../../api/Api";
 import Breadcrumbs from "../../../../Components/BreadCrumbs/BreadCrumbs";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useAuth } from "../../../../Context/AuthProvider";
-<<<<<<< HEAD
-import { toast } from "react-toastify";
-=======
 import TestiModal from "../../../../Components/Testimonials/TestiModal";
->>>>>>> 1cbaa9b (add api for courses testimonial => (updated files: courseController && courseModel && courseRoutes))
 
 export default function CourseForm() {
   const { auth } = useAuth();
@@ -49,6 +45,7 @@ export default function CourseForm() {
       Axios.get(`${coursesAPI}/${id}`)
         .then((res) => {
           setCourse(res.data.course);
+
           setTestimonials(res.data.course.testimonials);
         })
         .catch((err) => console.error("Error fetching course:", err));
@@ -113,17 +110,13 @@ export default function CourseForm() {
     try {
       if (isEditing) {
         await Axios.patch(`${coursesAPI}/${id}`, course);
-        toast.success("Course updated successfully!");
       } else {
         await Axios.post(`${coursesAPI}`, course);
-        toast.success("New course added!");
       }
-
       setRefreshKey((prev) => prev + 1); // Trigger a refresh
       navigate("/dashboard/workshop");
     } catch (error) {
       console.error("Error saving course:", error);
-      toast.error("Failed to save course!");
     }
   };
 
