@@ -227,7 +227,6 @@ export default function Testimonials({ layout = "slider" }) {
         onClose={handleModalClose}
         title="All Testimonials"
         contentList={testimonials}
-        imageKey="profilePic"
         animate={true}
         courseNames={courseNames}
       />

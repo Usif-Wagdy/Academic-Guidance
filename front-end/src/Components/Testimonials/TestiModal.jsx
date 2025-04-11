@@ -3,22 +3,27 @@ import { Modal, Card, Button, Form } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { motion } from "framer-motion";
 import { Axios } from "../../api/axios";
-import { coursesAPI } from "../../api/Api";
+import { testimonialsAPI } from "../../api/Api";
 import { useParams } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
+import { toast } from "react-toastify";
+import { useAuth } from "../../Context/AuthProvider";
 
 export default function TestiModal({
   show,
   onClose,
   title,
   contentList,
-  imageKey,
   courseNames,
+  onSuccess,
 }) {
   const [visibleItems, setVisibleItems] = useState(6); // Load 6 items initially
   const [showInput, setShowInput] = useState(false);
   const [newComment, setNewComment] = useState("");
   const { id } = useParams();
+  const { auth } = useAuth();
+  const currentUser = auth.user;
+
   const courseLocation =
     window.location.pathname.split("/")[1].toString() === "courses";
 
@@ -34,26 +39,31 @@ export default function TestiModal({
   const handleAddComment = async (e) => {
     e.preventDefault();
     try {
-      await Axios.post(`${coursesAPI}/${id}/testimonials`, {
+      await Axios.post(`${testimonialsAPI}`, {
         testimonial: newComment,
+        courseId: id,
+        name: currentUser.name,
+        profilePic: currentUser.profilePic,
       });
       setNewComment("");
       setShowInput(false);
+      toast.success("Testimonial added successfully!");
+
+      if (onSuccess) onSuccess();
     } catch (error) {
       console.log("Error submitting testimonial:", error);
+      toast.error("Couldn't add testimonial.");
     }
   };
 
   const deleteTesti = async (testiId) => {
-    if (!testiId) {
-      console.log("Testimonial ID is not defined");
-      return;
-    }
-
     try {
-      await Axios.delete(`${coursesAPI}/${id}/testimonials/${testiId}`);
+      await Axios.delete(`${testimonialsAPI}/${testiId}`);
+      toast.success("Testimonial deleted successfully!");
+      if (onSuccess) onSuccess();
     } catch (error) {
       console.log("Error deleting testimonial:", error);
+      toast.error("Couldn't delete testimonial.");
     }
   };
 
@@ -69,63 +79,58 @@ export default function TestiModal({
           hasMore={visibleItems < contentList.length}
           height={400}
         >
-          {contentList
-            .slice(0, visibleItems)
-            .map(
-              (
-                { name, testimonial, _id, courseId, [imageKey]: image },
-                index
-              ) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="mb-3"
-                >
-                  <Card className="shadow-sm p-3">
-                    <div className="d-flex align-items-center gap-3">
-                      {image && (
-                        <img
-                          src={image}
-                          alt={name}
-                          className="rounded-circle"
-                          width="50"
-                          height="50"
-                        />
-                      )}
-                      <Card.Title className="mb-0">{name}</Card.Title>
-                    </div>
-                    <Card.Text className="text-muted mt-2 between-flex">
-                      {testimonial}
-                      {dashLocation && (
-                        <MdDelete
-                          className="fs-16px text-danger pointer"
-                          onClick={() => deleteTesti(_id)}
-                        />
-                      )}
-                    </Card.Text>
-                    {courseId && (
-                      <div className="mt-2">
-                        <strong className="text-muted">Course: </strong>
-                        <span className="text-primary">
-                          {courseNames[courseId] || "Course name not found"}
-                        </span>
-                      </div>
-                    )}
-                  </Card>
-                </motion.div>
-              )
-            )}
+          {contentList?.slice(0, visibleItems).map((testimonial, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-3"
+            >
+              <Card className="shadow-sm p-3">
+                <div className="d-flex align-items-center gap-3">
+                  {testimonial.profilePic && (
+                    <img
+                      src={testimonial.profilePic}
+                      alt={testimonial.name}
+                      className="rounded-circle"
+                      width="50"
+                      height="50"
+                    />
+                  )}
+                  <Card.Title className="mb-0">{testimonial.name}</Card.Title>
+                </div>
+                <Card.Text className="text-muted mt-2 between-flex">
+                  {testimonial.testimonial}
+                  {dashLocation && (
+                    <MdDelete
+                      className="fs-16px text-danger pointer"
+                      onClick={() => deleteTesti(testimonial._id)}
+                    />
+                  )}
+                </Card.Text>
+                {courseNames && (
+                  <div className="mt-2">
+                    <strong className="text-muted">Course: </strong>
+                    <span className="text-primary">
+                      {courseNames[testimonial.courseId] ||
+                        "Course name not found"}
+                    </span>
+                  </div>
+                )}
+              </Card>
+            </motion.div>
+          ))}
         </InfiniteScroll>
 
         {courseLocation && (
           <>
             <Button
+              variant={showInput ? "secondary" : "primary text-light"}
               className="w-100 mt-3"
               onClick={() => setShowInput(!showInput)}
             >
-              {showInput ? "Cancel" : "Add Testimonials"}
+              {showInput ? "Cancel" : "Add Your Testimonial"}
             </Button>
 
             {showInput && (
@@ -139,6 +144,7 @@ export default function TestiModal({
                   onChange={(e) => setNewComment(e.target.value)}
                 />
                 <Button
+                  variant="success text-light"
                   className="mt-2 w-100"
                   onClick={handleAddComment}
                   disabled={!newComment.trim()}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Axios } from "../../api/axios";
-import { coursesAPI } from "../../api/Api";
+import { coursesAPI, testimonialsAPI } from "../../api/Api";
 import { Container, Accordion, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { MdOutlineWatchLater } from "react-icons/md";
@@ -15,6 +15,7 @@ export default function CourseView() {
   const [currentVideo, setCurrentVideo] = useState(null);
   const [testimonials, setTestimonials] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -22,8 +23,6 @@ export default function CourseView() {
       .then((res) => {
         const course = res.data.course;
         setCurrCourse(course);
-        setTestimonials(res.data.course.testimonials);
-
         // Flatten parts into one list grouped by section
         const groupedVideos = course.curriculum?.map((section) => ({
           sectionTitle: section.title,
@@ -36,9 +35,22 @@ export default function CourseView() {
       .catch((error) => console.log(error));
   }, [id]);
 
-  // Close Testimonials Modal
+  // Testimonials Modal Settings --
   const handleModalClose = () => {
     setShowModal(false);
+  };
+
+  const fetchTestimonials = async () => {
+    setLoading(true);
+    try {
+      const { data } = await Axios.get(`${testimonialsAPI}/course/${id}`);
+      setTestimonials(data.testimonials);
+      setShowModal(true);
+    } catch (err) {
+      console.error("Error fetching Testimonials:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,10 +66,11 @@ export default function CourseView() {
           <div className="between-flex">
             <h2 className="fs-1">{currCourse.name}</h2>
             <Button
+              variant="primary text-light"
               className="border w-sm-100"
-              onClick={() => setShowModal(true)}
+              onClick={fetchTestimonials}
             >
-              Testimonials
+              {loading ? "Loading.." : "Course Testimonials"}
             </Button>
           </div>
           <p>{currCourse.description}</p>
@@ -83,6 +96,7 @@ export default function CourseView() {
               </div>
             )}
             <h4 className="mt-3">{currentVideo?.title}</h4>
+            <h5 className="mt-3">{currentVideo?.description}</h5>
           </div>
 
           {/* Video List */}
@@ -125,6 +139,7 @@ export default function CourseView() {
           title="All Testimonials"
           contentList={testimonials}
           animate={true}
+          onSuccess={() => setShowModal(false)}
         />
       </motion.div>
     </Container>

@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 import { Axios } from "../../../../api/axios";
-import { coursesAPI } from "../../../../api/Api";
+import { coursesAPI, testimonialsAPI } from "../../../../api/Api";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useAuth } from "../../../../Context/AuthProvider";
 import { toast } from "react-toastify";
@@ -37,7 +37,6 @@ export default function CourseForm() {
     level: "",
     author: auth?.user.name,
     curriculum: [],
-    testimonials: [],
   });
 
   useEffect(() => {
@@ -45,8 +44,6 @@ export default function CourseForm() {
       Axios.get(`${coursesAPI}/${id}`)
         .then((res) => {
           setCourse(res.data.course);
-
-          setTestimonials(res.data.course.testimonials);
         })
         .catch((err) => console.error("Error fetching course:", err));
     }
@@ -171,9 +168,22 @@ export default function CourseForm() {
     }
   };
 
-  // Close Testimonials Modal
+  // Testimonials Modal Settings..
   const handleModalClose = () => {
     setShowModal(false);
+  };
+
+  const fetchTestimonials = async () => {
+    setLoading(true);
+    try {
+      const { data } = await Axios.get(`${testimonialsAPI}/course/${id}`);
+      setTestimonials(data.testimonials);
+      setShowModal(true);
+    } catch (err) {
+      console.error("Error fetching Testimonials:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -186,10 +196,10 @@ export default function CourseForm() {
           {isEditing && (
             <Button
               variant="primary text-light"
-              onClick={() => setShowModal(true)}
+              onClick={fetchTestimonials}
               className="my-3"
             >
-              View Testimonials
+              {loading ? "Loading.." : "View Testimonials"}
             </Button>
           )}
         </div>
@@ -499,6 +509,7 @@ export default function CourseForm() {
         title="All Testimonials"
         contentList={testimonials}
         animate={true}
+        onSuccess={() => setShowModal(false)}
       />
     </Container>
   );
