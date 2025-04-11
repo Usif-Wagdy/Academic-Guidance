@@ -18,6 +18,7 @@ import ImageDropzone from "../../../../Helpers/ImageDropzone";
 import ImageCropperModal from "../../../../Helpers/ImageCropperModal";
 import { Img } from "react-image";
 import Skeleton from "react-loading-skeleton";
+import TestiModal from "../../../../Components/Testimonials/TestiModal";
 
 export default function CourseForm() {
   const { auth } = useAuth();
@@ -26,6 +27,8 @@ export default function CourseForm() {
   const [loading, setLoading] = useState(false);
   const isEditing = Boolean(id);
   const { setRefreshKey } = useOutletContext();
+  const [testimonials, setTestimonials] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const [course, setCourse] = useState({
     name: "",
@@ -34,12 +37,17 @@ export default function CourseForm() {
     level: "",
     author: auth?.user.name,
     curriculum: [],
+    testimonials: [],
   });
 
   useEffect(() => {
     if (isEditing) {
       Axios.get(`${coursesAPI}/${id}`)
-        .then((res) => setCourse(res.data.course))
+        .then((res) => {
+          setCourse(res.data.course);
+
+          setTestimonials(res.data.course.testimonials);
+        })
         .catch((err) => console.error("Error fetching course:", err));
     }
   }, [id, isEditing]);
@@ -104,7 +112,6 @@ export default function CourseForm() {
         toast.info("Adding Course!");
         const { data } = await Axios.post(`${coursesAPI}`, course);
         toast.success("New course added!");
-        console.log(data);
         navigate(`/dashboard/workshop/${data.course._id}`);
       }
       setRefreshKey((prev) => prev + 1); // Trigger a refresh
@@ -164,12 +171,29 @@ export default function CourseForm() {
     }
   };
 
+  // Close Testimonials Modal
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
   return (
     <Container className="mt-5">
       <Card className="shadow-lg p-4">
-        <h2 className="text-center mb-4">
-          {isEditing ? "Edit Course" : "Add a New Course"}
-        </h2>
+        <div className="between-flex">
+          <h2 className="text-center mb-4">
+            {isEditing ? "Edit Course" : "Add a New Course"}
+          </h2>
+          {isEditing && (
+            <Button
+              variant="primary text-light"
+              onClick={() => setShowModal(true)}
+              className="my-3"
+            >
+              View Testimonials
+            </Button>
+          )}
+        </div>
+
         <Form onSubmit={handleSubmit}>
           <Row>
             <Col md={6}>
@@ -329,7 +353,11 @@ export default function CourseForm() {
             </div>
           )}
 
-          <Button variant="success" onClick={handleAddSection} className="mb-3">
+          <Button
+            variant="success"
+            onClick={handleAddSection}
+            className="mb-3 d-block"
+          >
             + Add Section
           </Button>
 
@@ -464,6 +492,14 @@ export default function CourseForm() {
           </div>
         </Form>
       </Card>
+
+      <TestiModal
+        show={showModal}
+        onClose={handleModalClose}
+        title="All Testimonials"
+        contentList={testimonials}
+        animate={true}
+      />
     </Container>
   );
 }

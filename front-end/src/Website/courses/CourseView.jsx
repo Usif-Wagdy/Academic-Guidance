@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { Axios } from "../../api/axios";
 import { coursesAPI } from "../../api/Api";
-import { Container, Accordion } from "react-bootstrap";
+import { Container, Accordion, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { motion } from "framer-motion";
 import "./courses.css";
 import Breadcrumbs from "../../Components/BreadCrumbs/BreadCrumbs";
+import TestiModal from "../../Components/Testimonials/TestiModal";
 
 export default function CourseView() {
   const [currCourse, setCurrCourse] = useState({});
   const [videoList, setVideoList] = useState([]);
   const [currentVideo, setCurrentVideo] = useState(null);
+  const [testimonials, setTestimonials] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -19,6 +22,7 @@ export default function CourseView() {
       .then((res) => {
         const course = res.data.course;
         setCurrCourse(course);
+        setTestimonials(res.data.course.testimonials);
 
         // Flatten parts into one list grouped by section
         const groupedVideos = course.curriculum?.map((section) => ({
@@ -32,6 +36,11 @@ export default function CourseView() {
       .catch((error) => console.log(error));
   }, [id]);
 
+  // Close Testimonials Modal
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
   return (
     <Container className="my-5">
       <Breadcrumbs title={currCourse.name} />
@@ -42,7 +51,15 @@ export default function CourseView() {
         transition={{ duration: 0.5 }}
       >
         <div className="mb-4 text-center text-md-start">
-          <h2 className="fs-1">{currCourse.name}</h2>
+          <div className="between-flex">
+            <h2 className="fs-1">{currCourse.name}</h2>
+            <Button
+              className="border w-sm-100"
+              onClick={() => setShowModal(true)}
+            >
+              Testimonials
+            </Button>
+          </div>
           <p>{currCourse.description}</p>
         </div>
 
@@ -101,6 +118,14 @@ export default function CourseView() {
             </Accordion>
           </div>
         </div>
+
+        <TestiModal
+          show={showModal}
+          onClose={handleModalClose}
+          title="All Testimonials"
+          contentList={testimonials}
+          animate={true}
+        />
       </motion.div>
     </Container>
   );
