@@ -1,20 +1,24 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
-export default function ImageDropzone({ onImageSelected }) {
+export default function ImageDropzone({ onImageSelected, multiple = false }) {
   const onDrop = useCallback(
     (acceptedFiles) => {
       if (acceptedFiles && acceptedFiles.length > 0) {
-        onImageSelected(acceptedFiles[0]);
+        if (multiple) {
+          onImageSelected(acceptedFiles); // For multiple files, pass the array
+        } else {
+          onImageSelected(acceptedFiles[0]); // For a single file, pass the first file
+        }
       }
     },
-    [onImageSelected]
+    [onImageSelected, multiple]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: { "image/*": [] },
-    multiple: false,
+    multiple: multiple, // Control multiple uploads
   });
 
   return (
@@ -24,9 +28,9 @@ export default function ImageDropzone({ onImageSelected }) {
     >
       <input {...getInputProps()} />
       {isDragActive ? (
-        <p>Drop the image here...</p>
+        <p>Drop the image(s) here...</p>
       ) : (
-        <p>Drag 'n' drop or click to upload an image</p>
+        <p>Drag 'n' drop or click to upload image(s)</p>
       )}
     </div>
   );

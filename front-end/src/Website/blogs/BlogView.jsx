@@ -5,6 +5,8 @@ import { blogsAPI } from "../../api/Api";
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import BreadCrumbs from "../../Components/BreadCrumbs/BreadCrumbs";
+import { Img } from "react-image";
+import Skeleton from "react-loading-skeleton";
 
 export default function BlogView() {
   const { id } = useParams(); // Get blog ID from URL
@@ -32,15 +34,19 @@ export default function BlogView() {
             by <span className="text-capitalize">{blog.author}</span> on{" "}
             {blog.date}
           </p>
-          <img
+          <Img
             src={blog.image}
-            alt="blog"
-            className="w-100 rounded-4 "
-            style={{ width: "100%", height: "700px" }}
+            alt={blog.title}
+            className="w-100 rounded-4 img-responsive "
+            loader={<Skeleton height={240} />}
+            decoding="async"
+            loading="lazy"
+            height={600}
           />
-          <p className="text-start fs-16px fs-md-18px mt-5 px-4">
-            {blog.content}
-          </p>
+          <div
+            className="text-start editor-content "
+            dangerouslySetInnerHTML={{ __html: blog.content }}
+          ></div>
         </div>
       </motion.div>
     </Container>

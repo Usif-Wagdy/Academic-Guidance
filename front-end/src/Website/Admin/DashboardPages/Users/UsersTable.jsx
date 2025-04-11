@@ -38,7 +38,7 @@ export default function UsersTable() {
       <Container className="mt-5">
         <div className="center-flex justify-content-end ">
           <Button
-            variant="primary text-light text-end"
+            variant="primary text-light"
             onClick={() => navigate("add")}
             className="mb-3 fs-10px fs-md-14px"
           >

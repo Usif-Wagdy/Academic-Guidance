@@ -55,6 +55,7 @@ export default function UserForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { setRefreshKey } = useOutletContext();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -94,12 +95,15 @@ export default function UserForm() {
   });
 
   const handleSubmit = async (values) => {
+    setLoading(true);
     try {
       const { role, isAdmin, ...userData } = values;
       if (isEdit) {
+        toast.info("Updating User!");
         await Axios.patch(`${updateUserApi}/${id}`, userData);
         toast.success("User updated successfully!");
       } else {
+        toast.info("Adding User!");
         await Axios.post(registerAPI, userData);
         toast.success("User added successfully!");
       }
@@ -118,6 +122,8 @@ export default function UserForm() {
     } catch (error) {
       console.error(error);
       toast.error("Failed to save user");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -304,11 +310,16 @@ export default function UserForm() {
                   <Button
                     variant="secondary"
                     onClick={() => navigate("/dashboard/users")}
+                    disabled={loading}
                   >
-                    Cancel
+                    {loading ? "Cancelling..." : "Cancel"}
                   </Button>
-                  <Button variant="success" type="submit">
-                    {isEdit ? "Update User" : "Add User"}
+                  <Button variant="success" type="submit" disabled={loading}>
+                    {loading
+                      ? "Saving..."
+                      : isEdit
+                      ? "Update User"
+                      : "Add User"}
                   </Button>
                 </div>
               </Form>

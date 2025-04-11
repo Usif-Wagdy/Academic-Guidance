@@ -50,7 +50,7 @@ export default function CourseList() {
           </Button>
         </div>
         <Row>
-          {[...Array(3)].map((_, index) => (
+          {[...Array(6)].map((_, index) => (
             <Col lg={4} key={index} className="mb-4">
               <Card>
                 <Skeleton height={240} />
@@ -65,6 +65,10 @@ export default function CourseList() {
             </Col>
           ))}
         </Row>
+        <p className="text-danger">
+          <b>If you're stuck with loading </b>, then there's no courses
+          available at the moment...
+        </p>
       </Container>
     );
   }
@@ -85,7 +89,10 @@ export default function CourseList() {
           <Col lg={4} md={6} key={course._id} className="mb-4">
             <Card className="h-100">
               <Img
-                src={course.images[0]}
+                src={
+                  course.images[0] ||
+                  `https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=${course.name}`
+                }
                 alt={course.name}
                 loader={<Skeleton height={240} />}
                 decoding="async"

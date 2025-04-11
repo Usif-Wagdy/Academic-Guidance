@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-
-const MAX_TEXT_LENGTH = 150;
+import { htmlToText } from "html-to-text";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -86,17 +85,29 @@ export default function Blogs() {
                     loading="lazy"
                     style={{ minWidth: "326px", height: "300px" }}
                   />
-                  <Card.Body>
-                    <Card.Title className="text-center fw-bold fs-22px">
+                  <Card.Body className=" px-4">
+                    <Card.Title className="truncate fs-3 m-0 ">
                       {blog.title}
                     </Card.Title>
-                    <Card.Title className="text-center fs-18px">
-                      {blog.date} {blog.duration ? "- " + blog.duration : ""}
-                    </Card.Title>
-                    <Card.Text className="text-center fs-16px fs-md-18px">
-                      {blog.content.length > MAX_TEXT_LENGTH
-                        ? `${blog.content.substring(0, MAX_TEXT_LENGTH)}...`
-                        : blog.content}
+
+                    <div className="between-flex w-100 mt-2 mb-3">
+                      <Card.Subtitle className="text-capitalize text-muted m-0 truncate">
+                        by: {blog.author}
+                      </Card.Subtitle>
+
+                      <div className="center-flex gap-3 px-2">
+                        <Card.Subtitle className="text-muted truncate m-0">
+                          {blog.date}
+                        </Card.Subtitle>
+
+                        <Card.Subtitle className="text-capitalize text-muted m-0 ">
+                          {blog.duration}
+                        </Card.Subtitle>
+                      </div>
+                    </div>
+
+                    <Card.Text className="fs-16px fs-md-18px text-truncate">
+                      {htmlToText(blog.content, { wordwrap: false })}
                     </Card.Text>
                   </Card.Body>
                 </Card>
