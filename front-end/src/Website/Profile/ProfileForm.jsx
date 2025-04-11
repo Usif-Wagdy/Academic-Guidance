@@ -47,6 +47,7 @@ export default function ProfileForm({ user, setAuth }) {
   };
 
   const handleCroppedImage = async (croppedFile) => {
+    toast.info("Uploading image...");
     const form_Data = new FormData();
     form_Data.append("photo", croppedFile);
 

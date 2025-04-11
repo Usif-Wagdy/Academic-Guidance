@@ -5,9 +5,10 @@ import getCroppedImg from "../Utils/cropImage";
 
 export default function ImageCropperModal({
   file,
-  show, 
+  show,
   onClose,
   onCropComplete,
+  aspect = 1, // Default to 1:1 for profile if not provided
 }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -39,7 +40,7 @@ export default function ImageCropperModal({
           image={file ? URL.createObjectURL(file) : null}
           crop={crop}
           zoom={zoom}
-          aspect={1}
+          aspect={aspect}
           onCropChange={setCrop}
           onZoomChange={setZoom}
           onCropComplete={onCropCompleteInternal}

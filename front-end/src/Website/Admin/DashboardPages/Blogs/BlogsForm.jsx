@@ -1,71 +1,177 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Form, Button, Card, Container } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { Axios } from "../../../../api/axios";
 import { blogsAPI } from "../../../../api/Api";
-import Breadcrumbs from "../../../../Components/BreadCrumbs/BreadCrumbs";
 import { useAuth } from "../../../../Context/AuthProvider";
 import { toast } from "react-toastify";
+import ImageDropzone from "../../../../Helpers/ImageDropzone";
+import ImageCropperModal from "../../../../Helpers/ImageCropperModal";
+import TextEditor from "../../../../Components/TextEditor/Editor";
+import { Img } from "react-image";
+import Skeleton from "react-loading-skeleton";
 
 export default function BlogForm() {
-  const { auth } = useAuth();
   const navigate = useNavigate();
+  const { auth } = useAuth();
   const { id } = useParams();
   const isEditing = Boolean(id);
-  console.log(isEditing);
+  const { setRefreshKey } = useOutletContext();
 
+  const [loading, setLoading] = useState(false);
   const [blog, setBlog] = useState({
     title: "",
     author: auth?.user.name,
-    image: "https://dummyimage.com/300x200/dfdfdfdf/ffffff&text=Blog+Image",
     duration: "",
     date: new Date().toDateString(),
-    description: "",
+    content: "",
   });
 
+  // Ref to track if the component is still mounted
+  const isMounted = useRef(true);
+
   useEffect(() => {
-    if (isEditing) {
+    // Set the flag to true when component is mounted
+    isMounted.current = true;
+
+    // Clean up function to set the flag to false when component is unmounted
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (id) {
+      setLoading(true);
       Axios.get(`${blogsAPI}/${id}`)
-        .then((res) => setBlog(res.data))
-        .catch((err) => console.error("Error fetching blog:", err));
+        .then((res) => {
+          if (isMounted.current) {
+            setBlog(res.data.blog); // Only update state if component is mounted
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching blog:", err);
+        })
+        .finally(() => {
+          if (isMounted.current) {
+            setLoading(false); // Only update state if component is mounted
+          }
+        });
     }
-  }, [id, isEditing]);
+  }, [id]);
+
+  const [blogImage, setBlogImage] = useState(blog.image);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [showCropper, setShowCropper] = useState(false);
+
+  useEffect(() => {
+    setBlogImage(blog.image);
+  }, [blog.image]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBlog({ ...blog, [name]: value });
   };
 
-  const handleImageChange = (e) => {
-    setBlog({ ...blog, image: e.target.value });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       if (isEditing) {
-        await Axios.put(`${blogsAPI}/${id}`, blog);
-        toast.success("Blog updated successfully!");
+        toast.info("Updating Blog!");
+        await Axios.patch(`${blogsAPI}/${id}`, blog);
+        if (isMounted.current) {
+          toast.success("Blog updated successfully!");
+          navigate("/dashboard/blogs");
+        }
       } else {
-        await Axios.post(blogsAPI, blog);
-        toast.success("New blog added!");
+        toast.info("Adding Blog!");
+        const { data } = await Axios.post(blogsAPI, blog);
+        if (isMounted.current) {
+          toast.success("New blog added!");
+          navigate(`/dashboard/blogs/${data.blog._id}`);
+        }
       }
-      navigate("/dashboard/blogs");
-      window.location.reload();
+      setRefreshKey((prev) => prev + 1); // Trigger a refresh
     } catch (error) {
-      toast.error("Failed to save blog!");
+      if (isMounted.current) {
+        toast.error("Failed to save blog!");
+      }
       console.error("Error saving blog:", error);
+    } finally {
+      if (isMounted.current) {
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleImageSelected = (file) => {
+    setSelectedFile(file);
+    setShowCropper(true);
+  };
+
+  const handleCroppedImage = async (croppedFile) => {
+    toast.info("Uploading image...");
+    const form_Data = new FormData();
+    form_Data.append("image", croppedFile);
+    setLoading(true);
+    try {
+      const { data } = await Axios.post(`${blogsAPI}/${id}/image`, form_Data);
+      setBlogImage(data.blog.image);
+      setBlog((prevBlog) => ({
+        ...prevBlog,
+        image: data.blog.image,
+      }));
+      toast.success("Blog Image updated!");
+    } catch (err) {
+      console.error("Error uploading image:", err);
+      toast.error("Image upload failed.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <Container className="mt-5">
-      <Breadcrumbs title={blog.title} />
       <Card className="shadow-lg p-4">
         <h2 className="text-center mb-4">
           {isEditing ? "Edit Blog" : "Add a New Blog"}
         </h2>
         <Form onSubmit={handleSubmit}>
+          {isEditing ? (
+            <div className="mt-3 center-flex flex-column text-center">
+              <Img
+                src={
+                  blogImage ||
+                  `https://dummyimage.com/400x220/dfdfdfdf/ffffff&text=${blog.title}`
+                }
+                alt="Blog"
+                loader={<Skeleton height={240} />}
+                decoding="async"
+                loading="lazy"
+                className="rounded-3"
+                style={{ height: "220px", width: "400px" }}
+              />
+
+              <div className="mt-3 w-100" style={{ maxWidth: 400 }}>
+                <ImageDropzone onImageSelected={handleImageSelected} />
+              </div>
+
+              <ImageCropperModal
+                file={selectedFile}
+                show={showCropper}
+                onClose={() => setShowCropper(false)}
+                onCropComplete={handleCroppedImage}
+                aspect={16 / 9}
+              />
+            </div>
+          ) : (
+            <div className="text-center my-4 text-muted">
+              <strong>Save the blog first to upload an image.</strong>
+            </div>
+          )}
+
           <div className="row">
             <Form.Group className="mb-3 col-4">
               <Form.Label>Title</Form.Label>
@@ -108,31 +214,22 @@ export default function BlogForm() {
           </div>
 
           <Form.Group className="mb-3">
-            <Form.Label>Image URL</Form.Label>
-            <Form.Control
-              type="text"
-              name="image"
-              value={blog.image}
-              onChange={handleImageChange}
-              // required={!isEditing}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={4}
-              name="description"
-              value={blog.description}
-              onChange={handleChange}
-              required
-            />
+            <TextEditor blog={blog} setBlog={setBlog} />
           </Form.Group>
 
-          <Button variant="primary" type="submit" className="w-100">
-            {isEditing ? "Update Blog" : "Submit Blog"}
-          </Button>
+          <div className="d-flex justify-content-between mt-4">
+            <Button
+              variant="secondary"
+              onClick={() => navigate("/dashboard/blogs")}
+              disabled={loading}
+            >
+              {loading ? "Cancelling..." : "Cancel"}
+            </Button>
+            <Button variant="success" type="submit" disabled={loading}>
+              {loading ? "Saving..." : isEditing ? "Update Blog" : "Add Blog"}
+            </Button>
+          </div>
         </Form>
       </Card>
     </Container>

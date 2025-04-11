@@ -45,13 +45,13 @@ function Sidebar({ isCollapsed, setIsCollapsed }) {
       },
       {
         path: "/dashboard/blogs",
-        label: "Blog",
+        label: "Blogs",
         icon: <FaBlogger size={22} />,
         roles: ["instructor", "superInstructor", "superAdmin"],
       },
       {
         path: "/dashboard/intern-ships",
-        label: "Internship",
+        label: "Internships",
         icon: <FaBriefcase size={22} />,
         roles: ["cvAdmin", "superAdmin"],
       },
@@ -63,7 +63,7 @@ function Sidebar({ isCollapsed, setIsCollapsed }) {
       },
       {
         path: "/dashboard/workshop",
-        label: "Workshop",
+        label: "Workshops",
         icon: <FaUserTie size={22} />,
         roles: ["instructor", "superInstructor", "superAdmin"],
       },

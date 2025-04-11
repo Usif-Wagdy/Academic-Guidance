@@ -11,15 +11,19 @@ import {
 import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 import { Axios } from "../../../../api/axios";
 import { coursesAPI } from "../../../../api/Api";
-import Breadcrumbs from "../../../../Components/BreadCrumbs/BreadCrumbs";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useAuth } from "../../../../Context/AuthProvider";
 import { toast } from "react-toastify";
+import ImageDropzone from "../../../../Helpers/ImageDropzone";
+import ImageCropperModal from "../../../../Helpers/ImageCropperModal";
+import { Img } from "react-image";
+import Skeleton from "react-loading-skeleton";
 
 export default function CourseForm() {
   const { auth } = useAuth();
-  const navigate = useNavigate();
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const isEditing = Boolean(id);
   const { setRefreshKey } = useOutletContext();
 
@@ -29,11 +33,6 @@ export default function CourseForm() {
     duration: "",
     level: "",
     author: auth?.user.name,
-    images: [
-      "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
-      "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
-      "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
-    ],
     curriculum: [],
   });
 
@@ -48,12 +47,6 @@ export default function CourseForm() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCourse({ ...course, [name]: value });
-  };
-
-  const handleImageUrlChange = (index, url) => {
-    const updatedImages = [...course.images];
-    updatedImages[index] = url;
-    setCourse({ ...course, images: updatedImages });
   };
 
   const handleAddSection = () => {
@@ -100,25 +93,79 @@ export default function CourseForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       if (isEditing) {
+        toast.info("Updating Course!");
         await Axios.patch(`${coursesAPI}/${id}`, course);
         toast.success("Course updated successfully!");
+        navigate("/dashboard/workshop");
       } else {
-        await Axios.post(`${coursesAPI}`, course);
+        toast.info("Adding Course!");
+        const { data } = await Axios.post(`${coursesAPI}`, course);
         toast.success("New course added!");
+        console.log(data);
+        navigate(`/dashboard/workshop/${data.course._id}`);
       }
       setRefreshKey((prev) => prev + 1); // Trigger a refresh
-      navigate("/dashboard/workshop");
     } catch (error) {
       console.error("Error saving course:", error);
       toast.error("Failed to save course!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const [courseImages, setCourseImages] = useState(course?.images || []);
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [imageToCrop, setImageToCrop] = useState(null);
+  const [showCropper, setShowCropper] = useState(false);
+  const [hintMessage, setHintMessage] = useState("");
+
+  useEffect(() => {
+    setCourseImages(course.images);
+  }, [course.images]);
+
+  const handleImageSelected = (files) => {
+    // Check if the number of selected files is 3
+    if (files.length === 3) {
+      setSelectedImages(files); // Set selected images
+      setHintMessage(""); // Clear any hint message
+      toast.info("Please click each image to crop & upload.");
+    } else {
+      setHintMessage("Please select exactly 3 images.");
+      setSelectedImages([]); // Clear previously selected images
+    }
+  };
+
+  const handleImageToCrop = (image) => {
+    setImageToCrop(image); // Set the clicked image to crop
+    setShowCropper(true); // Show the cropper modal
+  };
+
+  const handleCroppedImage = async (croppedFile) => {
+    toast.info("Uploading image...");
+    const form_Data = new FormData();
+    form_Data.append("images", croppedFile);
+    setLoading(true);
+    try {
+      const { data } = await Axios.post(`${coursesAPI}/${id}`, form_Data);
+      setCourseImages(data.course.images);
+      setCourse((prevCourse) => ({
+        ...prevCourse,
+        images: data.course.images,
+      }));
+      toast.success("Course Image updated!");
+    } catch (err) {
+      console.error("Error uploading image:", err);
+      toast.error("Image upload failed.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <Container className="mt-5">
-      <Breadcrumbs title={course.name} />
       <Card className="shadow-lg p-4">
         <h2 className="text-center mb-4">
           {isEditing ? "Edit Course" : "Add a New Course"}
@@ -181,9 +228,6 @@ export default function CourseForm() {
                   <option value="10 Weeks">10 Weeks</option>
                   <option value="12 Weeks">12 Weeks</option>
                   <option value="14 Weeks">14 Weeks</option>
-                  <option value="5 Months">5 Months</option>
-                  <option value="6 Months">6 Months</option>
-                  <option value="7 Months">7 Months</option>
                 </Form.Select>
               </Form.Group>
             </Col>
@@ -204,20 +248,86 @@ export default function CourseForm() {
               </Form.Group>
             </Col>
           </Row>
+          {isEditing ? (
+            <div className="center-flex flex-column">
+              <div
+                className="center-flex gap-5 mt-3 mb-2 p-3 bg-secondary rounded-3 w-100"
+                style={{ height: "200px" }}
+              >
+                {courseImages?.length > 0 ? (
+                  courseImages.map((image, index) => (
+                    <div key={index}>
+                      <Img
+                        src={image}
+                        alt={`Course Image ${index + 1}`}
+                        loader={<Skeleton height={160} width={200} />}
+                        decoding="async"
+                        loading="lazy"
+                        className="rounded-3"
+                        width={200}
+                        height={160}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p>No images uploaded</p>
+                )}
+              </div>
 
-          <Row className="mb-3">
-            <Form.Label>Image URLs</Form.Label>
-            {course.images.map((image, index) => (
-              <Col md={4} key={index}>
-                <Form.Control
-                  type="text"
-                  placeholder={`Image URL ${index + 1}`}
-                  value={image}
-                  onChange={(e) => handleImageUrlChange(index, e.target.value)}
-                />
-              </Col>
-            ))}
-          </Row>
+              <ImageDropzone
+                onImageSelected={handleImageSelected}
+                multiple={true}
+              />
+
+              {selectedImages.length === 3 && (
+                <div className="text-center text-light my-3 p-3 bg-dark rounded-3 w-100">
+                  <h1>Selected Images</h1>
+                  <p className="fw-bold text-danger mt-3 ">
+                    Click each image to crop & upload !
+                  </p>
+
+                  <div
+                    className="center-flex gap-5 "
+                    style={{ height: "200px" }}
+                  >
+                    {selectedImages.map((image, index) => (
+                      <div key={index}>
+                        <Img
+                          src={URL.createObjectURL(image)}
+                          alt={`Selected Image ${index + 1}`}
+                          loader={<Skeleton height={160} width={200} />}
+                          decoding="async"
+                          loading="lazy"
+                          className="rounded-3 pointer"
+                          width={200}
+                          height={160}
+                          onClick={() => handleImageToCrop(image)} // Set this image for cropping
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Show hint message if selected images is not 3 */}
+              {hintMessage && <p className="text-danger">{hintMessage}</p>}
+
+              <ImageCropperModal
+                file={imageToCrop}
+                show={showCropper}
+                onClose={() => setShowCropper(false)}
+                onCropComplete={handleCroppedImage}
+                aspect={16 / 9}
+              />
+            </div>
+          ) : (
+            <div
+              className="center-flex text-muted mt-3 mb-4 p-3 bg-secondary rounded-3 w-100 "
+              style={{ height: "200px" }}
+            >
+              <strong>Save the course first to upload images.</strong>
+            </div>
+          )}
 
           <Button variant="success" onClick={handleAddSection} className="mb-3">
             + Add Section
@@ -336,9 +446,22 @@ export default function CourseForm() {
             ))}
           </Accordion>
 
-          <Button variant="primary" type="submit" className="mt-4 w-100">
-            {isEditing ? "Update Course" : "Submit Course"}
-          </Button>
+          <div className="d-flex justify-content-between mt-4">
+            <Button
+              variant="secondary"
+              onClick={() => navigate("/dashboard/workshop")}
+              disabled={loading}
+            >
+              {loading ? "Cancelling..." : "Cancel"}
+            </Button>
+            <Button variant="success" type="submit" disabled={loading}>
+              {loading
+                ? "Saving..."
+                : isEditing
+                ? "Update Course"
+                : "Add Course"}
+            </Button>
+          </div>
         </Form>
       </Card>
     </Container>
