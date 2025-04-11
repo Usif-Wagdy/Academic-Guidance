@@ -14,7 +14,11 @@ import { coursesAPI } from "../../../../api/Api";
 import Breadcrumbs from "../../../../Components/BreadCrumbs/BreadCrumbs";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useAuth } from "../../../../Context/AuthProvider";
+<<<<<<< HEAD
 import { toast } from "react-toastify";
+=======
+import TestiModal from "../../../../Components/Testimonials/TestiModal";
+>>>>>>> 1cbaa9b (add api for courses testimonial => (updated files: courseController && courseModel && courseRoutes))
 
 export default function CourseForm() {
   const { auth } = useAuth();
@@ -22,6 +26,8 @@ export default function CourseForm() {
   const { id } = useParams();
   const isEditing = Boolean(id);
   const { setRefreshKey } = useOutletContext();
+  const [testimonials, setTestimonials] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const [course, setCourse] = useState({
     name: "",
@@ -35,12 +41,16 @@ export default function CourseForm() {
       "https://dummyimage.com/900x600/dfdfdfdf/ffffff&text=Course+Image",
     ],
     curriculum: [],
+    testimonials: [],
   });
 
   useEffect(() => {
     if (isEditing) {
       Axios.get(`${coursesAPI}/${id}`)
-        .then((res) => setCourse(res.data.course))
+        .then((res) => {
+          setCourse(res.data.course);
+          setTestimonials(res.data.course.testimonials);
+        })
         .catch((err) => console.error("Error fetching course:", err));
     }
   }, [id, isEditing]);
@@ -108,12 +118,18 @@ export default function CourseForm() {
         await Axios.post(`${coursesAPI}`, course);
         toast.success("New course added!");
       }
+
       setRefreshKey((prev) => prev + 1); // Trigger a refresh
       navigate("/dashboard/workshop");
     } catch (error) {
       console.error("Error saving course:", error);
       toast.error("Failed to save course!");
     }
+  };
+
+  // Close Testimonials Modal
+  const handleModalClose = () => {
+    setShowModal(false);
   };
 
   return (
@@ -219,7 +235,11 @@ export default function CourseForm() {
             ))}
           </Row>
 
-          <Button variant="success" onClick={handleAddSection} className="mb-3">
+          <Button
+            variant="success"
+            onClick={handleAddSection}
+            className="mb-3 d-block"
+          >
             + Add Section
           </Button>
 
@@ -336,11 +356,28 @@ export default function CourseForm() {
             ))}
           </Accordion>
 
+          {isEditing && (
+            <Button
+              variant="primary"
+              onClick={() => setShowModal(true)}
+              className="my-3"
+            >
+              View Testimonials
+            </Button>
+          )}
           <Button variant="primary" type="submit" className="mt-4 w-100">
             {isEditing ? "Update Course" : "Submit Course"}
           </Button>
         </Form>
       </Card>
+
+      <TestiModal
+        show={showModal}
+        onClose={handleModalClose}
+        title="All Testimonials"
+        contentList={testimonials}
+        animate={true}
+      />
     </Container>
   );
 }
