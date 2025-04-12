@@ -12,12 +12,8 @@ const upload = multer({ dest: "temp_uploads/" });
 router.post("/analyze-cv", upload.single("cv"), async (req, res) => {
     try {
 
-        if (!req.file) {
-            return res.status(400).json({
-                success: false,
-                error: "No file uploaded."
-            });
-        }
+        console.log("File uploaded:", req.file);
+
         const filePath = req.file.path;
         const originalName = req.file.originalname;
         const form = new FormData();
