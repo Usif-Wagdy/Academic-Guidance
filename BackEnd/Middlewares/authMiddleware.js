@@ -22,6 +22,7 @@ const allowedTo = (...roles) => {
       if (!roles.includes(req.user.role)) {
          return res.status(403).json({ error: `Forbidden , To acess This route you must be ${[roles]} not ${req.user.role}` });
       }
+      console.log('AllowedTo passed:', req.user); // Add this
       next();
    }
 }
