@@ -259,7 +259,6 @@ export default function Register() {
                     </option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
-                    <option value="other">Other</option>
                   </Form.Select>
                 </InputGroup>
                 <div style={{ minHeight: "25px", marginLeft: "42px" }}>
