@@ -6,7 +6,8 @@ const curriculumSchema = new mongoose.Schema({
             title: { type: String, required: true },
             duration: { type: String, required: true },
             numbering: { type: String, required: true },
-            demoVideo: { type: String, required: true }
+            demoVideo: { type: String, required: true },
+            description: { type: String, required: true }
 
         }
     ]
