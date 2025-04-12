@@ -72,5 +72,17 @@ const deleteTrack = async (req, res) => {
         res.status(404).json({ status: "fail", message: err });
     }
 };
+// In Controllers/tracksControllers.js
+const getTrackById = async (req, res) => {
+  try {
+    const track = await Track.findById(req.params.id);
+    if (!track) {
+      return res.status(404).json({ message: "Track not found" });
+    }
+    res.status(200).json(track);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
 
-module.exports = { getAllTracks, addTrack, deleteTrack };
+module.exports = { getAllTracks, addTrack, deleteTrack , getTrackById};
