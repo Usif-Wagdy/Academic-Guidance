@@ -22,4 +22,6 @@ export const testimonialsAPI = "testimonials"; // same as courses
 
 // Internships
 export const internshipsAPI = "interns";
-export const tracksAPI = "tracks";
+
+// tracks
+export const tracksAPI = "tracks"; // get all / post id

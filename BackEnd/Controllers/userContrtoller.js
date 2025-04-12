@@ -170,6 +170,7 @@ exports.getInstructors = async (req, res) => {
 
 exports.getStudents = async (req, res) => {
   try {
+    console.log('Fetching students...');
     const students = await User.find({ role: 'student' }).select('-password');
 
     if (!students || students.length === 0) {

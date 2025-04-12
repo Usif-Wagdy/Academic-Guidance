@@ -1,15 +1,16 @@
-import { Button, Container, Row } from "react-bootstrap";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 
 export default function CVBuilder() {
   return (
     <Container className="my-5">
+      {/* Heading */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="between-flex flex-wrap ">
+        <div className="between-flex flex-wrap mb-5">
           <div className="col-12 col-md-5 p-5 bg-secondary rounded-circle">
             <img src="/Assets/cv builder/man.png" className="w-100" alt="man" />
           </div>
@@ -24,79 +25,36 @@ export default function CVBuilder() {
           </div>
         </div>
 
-        <div className="my-5 bg-secondary rounded-3 p-5">
-          <div>
-            <Row>
-              <h2 className="mb-3">
-                Stand out from the crowd with a top notch resume
-              </h2>
-              <ul className="ms-4 mb-5 ">
-                <li className="py-1">
-                  - Get a professional quality resume in minutes, not hours
-                </li>
-                <li className="py-1">
-                  - Keep tailoring your resume with AI and catch HR’s eyes in 6
-                  seconds
-                </li>
-                <li className="py-1">
-                  - Rest easy knowing your resume will be ATS compatible
-                </li>
-              </ul>
-            </Row>
-            <Row>
-              <div className="col-12 col-md-6 center-flex">
-                <Button variant="dark" className="fs-30px px-3 mb-3">
-                  Download CV
-                </Button>
-              </div>
-              <div className="col-12 col-md-6">
-                <img
-                  src="/Assets/cv builder/n2.png"
-                  className="w-100"
-                  alt="man"
-                />
-              </div>
-            </Row>
-          </div>
-        </div>
-
-        <div className="my-5 bg-secondary rounded-3 p-5">
-          <div>
-            <Row className="mb-5">
-              <h2 className="mb-3">Improve CV</h2>
-              <p>
-                AI Job Match / Job searching is already hard! Increase your odds
-                with AI matched Jobs
+        {/* Combined Feature Card */}
+        <div className="bg-secondary rounded-4 p-5">
+          <Row className="align-items-center">
+            {/* Left Content */}
+            <Col md={6} className="text-center text-md-start">
+              <h2 className="mb-3">Level up your career with smart CV tools</h2>
+              <p className="mb-4 fs-5">
+                Discover jobs that truly fit you and stand out with a
+                professional, AI-enhanced resume. Our tools ensure your CV is
+                tailored, clean, and recruiter-ready.
               </p>
-
-              <ul className="px-4">
-                <li className="py-1">
-                  - Apply only to Jobs you are qualified for
-                </li>
-                <li className="py-1">
-                  - Discover matched jobs based on your skills, not only titles
-                </li>
-                <li className="py-1">- Say goodbye to fake jobs</li>
-                <li className="py-1">
-                  - Apply early with our custom job alerts
-                </li>
-              </ul>
-            </Row>
-            <Row>
-              <div className="col-12 col-md-6 center-flex">
-                <Button variant="dark" className="fs-30px px-3 mb-3">
-                  Upload my CV
+              <div className="d-flex flex-column flex-md-row gap-3 justify-content-center justify-content-md-start">
+                <Button variant="dark" className="fs-5 px-4">
+                  Upload My CV
+                </Button>
+                <Button variant="outline-light" className="fs-5 px-4">
+                  Download Template
                 </Button>
               </div>
-              <div className="col-12 col-md-6">
-                <img
-                  src="/Assets/cv builder/n1.png"
-                  className="w-100"
-                  alt="man"
-                />
-              </div>
-            </Row>
-          </div>
+            </Col>
+
+            {/* Right Image */}
+            <Col md={6} className="mt-4 mt-md-0">
+              <img
+                src="/Assets/cv builder/n1.png"
+                className="w-100 rounded-3 shadow"
+                alt="cv preview"
+              />
+            </Col>
+          </Row>
         </div>
       </motion.div>
     </Container>
