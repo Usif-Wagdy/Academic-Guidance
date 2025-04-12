@@ -80,6 +80,16 @@ const UsersForm = lazy(() =>
   import("./Website/Admin/DashboardPages/Users/UsersForm")
 );
 
+const TracksPage = lazy(() =>
+  import("./Website/Admin/DashboardPages/Tracks/TracksPage")
+);
+const TracksList = lazy(() =>
+  import("./Website/Admin/DashboardPages/Tracks/TracksList")
+);
+const TracksForm = lazy(() =>
+  import("./Website/Admin/DashboardPages/Tracks/TracksForm")
+);
+
 const Intern = lazy(() =>
   import("./Website/Admin/DashboardPages/InternShips/Intern")
 );
@@ -88,16 +98,6 @@ const EditIntern = lazy(() =>
 );
 const AddIntern = lazy(() =>
   import("./Website/Admin/DashboardPages/InternShips/AddIntern")
-);
-
-const EditTrack = lazy(() =>
-  import("./Website/Admin/DashboardPages/Tracks/EditTrack")
-);
-const AddTrack = lazy(() =>
-  import("./Website/Admin/DashboardPages/Tracks/AddTrack")
-);
-const AllTracks = lazy(() =>
-  import("./Website/Admin/DashboardPages/Tracks/Tracks")
 );
 
 // Layout with header and footer
@@ -138,7 +138,14 @@ root.render(
               </Route>
 
               <Route path="/courses" element={<Courses />} />
-              <Route path="/courses/:id" element={<CourseView />} />
+              <Route
+                path="/courses/:id"
+                element={
+                  <PrivateRoute type={"requireAuth"}>
+                    <CourseView />
+                  </PrivateRoute>
+                }
+              />
 
               <Route path="/tracks" element={<Tracks />} />
               <Route path="/tracks/:id" element={<TrackRoadmap />} />
@@ -169,7 +176,6 @@ root.render(
               }
             >
               <Route index element={<Navigate to="insights" replace />} />
-
               <Route path="insights" element={<Insights />} />
               <Route path="cv-template" element={<CVTemplate />} />
 
@@ -177,12 +183,14 @@ root.render(
                 path="tracks"
                 element={
                   <PrivateRoute type="trackAdmin">
-                    <AllTracks />
+                    <TracksPage />
                   </PrivateRoute>
                 }
-              />
-              <Route path="tracks/:id" element={<EditTrack />} />
-              <Route path="track/add" element={<AddTrack />} />
+              >
+                <Route index element={<TracksList />} />
+                <Route path="add" element={<TracksForm />} />
+                <Route path=":id" element={<TracksForm />} />
+              </Route>
 
               <Route
                 path="blogs"

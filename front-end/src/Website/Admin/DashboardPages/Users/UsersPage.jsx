@@ -20,8 +20,8 @@ export default function UsersPage() {
 
   const fetchUsers = async () => {
     try {
-      const res = await Axios.get(`${usersAPI}`);
-      let usersData = res.data.users;
+      const { data } = await Axios.get(`${usersAPI}`);
+      let usersData = data.users;
 
       // Remove the logged-in user from the list
       if (currentUser) {
@@ -40,7 +40,7 @@ export default function UsersPage() {
       fetchUsers();
       toast.success("User deleted successfully.");
     } catch (error) {
-      console.error("Error deleting course:", error);
+      console.error("Error deleting user:", error);
       toast.error(error?.response?.data?.error || "Couldn't delete user.");
     }
   };
@@ -63,9 +63,9 @@ export default function UsersPage() {
   const isMainUsersPage = location.pathname === "/dashboard/users";
 
   return (
-    <div className="container mt-4">
+    <div className="mt-4">
       {isMainUsersPage && (
-        <div className="mb-3">
+        <div className="mb-3 container">
           <label htmlFor="roleFilter" className="form-label">
             Filter by Role
           </label>

@@ -92,24 +92,28 @@ const Insights = () => {
       {/* Second Section with BarChart based on Gender & Age */}
       <Row>
         <Col sm={12}>
-          <Card className="p-4">
+          <Card className="p-4 ">
             <Card.Body height={400}>
               <h5 className="text-center mb-4">Students by Gender and Age</h5>
               <ResponsiveContainer width="100%" height={400}>
-                <BarChart data={chartData} barSize={30}>
+                <BarChart
+                  data={chartData}
+                  barSize={30}
+                  margin={{ top: 20, right: 50, left: 50, bottom: 50 }}
+                >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="age">
-                    <Label value="Age" position="bottom" offset={0} />
+                    <Label value="Age" offset={-10} position="insideBottom" />
                   </XAxis>
                   <YAxis
                     type="number"
-                    tickFormatter={(tick) => Math.floor(tick)} // Ensures only integers on the Y-axis
+                    tickFormatter={(tick) => Math.floor(tick)}
                   >
                     <Label
                       value="Count"
                       angle={-90}
-                      position="left"
-                      offset={10}
+                      position="insideLeft"
+                      offset={-5}
                     />
                   </YAxis>
                   <Tooltip
