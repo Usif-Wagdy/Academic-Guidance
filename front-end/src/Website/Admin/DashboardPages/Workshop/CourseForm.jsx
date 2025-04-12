@@ -363,12 +363,14 @@ export default function CourseForm() {
             </div>
           )}
 
+          <h5 className="mt-4">Curriculum</h5>
+
           <Button
-            variant="success"
+            variant="primary text-light"
             onClick={handleAddSection}
-            className="mb-3 d-block"
+            className="my-3 d-block"
           >
-            + Add Section
+            Add Section
           </Button>
 
           <Accordion>
@@ -402,65 +404,84 @@ export default function CourseForm() {
                     </Button>
                   </div>
 
-                  <div className="between-flex">
-                    <Button
-                      variant="info"
-                      onClick={() => handleAddLesson(sectionIndex)}
-                      className="mb-2"
-                    >
-                      + Add Lesson
-                    </Button>
-                  </div>
+                  <h6>Lessons</h6>
 
                   {section.parts.map((lesson, lessonIndex) => (
                     <Card key={lessonIndex} className="p-3 mb-2">
                       <div className="between-flex">
-                        <div>
+                        <div className="d-flex flex-column w-75">
+                          <div className="between-flex ">
+                            <Form.Group className="mb-2">
+                              <Form.Label>Lesson Title</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="Lesson Title"
+                                value={lesson.title}
+                                onChange={(e) =>
+                                  handleLessonChange(
+                                    sectionIndex,
+                                    lessonIndex,
+                                    "title",
+                                    e.target.value
+                                  )
+                                }
+                                required
+                              />
+                            </Form.Group>
+                            <Form.Group className="mb-2">
+                              <Form.Label>Duration</Form.Label>
+                              <Form.Select
+                                value={lesson.duration}
+                                onChange={(e) =>
+                                  handleLessonChange(
+                                    sectionIndex,
+                                    lessonIndex,
+                                    "duration",
+                                    e.target.value
+                                  )
+                                }
+                                required
+                              >
+                                <option value="">Select duration</option>
+                                <option value="15 Minutes">15 Minutes</option>
+                                <option value="30 Minutes">30 Minutes</option>
+                                <option value="45 Minutes">45 Minutes</option>
+                                <option value="1 Hour">1 Hour</option>
+                                <option value="1.5 Hours">1.5 Hours</option>
+                                <option value="2 Hours">2 Hours</option>
+                              </Form.Select>
+                            </Form.Group>
+
+                            <Form.Group className="mb-2">
+                              <Form.Label>Video</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="e.g., https://www.youtube..."
+                                value={lesson.demoVideo}
+                                onChange={(e) =>
+                                  handleLessonChange(
+                                    sectionIndex,
+                                    lessonIndex,
+                                    "demoVideo",
+                                    e.target.value
+                                  )
+                                }
+                                required
+                              />
+                            </Form.Group>
+                          </div>
                           <Form.Group className="mb-2">
-                            <Form.Label>Lesson Title</Form.Label>
+                            <Form.Label>Lesson Description</Form.Label>
                             <Form.Control
-                              type="text"
-                              placeholder="Lesson Title"
-                              value={lesson.title}
+                              as="textarea"
+                              rows={3}
+                              placeholder="This lesson is about..."
+                              value={lesson.description}
                               onChange={(e) =>
                                 handleLessonChange(
                                   sectionIndex,
                                   lessonIndex,
-                                  "title",
-                                  e.target.value
-                                )
-                              }
-                              required
-                            />
-                          </Form.Group>
-                          <Form.Group className="mb-2">
-                            <Form.Label>Duration</Form.Label>
-                            <Form.Control
-                              type="text"
-                              placeholder="e.g., 45 Minutes"
-                              value={lesson.duration}
-                              onChange={(e) =>
-                                handleLessonChange(
-                                  sectionIndex,
-                                  lessonIndex,
-                                  "duration",
-                                  e.target.value
-                                )
-                              }
-                              required
-                            />
-                          </Form.Group>
-                          <Form.Group className="mb-2">
-                            <Form.Label>Video</Form.Label>
-                            <Form.Control
-                              type="text"
-                              placeholder="e.g., https://www.youtube..."
-                              value={lesson.demoVideo}
-                              onChange={(e) =>
-                                handleLessonChange(
-                                  sectionIndex,
-                                  lessonIndex,
-                                  "demoVideo",
+                                  "description",
                                   e.target.value
                                 )
                               }
@@ -474,11 +495,18 @@ export default function CourseForm() {
                             handleDeleteLesson(sectionIndex, lessonIndex)
                           }
                         >
-                          <FaRegTrashAlt />
+                          Delete
                         </Button>
                       </div>
                     </Card>
                   ))}
+                  <Button
+                    variant="info"
+                    onClick={() => handleAddLesson(sectionIndex)}
+                    className="mb-2"
+                  >
+                    Add Lesson
+                  </Button>
                 </Accordion.Body>
               </Accordion.Item>
             ))}

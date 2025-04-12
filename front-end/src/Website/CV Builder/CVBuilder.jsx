@@ -2,6 +2,11 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 
 export default function CVBuilder() {
+  const handleDownload = async () => {
+    
+  };
+  const handleUpload = async () => {};
+
   return (
     <Container className="my-5">
       {/* Heading */}
@@ -37,10 +42,18 @@ export default function CVBuilder() {
                 tailored, clean, and recruiter-ready.
               </p>
               <div className="d-flex flex-column flex-md-row gap-3 justify-content-center justify-content-md-start">
-                <Button variant="dark" className="fs-5 px-4">
+                <Button
+                  variant="dark"
+                  className="fs-5 px-4"
+                  onClick={handleDownload}
+                >
                   Upload My CV
                 </Button>
-                <Button variant="outline-light" className="fs-5 px-4">
+                <Button
+                  variant="outline-light"
+                  className="fs-5 px-4"
+                  onClick={handleUpload}
+                >
                   Download Template
                 </Button>
               </div>

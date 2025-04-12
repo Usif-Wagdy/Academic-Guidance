@@ -99,11 +99,11 @@ export default function UserForm() {
     try {
       const { role, isAdmin, ...userData } = values;
       if (isEdit) {
-        toast.info("Updating User!");
+        toast.info("Updating User...");
         await Axios.patch(`${updateUserApi}/${id}`, userData);
         toast.success("User updated successfully!");
       } else {
-        toast.info("Adding User!");
+        toast.info("Adding User...");
         await Axios.post(registerAPI, userData);
         toast.success("User added successfully!");
       }

@@ -39,7 +39,7 @@ function Sidebar({ isCollapsed, setIsCollapsed }) {
       },
       {
         path: "/dashboard/tracks",
-        label: "Tracks",
+        label: "Tracks & Roadmap",
         icon: <LuWaypoints size={22} />,
         roles: ["trackAdmin", "superAdmin"],
       },
@@ -57,7 +57,7 @@ function Sidebar({ isCollapsed, setIsCollapsed }) {
       },
       {
         path: "/dashboard/users",
-        label: "Users Accounts",
+        label: "User Accounts",
         icon: <FaUsers size={22} />,
         roles: ["superAdmin"],
       },

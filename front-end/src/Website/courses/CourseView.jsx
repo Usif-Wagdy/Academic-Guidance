@@ -96,7 +96,7 @@ export default function CourseView() {
               </div>
             )}
             <h4 className="mt-3">{currentVideo?.title}</h4>
-            <h5 className="mt-3">{currentVideo?.description}</h5>
+            <p className="mt-3 fs-19px px-4">{currentVideo?.description}</p>
           </div>
 
           {/* Video List */}
