@@ -61,7 +61,7 @@ export default function ProfileInfo({ formData, handleChange, editMode }) {
           value={formData.age}
           onChange={handleChange}
           disabled={!editMode}
-          min={16}
+          min={18}
         />
       </div>
 
