@@ -75,7 +75,7 @@ exports.login = async (req, res) => {
         .send('Email and password are required');
     }
 
-    console.log('Login Request Body:', req.body);
+
 
     const user = await User.findOne({ email }).select(
       '+password',
@@ -87,7 +87,6 @@ exports.login = async (req, res) => {
         .send('Invalid email or password');
     }
 
-    console.log('User retrieved from DB:', user);
 
     const isPasswordValid = await bcrypt.compare(
       password,
