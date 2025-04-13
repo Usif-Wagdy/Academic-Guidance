@@ -22,16 +22,16 @@ exports.getInternById = async (req, res) => {
 }
 exports.createIntern = async (req, res) => {
     try {
-        const { image, keywords, sponser, company, salary, place, duration, description, link } = req.body;
+        const { keywords, sponser, company, salary, place, duration, description, link } = req.body;
 
-        if (!image || !keywords || !sponser || !company || !place || !salary || !duration || !description || !link) {
+        if (!keywords || !sponser || !company || !place || !salary || !duration || !description || !link) {
             return res.status(400).json({
                 success: false,
                 message: 'All fields are required.'
             });
         }
 
-        const newintern = new Intern({ image, keywords, sponser, company, place, salary, duration, description, link });
+        const newintern = new Intern({ keywords, sponser, company, place, salary, duration, description, link });
         await newintern.save();
 
         res.status(201).json({
