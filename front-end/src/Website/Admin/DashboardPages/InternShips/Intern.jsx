@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Axios } from "../../../../api/axios";
 import { internshipsAPI } from "../../../../api/Api";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -37,7 +37,7 @@ export default function Intern() {
       internShips.map((intern, i) => (
         <div
           key={i}
-          className="between-flex flex-column flex-md-row col-12 p-2 bg-secondary mb-3"
+          className="between-flex flex-column flex-md-row col-12 p-2 bg-white mb-3 rounded"
         >
           <div className="d-flex">
             <div className="me-2">
@@ -56,7 +56,7 @@ export default function Intern() {
                 {intern.keywords?.map((keyword, i) => (
                   <span
                     key={i}
-                    className="me-2 mb-2 mb-md-0 rounded-3 px-1 fs-12px border border-dark"
+                    className="me-2 mb-2 mb-lg-0 rounded-3 px-1 fs-12px border border-dark"
                   >
                     {keyword}
                   </span>
@@ -83,14 +83,21 @@ export default function Intern() {
     );
 
   return (
-    <div className="d-flex flex-wrap">
-      <Link
-        to="/dashboard/intern-ship/add"
-        className="d-flex justify-content-end w-100 py-2"
-      >
-        <Button variant="primary">Add Intern ship</Button>
-      </Link>
-      {showInterShips}
-    </div>
+    <Container>
+      <div className="d-flex flex-wrap">
+        <Link
+          to="/dashboard/intern-ship/add"
+          className="d-flex justify-content-end w-100 py-2"
+        >
+          <Button
+            variant="primary text-light"
+            className="mb-3 fs-10px fs-md-14px"
+          >
+            Add Intern ship
+          </Button>
+        </Link>
+        {showInterShips}
+      </div>
+    </Container>
   );
 }
