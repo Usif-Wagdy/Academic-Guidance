@@ -2,13 +2,14 @@ const Testimonial = require("../Models/TestimonialModel");
 
 exports.createTestimonial = async (req, res) => {
     try {
-        const { name, profilePic, testimonial, courseId } = req.body;
+        const { testimonial, courseId } = req.body;
+        const userId = req.user.id;
 
-        if (!name || !profilePic || !testimonial || !courseId) {
-            return res.status(400).json({ success: false, message: "All fields are required." });
+        if (!testimonial || !courseId) {
+            return res.status(400).json({ success: false, message: "Testimonial and courseId are required." });
         }
 
-        const newTestimonial = new Testimonial({ name, profilePic, testimonial, courseId });
+        const newTestimonial = new Testimonial({ userId, testimonial, courseId });
         await newTestimonial.save();
         res.status(201).json({ success: true, message: "Testimonial added successfully.", testimonial: newTestimonial });
     } catch (error) {
@@ -19,7 +20,9 @@ exports.createTestimonial = async (req, res) => {
 
 exports.getAllTestimonials = async (req, res) => {
     try {
-        const testimonials = await Testimonial.find();
+        const testimonials = await Testimonial.find()
+            .populate("userId", "name profilePic") // Populate name and profilePic from User
+            .populate("courseId", "name"); // Optionally populate course name
         res.json({ success: true, testimonials });
     } catch (error) {
         res.status(500).json({ success: false, message: "Could not fetch testimonials." });
@@ -29,7 +32,9 @@ exports.getAllTestimonials = async (req, res) => {
 exports.deleteTestimonial = async (req, res) => {
     try {
         const { id } = req.params;
-        const deletedTestimonial = await Testimonial.findByIdAndDelete(id);
+        const deletedTestimonial = await Testimonial.findByIdAndDelete(id)
+            .populate("userId", "name profilePic") // Populate name and profilePic from User
+            .populate("courseId", "name"); // Optionally populate course name
 
         if (!deletedTestimonial) {
             return res.status(404).json({ success: false, message: "Testimonial not found." });
@@ -49,7 +54,9 @@ exports.getTestimonialsByCourse = async (req, res) => {
             return res.status(400).json({ success: false, message: "Course ID is required." });
         }
 
-        const testimonials = await Testimonial.find({ courseId });
+        const testimonials = await Testimonial.find({ courseId })
+            .populate("userId", "name profilePic") // Populate name and profilePic from User
+            .populate("courseId", "name"); // Optionally populate course name
         res.json({ success: true, testimonials });
     } catch (error) {
         res.status(500).json({ success: false, message: "Error fetching testimonials." });
