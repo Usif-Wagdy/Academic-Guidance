@@ -88,22 +88,51 @@ export default function Courses() {
                 <Card key={_id} className="col-12 p-2 border-0 d-lg-none">
                   <Card.Img
                     variant="top"
-                    src={course.images[0]}
+                    src={
+                      course.images[0] ||
+                      `https://dummyimage.com/400x220/dfdfdfdf/ffffff&text=${course.name}`
+                    }
                     style={{ minWidth: "326px", height: "300px" }}
                   />
                 </Card>
-                {course.images.slice(0, 3).map((img, i) => (
-                  <Card
-                    key={i}
-                    className="col-4 p-2 border-0 d-none d-lg-block"
-                  >
-                    <Card.Img
-                      variant="top"
-                      src={img}
-                      style={{ minWidth: "326px", height: "300px" }}
-                    />
-                  </Card>
-                ))}
+                {course.images.length === 3 ? (
+                  course.images.slice(0, 3).map((img, i) => (
+                    <Card
+                      key={i}
+                      className="col-4 p-2 border-0 d-none d-lg-block"
+                    >
+                      <Card.Img
+                        variant="top"
+                        src={img}
+                        style={{ minWidth: "326px", height: "300px" }}
+                      />
+                    </Card>
+                  ))
+                ) : (
+                  <>
+                    <Card className="col-4 p-2 border-0 d-none d-lg-block">
+                      <Card.Img
+                        variant="top"
+                        src={`https://dummyimage.com/400x220/dfdfdfdf/ffffff&text=${course.name}`}
+                        style={{ minWidth: "326px", height: "300px" }}
+                      />
+                    </Card>
+                    <Card className="col-4 p-2 border-0 d-none d-lg-block">
+                      <Card.Img
+                        variant="top"
+                        src={`https://dummyimage.com/400x220/dfdfdfdf/ffffff&text=${course.name}`}
+                        style={{ minWidth: "326px", height: "300px" }}
+                      />
+                    </Card>
+                    <Card className="col-4 p-2 border-0 d-none d-lg-block">
+                      <Card.Img
+                        variant="top"
+                        src={`https://dummyimage.com/400x220/dfdfdfdf/ffffff&text=${course.name}`}
+                        style={{ minWidth: "326px", height: "300px" }}
+                      />
+                    </Card>
+                  </>
+                )}
               </div>
 
               <div className="between-flex flex-wrap p-2">
@@ -116,7 +145,7 @@ export default function Courses() {
                   </span>
                 </div>
                 <div className="fw-bold p-2 text-capitalize">
-                  By {course.author}
+                  By {course.author?.name}
                 </div>
               </div>
 

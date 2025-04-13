@@ -26,7 +26,7 @@ export default function BlogList() {
   const filteredBlogs =
     currentUser.role === "superAdmin" || currentUser.role === "superInstructor"
       ? blogs
-      : blogs.filter((blog) => blog.authorId === currentUser._id);
+      : blogs.filter((blog) => blog.author._id === currentUser._id);
 
   // Calculate the index of the first and last blog on the current page
   const indexOfLastBlog = currentPage * cardsPerPage;
@@ -36,7 +36,7 @@ export default function BlogList() {
   // Show skeleton until blogs are loaded
   if (!filteredBlogs || filteredBlogs.length === 0) {
     return (
-      <Container className="mt-5">
+      <Container>
         <div className="center-flex justify-content-end ">
           <Button
             variant="primary text-light"
@@ -81,6 +81,7 @@ export default function BlogList() {
           Add Blog
         </Button>
       </div>
+
       <Row>
         {currentBlogs.map((blog) => (
           <Col lg={4} md={6} key={blog._id} className="mb-4">
@@ -100,7 +101,7 @@ export default function BlogList() {
                 <div className="between-flex mb-2">
                   <Card.Title className="truncate m-0">{blog.title}</Card.Title>
                   <span className="text-capitalize text-muted truncate">
-                    by: {blog.author}
+                    by: {blog.author.name}
                   </span>
                 </div>
 

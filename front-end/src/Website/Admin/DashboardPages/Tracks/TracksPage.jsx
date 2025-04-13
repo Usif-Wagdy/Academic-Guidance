@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import { tracksAPI } from "../../../../api/Api";
 import { toast } from "react-toastify";
 
-export default function TracksPage() {
+const TracksPage = () => {
   const [tracks, setTracks] = useState([]);
   const [refreshKey, setRefreshKey] = useState(0);
 
@@ -33,9 +33,11 @@ export default function TracksPage() {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="mt-4">
       {/* Default view is TracksList */}
       <Outlet context={{ tracks, handleDelete, setRefreshKey }} />
     </div>
   );
-}
+};
+
+export default TracksPage;

@@ -189,8 +189,7 @@ export default function BlogForm() {
               <Form.Control
                 type="text"
                 name="author"
-                value={blog.author}
-                onChange={handleChange}
+                value={isEditing ? blog.author.name : blog.author}
                 disabled
               />
             </Form.Group>

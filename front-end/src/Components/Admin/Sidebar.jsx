@@ -50,7 +50,7 @@ function Sidebar({ isCollapsed, setIsCollapsed }) {
         roles: ["instructor", "superInstructor", "superAdmin"],
       },
       {
-        path: "/dashboard/intern-ships",
+        path: "/dashboard/internships",
         label: "Internships",
         icon: <FaBriefcase size={22} />,
         roles: ["cvAdmin", "superAdmin"],

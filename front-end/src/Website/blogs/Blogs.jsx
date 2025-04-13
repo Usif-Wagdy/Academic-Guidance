@@ -80,7 +80,10 @@ export default function Blogs() {
                 <Card className="border-0 bg-info shadow-sm rounded-4 h-100">
                   <Card.Img
                     variant="top"
-                    src={blog.image}
+                    src={
+                      blog.image ||
+                      `https://dummyimage.com/400x220/dfdfdfdf/ffffff&text=${blog.title}`
+                    }
                     className="rounded-4"
                     loading="lazy"
                     style={{ minWidth: "326px", height: "300px" }}
@@ -92,7 +95,7 @@ export default function Blogs() {
 
                     <div className="between-flex w-100 mt-2 mb-3">
                       <Card.Subtitle className="text-capitalize text-muted m-0 truncate">
-                        by: {blog.author}
+                        by: {blog.author.name}
                       </Card.Subtitle>
 
                       <div className="center-flex gap-3 px-2">

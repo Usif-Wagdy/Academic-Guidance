@@ -11,7 +11,6 @@ import {
 import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 import { Axios } from "../../../../api/axios";
 import { coursesAPI, testimonialsAPI } from "../../../../api/Api";
-import { FaRegTrashAlt } from "react-icons/fa";
 import { useAuth } from "../../../../Context/AuthProvider";
 import { toast } from "react-toastify";
 import ImageDropzone from "../../../../Helpers/ImageDropzone";
@@ -224,8 +223,7 @@ export default function CourseForm() {
                 <Form.Control
                   type="text"
                   name="author"
-                  value={course.author}
-                  onChange={handleChange}
+                  value={isEditing ? course.author.name : course.author}
                   disabled
                 />
               </Form.Group>

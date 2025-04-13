@@ -25,3 +25,8 @@ export const internshipsAPI = "interns";
 
 // tracks
 export const tracksAPI = "tracks"; // get all / post id
+
+// CV Routes
+export const uploadTemplateAPI = "cv/upload-template"; // post
+export const downloadTemplateAPI = "cv/download-template/cv.pdf"; // get /name
+export const analyzeCvAPI = "cv/analyze-cv"; // post - file - cv

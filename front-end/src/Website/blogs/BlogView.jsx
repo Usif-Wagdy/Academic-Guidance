@@ -31,11 +31,17 @@ export default function BlogView() {
         <div className="px-5">
           <h1 className="text-center mb-4">{blog.title}</h1>
           <p className="px-4">
-            by <span className="text-capitalize">{blog.author}</span> on{" "}
-            {blog.date}
+            by{" "}
+            <span className="text-capitalize text-muted">
+              {blog.author.name}
+            </span>{" "}
+            on <span className="text-muted">{blog.date}</span>
           </p>
           <Img
-            src={blog.image}
+            src={
+              blog.image ||
+              `https://dummyimage.com/400x220/dfdfdfdf/ffffff&text=${blog.title}`
+            }
             alt={blog.title}
             className="w-100 rounded-4 img-responsive "
             loader={<Skeleton height={240} />}

@@ -39,7 +39,7 @@ export default function CourseList() {
   // Show skeleton until courses are loaded
   if (!filteredCourses || filteredCourses.length === 0) {
     return (
-      <Container className="mt-5">
+      <Container>
         <div className="center-flex justify-content-end ">
           <Button
             variant="primary text-light text-end"
@@ -103,7 +103,7 @@ export default function CourseList() {
                 <div className="between-flex">
                   <Card.Title className="truncate">{course.name}</Card.Title>
                   <span className="text-capitalize text-muted truncate">
-                    by: {course.author}
+                    by: {course.author?.name}
                   </span>
                 </div>
                 <div className="between-flex mt-3 text-light">

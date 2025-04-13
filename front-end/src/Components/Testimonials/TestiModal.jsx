@@ -7,22 +7,18 @@ import { testimonialsAPI } from "../../api/Api";
 import { useParams } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
-import { useAuth } from "../../Context/AuthProvider";
 
 export default function TestiModal({
   show,
   onClose,
   title,
   contentList,
-  courseNames,
   onSuccess,
 }) {
   const [visibleItems, setVisibleItems] = useState(6); // Load 6 items initially
   const [showInput, setShowInput] = useState(false);
   const [newComment, setNewComment] = useState("");
   const { id } = useParams();
-  const { auth } = useAuth();
-  const currentUser = auth.user;
 
   const courseLocation =
     window.location.pathname.split("/")[1].toString() === "courses";
@@ -42,8 +38,6 @@ export default function TestiModal({
       await Axios.post(`${testimonialsAPI}`, {
         testimonial: newComment,
         courseId: id,
-        name: currentUser.name,
-        profilePic: currentUser.profilePic,
       });
       setNewComment("");
       setShowInput(false);
@@ -89,16 +83,18 @@ export default function TestiModal({
             >
               <Card className="shadow-sm p-3">
                 <div className="d-flex align-items-center gap-3">
-                  {testimonial.profilePic && (
+                  {testimonial.userProfilePic && (
                     <img
-                      src={testimonial.profilePic}
-                      alt={testimonial.name}
+                      src={testimonial.userProfilePic}
+                      alt={testimonial.userName}
                       className="rounded-circle"
                       width="50"
                       height="50"
                     />
                   )}
-                  <Card.Title className="mb-0">{testimonial.name}</Card.Title>
+                  <Card.Title className="mb-0">
+                    {testimonial.userName}
+                  </Card.Title>
                 </div>
                 <Card.Text className="text-muted mt-2 between-flex">
                   {testimonial.testimonial}
@@ -109,12 +105,11 @@ export default function TestiModal({
                     />
                   )}
                 </Card.Text>
-                {courseNames && (
+                {testimonial.courseName && (
                   <div className="mt-2">
                     <strong className="text-muted">Course: </strong>
                     <span className="text-primary">
-                      {courseNames[testimonial.courseId] ||
-                        "Course name not found"}
+                      {testimonial.courseName || "Course name not found"}
                     </span>
                   </div>
                 )}

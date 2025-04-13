@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
-import { Button, Card, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -26,72 +26,45 @@ export default function TracksList() {
   // Show skeleton until tracks are loaded
   if (!tracks || tracks.length === 0 || tracks === undefined) {
     return (
-      <Row>
-        {[...Array(6)].map((_, index) => (
-          <div key={index} className="col-12 col-md-6 p-2">
-            <Card className="h-100 shadow-sm border-0">
-              <Card.Body>
-                <Card.Title className="text-start mb-3">
-                  <Skeleton width="50%" height={24} />
-                </Card.Title>
-                <Card.Text className="text-start">
-                  <Skeleton count={2} width="100%" />
-                </Card.Text>
-                <div className="d-flex justify-content-between pt-3">
-                  <Skeleton width={80} height={36} />
-                  <Skeleton width={40} height={36} />
-                </div>
-              </Card.Body>
-            </Card>
-          </div>
-        ))}
-      </Row>
+      <Container>
+        <div className="center-flex justify-content-end ">
+          <Button
+            variant="primary text-light text-end"
+            onClick={() => navigate("add")}
+            className="mb-3 fs-10px fs-md-14px"
+          >
+            Add Track
+          </Button>
+        </div>
+        <Row>
+          {[...Array(6)].map((_, index) => (
+            <Col xs={12} md={6} key={index} className="mb-4">
+              <Card className="h-100 shadow-sm border-0">
+                <Card.Body>
+                  <Card.Title className="text-start mb-3">
+                    <Skeleton width="50%" height={24} />
+                  </Card.Title>
+                  <Card.Text className="text-start">
+                    <Skeleton count={2} width="100%" />
+                  </Card.Text>
+                  <div className="d-flex justify-content-between pt-3">
+                    <Skeleton width={80} height={36} />
+                    <Skeleton width={40} height={36} />
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
     );
   }
 
-  // Show current tracks based on pagination
-  const showTracks = currentTracks.map((track, i) => (
-    <div key={i} className="col-12 col-md-6 p-2">
-      <Card className="h-100 shadow-sm border-0 h-100">
-        <Card.Body>
-          <Card.Title className="mb-3 fw-semibold">
-            [{` Track-${i + 1} `}] {track.name}
-          </Card.Title>
-          <Card.Text className="text-muted text-truncate fs-12px fs-md-16px ps-3">
-            {track.description}
-          </Card.Text>
-          <div className="d-flex justify-content-between mt-2">
-            <Button
-              variant="success"
-              onClick={() => {
-                setTrackId(track?._id);
-                setSelectedAction("edit");
-                setShowModal(true);
-              }}
-            >
-              Edit
-            </Button>
-            <Button
-              variant="danger"
-              onClick={() => {
-                setTrackId(track?._id);
-                setSelectedAction("delete");
-                setShowModal(true);
-              }}
-            >
-              <FaRegTrashAlt />
-            </Button>
-          </div>
-        </Card.Body>
-      </Card>
-    </div>
-  ));
-
   return (
-    <Container className="mt-5">
+    <Container>
       <div className="center-flex justify-content-end ">
         <Button
-          variant="primary text-light text-end"
+          variant="primary text-light"
           onClick={() => navigate("add")}
           className="mb-3 fs-10px fs-md-14px"
         >
@@ -99,38 +72,75 @@ export default function TracksList() {
         </Button>
       </div>
 
-      <Row> {showTracks}</Row>
+      <Row>
+        {currentTracks.map((track, i) => (
+          <Col xs={12} md={6} key={i} className="mb-4">
+            <Card className="h-100 shadow-sm border-0">
+              <Card.Body>
+                <Card.Title className="mb-3 fw-semibold">
+                  [{` Track-${i + 1} `}] {track.name}
+                </Card.Title>
+                <Card.Text className="text-muted text-truncate ps-3">
+                  {track.description}
+                </Card.Text>
+                <div className="between-flex mt-2">
+                  <Button
+                    variant="success"
+                    onClick={() => {
+                      setTrackId(track?._id);
+                      setSelectedAction("edit");
+                      setShowModal(true);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => {
+                      setTrackId(track?._id);
+                      setSelectedAction("delete");
+                      setShowModal(true);
+                    }}
+                  >
+                    <FaRegTrashAlt />
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
 
-      {/* Pagination Controls */}
-      <div className="d-flex justify-content-between">
-        <Button
-          variant="secondary"
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="secondary"
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={indexOfLastTrack >= tracks.length}
-        >
-          Next
-        </Button>
-      </div>
+        {/* Pagination Controls */}
+        <div className="d-flex justify-content-between">
+          <Button
+            variant="secondary"
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={indexOfLastTrack >= tracks.length}
+          >
+            Next
+          </Button>
+        </div>
 
-      {/* Verification Modal */}
-      <CheckPasswordModal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        onSuccess={() => {
-          if (selectedAction === "delete") {
-            handleDelete(trackId);
-          } else if (selectedAction === "edit") {
-            navigate(`${trackId}`);
-          }
-        }}
-      />
+        {/* Verification Modal */}
+        <CheckPasswordModal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          onSuccess={() => {
+            if (selectedAction === "delete") {
+              handleDelete(trackId);
+            } else if (selectedAction === "edit") {
+              navigate(`${trackId}`);
+            }
+          }}
+        />
+      </Row>
     </Container>
   );
 }

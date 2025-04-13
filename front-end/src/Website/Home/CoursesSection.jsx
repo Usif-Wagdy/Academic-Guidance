@@ -18,7 +18,10 @@ export default function CoursesSection() {
           <Card key={_id} className=" border-0">
             <Card.Img
               variant="top"
-              src={course.images[0]}
+              src={
+                course.images[0] ||
+                `https://dummyimage.com/400x220/dfdfdfdf/ffffff&text=${course.name}`
+              }
               style={{
                 maxHeight: "300px",
               }}
@@ -35,7 +38,7 @@ export default function CoursesSection() {
               </span>
             </div>
 
-            <div className="fw-bold p-2 fs-14px">By {course.author}</div>
+            <div className="fw-bold p-2 fs-14px">By {course.author.name}</div>
           </div>
         </div>
 

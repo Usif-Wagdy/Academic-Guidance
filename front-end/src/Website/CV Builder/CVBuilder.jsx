@@ -1,10 +1,32 @@
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
+import { Axios } from "../../api/axios";
+import { downloadTemplateAPI, analyzeCvAPI } from "../../api/Api";
 
 export default function CVBuilder() {
   const handleDownload = async () => {
-    
+    try {
+      const response = await Axios.get(downloadTemplateAPI, {
+        responseType: "blob", // Ensure the response is in blob format (for file download)
+      });
+
+      // Create a new Blob object using the response data
+      const blob = new Blob([response.data], {
+        type: response.headers["content-type"],
+      });
+
+      // Create a link element to trigger the download
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "cv.pdf";
+      link.click();
+
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
   };
+
   const handleUpload = async () => {};
 
   return (
@@ -45,14 +67,14 @@ export default function CVBuilder() {
                 <Button
                   variant="dark"
                   className="fs-5 px-4"
-                  onClick={handleDownload}
+                  onClick={handleUpload}
                 >
                   Upload My CV
                 </Button>
                 <Button
-                  variant="outline-light"
+                  variant="outline-success"
                   className="fs-5 px-4"
-                  onClick={handleUpload}
+                  onClick={handleDownload}
                 >
                   Download Template
                 </Button>

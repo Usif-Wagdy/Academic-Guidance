@@ -44,7 +44,15 @@ export default function CourseView() {
     setLoading(true);
     try {
       const { data } = await Axios.get(`${testimonialsAPI}/course/${id}`);
-      setTestimonials(data.testimonials);
+      const fetchedTestimonials = data.testimonials;
+      // Enhance testimonials with userName and userProfilePic
+      const enhancedTestimonials = fetchedTestimonials.map((t) => ({
+        ...t,
+        userName: t.userId?.name,
+        userProfilePic: t.userId?.profilePic,
+        courseName: t.courseId?.name,
+      }));
+      setTestimonials(enhancedTestimonials);
       setShowModal(true);
     } catch (err) {
       console.error("Error fetching Testimonials:", err);

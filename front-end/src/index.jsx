@@ -90,14 +90,14 @@ const TracksForm = lazy(() =>
   import("./Website/Admin/DashboardPages/Tracks/TracksForm")
 );
 
-const Intern = lazy(() =>
-  import("./Website/Admin/DashboardPages/InternShips/Intern")
+const InternPage = lazy(() =>
+  import("./Website/Admin/DashboardPages/InternShips/InternPage")
 );
-const EditIntern = lazy(() =>
-  import("./Website/Admin/DashboardPages/InternShips/EditIntern")
+const InternList = lazy(() =>
+  import("./Website/Admin/DashboardPages/InternShips/InternList")
 );
-const AddIntern = lazy(() =>
-  import("./Website/Admin/DashboardPages/InternShips/AddIntern")
+const InternForm = lazy(() =>
+  import("./Website/Admin/DashboardPages/InternShips/InternForm")
 );
 
 // Layout with header and footer
@@ -177,7 +177,14 @@ root.render(
             >
               <Route index element={<Navigate to="insights" replace />} />
               <Route path="insights" element={<Insights />} />
-              <Route path="cv-template" element={<CVTemplate />} />
+              <Route
+                path="cv-template"
+                element={
+                  <PrivateRoute type={"cvAdmin"}>
+                    <CVTemplate />
+                  </PrivateRoute>
+                }
+              />
 
               <Route
                 path="tracks"
@@ -231,9 +238,18 @@ root.render(
                 <Route path=":id" element={<UsersForm />} />
               </Route>
 
-              <Route path="intern-ships" element={<Intern />} />
-              <Route path="intern-ships/:id" element={<EditIntern />} />
-              <Route path="intern-ship/add" element={<AddIntern />} />
+              <Route
+                path="internships"
+                element={
+                  <PrivateRoute type={"cvAdmin"}>
+                    <InternPage />
+                  </PrivateRoute>
+                }
+              >
+                <Route index element={<InternList />} />
+                <Route path="add" element={<InternForm />} />
+                <Route path=":id" element={<InternForm />} />
+              </Route>
             </Route>
 
             {/* Redirect unknown routes to Home */}
