@@ -1,7 +1,7 @@
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
-require('dotenv').config(); // If using environment variables
+require('dotenv').config();
 
 // Cloudinary Configuration
 cloudinary.config({
@@ -10,13 +10,12 @@ cloudinary.config({
   api_secret: 'cWifB4c-hreQ2fS9QUTB1Mt7peQ',
 });
 
-// Storage for Photos
 const imageStorage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: 'user_photos',
     allowed_formats: ['jpeg', 'png', 'jpg'],
-    resource_type: 'image', // Specify resource type
+    resource_type: 'image',
   },
 });
 
