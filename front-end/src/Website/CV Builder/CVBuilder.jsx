@@ -2,9 +2,20 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { Axios } from "../../api/axios";
 import { downloadTemplateAPI, analyzeCvAPI } from "../../api/Api";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function CVBuilder() {
+  const user = Cookies.get("userData");
+  const isAuthenticated = user ? true : false;
+  const navigate = useNavigate();
+
   const handleDownload = async () => {
+    if (!isAuthenticated) {
+      navigate("/Oops");
+      return;
+    }
+
     try {
       const response = await Axios.get(downloadTemplateAPI, {
         responseType: "blob", // Ensure the response is in blob format (for file download)
@@ -27,7 +38,12 @@ export default function CVBuilder() {
     }
   };
 
-  const handleUpload = async () => {};
+  const handleUpload = async () => {
+    if (!isAuthenticated) {
+      navigate("/Oops");
+      return;
+    }
+  };
 
   return (
     <Container className="my-5">

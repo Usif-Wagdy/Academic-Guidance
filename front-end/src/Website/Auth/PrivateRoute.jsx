@@ -11,7 +11,7 @@ export default function PrivateRoute({ children, type }) {
 
   // Check if the user is authenticated (requireAuth)
   if (type === "requireAuth" && !isAuthenticated) {
-    return <Navigate to="/auth/login" />;
+    return <Navigate to="/Oops" />;
   }
 
   // Check if the user is already authenticated (requireNoAuth)

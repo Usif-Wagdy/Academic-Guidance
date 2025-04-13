@@ -27,6 +27,7 @@ import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Profile from "./Website/Profile/Profile";
+import Oops from "./Website/Error/Oops";
 
 // Lazy-loaded Website Pages
 const Home = lazy(() => import("./Website/Home/Home"));
@@ -254,6 +255,7 @@ root.render(
 
             {/* Redirect unknown routes to Home */}
             <Route path="*" element={<ErrorPage />} />
+            <Route path="/Oops" element={<Oops />} />
           </Routes>
         </Suspense>
       </Router>
