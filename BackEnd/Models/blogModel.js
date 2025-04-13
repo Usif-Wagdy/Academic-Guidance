@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const blog = new mongoose.Schema({
     author: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
     image: {
@@ -20,12 +21,7 @@ const blog = new mongoose.Schema({
     },
     content: {
         type: String,
-    },
-    instructorId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    },
+    }
 })
 
 

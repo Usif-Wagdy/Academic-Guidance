@@ -20,7 +20,7 @@ const courseSchema = new mongoose.Schema({
     description: { type: String, required: true, trim: true },
     duration: { type: String, required: true, trim: true },
     level: { type: String, required: true, enum: ["Beginner", "Intermediate", "Advanced"] },
-    author: { type: String, required: true, trim: true },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Reference to User model
     images: [{ type: String }],
     curriculum: [curriculumSchema],
 }, { timestamps: true });
