@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { link } = require('../Routes/userRoutes');
 const internships = new mongoose.Schema({
     place: {
         type: String,
@@ -27,6 +28,6 @@ const internships = new mongoose.Schema({
     image: {
         type: String, required: true
     },
-
+    link: { type: String, required: true },
 })
 module.exports = mongoose.model('internships', internships)

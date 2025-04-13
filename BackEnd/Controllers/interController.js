@@ -23,14 +23,14 @@ exports.getInternById = async (req, res) => {
 exports.createIntern = async (req, res) => {
 
     try {
-        const { image, keywords, sponser, company, salary, place, duration, description } = req.body;
-        if (!image || !keywords || !sponser || !company || !place || !salary || !duration) {
+        const { image, keywords, sponser, company, salary, place, duration, description, link } = req.body;
+        if (!image || !keywords || !sponser || !company || !place || !salary || !duration || !description || !link) {
             res.status(400).json({
                 sucess: "false ", message: 'All fields are required.'
             });
 
         }
-        const newintern = new Intern({ image, keywords, sponser, company, place, salary, duration, description });
+        const newintern = new Intern({ image, keywords, sponser, company, place, salary, duration, description, link });
         await newintern.save();
         res.status(201).json({
             success: true, message: 'Intern created successfully.', intern: newintern
@@ -56,12 +56,11 @@ exports.deleteIntern = async (req, res) => {
 exports.updateIntern = async (req, res) => {
     try {
         const id = req.params.id;
-        const { image, keywords, sponser, company, place, salary, duration, description } = req.body;
-        const newdata = { image, keywords, sponser, company, place, salary, duration, description };
+        const { image, keywords, sponser, company, place, salary, duration, description, link } = req.body;
+        const newdata = { image, keywords, sponser, company, place, salary, duration, description, link };
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ success: false, message: 'Invalid Intern ID format.' });
         }
-
         const updatedIntern = await Intern.findByIdAndUpdate(id, newdata, { new: true });
         if (!updatedIntern) {
             return res.status(404).json({ success: false, message: 'Intern not found.' });
