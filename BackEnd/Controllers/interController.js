@@ -24,14 +24,14 @@ exports.createIntern = async (req, res) => {
     try {
         const { keywords, sponser, company, salary, place, duration, description, link } = req.body;
 
-        if (!keywords || !sponser || !company || !place || !salary || !duration || !description || !link) {
+        if (!keywords || !sponser || !company || !place || !salary || !duration || !link) {
             return res.status(400).json({
                 success: false,
                 message: 'All fields are required.'
             });
         }
 
-        const newintern = new Intern({ keywords, sponser, company, place, salary, duration, description, link });
+        const newintern = new Intern({ keywords, sponser, company, place, salary, duration, link });
         await newintern.save();
 
         res.status(201).json({
@@ -65,8 +65,8 @@ exports.deleteIntern = async (req, res) => {
 exports.updateIntern = async (req, res) => {
     try {
         const id = req.params.id;
-        const { image, keywords, sponser, company, place, salary, duration, description, link } = req.body;
-        const newdata = { image, keywords, sponser, company, place, salary, duration, description, link };
+        const { image, keywords, sponser, company, place, salary, duration, link } = req.body;
+        const newdata = { image, keywords, sponser, company, place, salary, duration, link };
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ success: false, message: 'Invalid Intern ID format.' });
         }
