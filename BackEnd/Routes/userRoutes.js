@@ -13,9 +13,12 @@ router.post('/role/:id', authMiddleware, allowedTo('superAdmin'), userController
 router.post('/check-password', authMiddleware, userController.checkPassword);
 
 router.get('/', authMiddleware, allowedTo('superAdmin'), userController.getAllUsers);
-router.get('/getStudents', authMiddleware, allowedTo('superAdmin'), userController.getStudents);
-router.get('/getInstructors', authMiddleware, allowedTo('superAdmin'), userController.getInstructors);
-router.get('/:id', authMiddleware, allowedTo('superAdmin'), userController.getUser);
+router.get('/getStudents', authMiddleware, allowedTo('superAdmin'),
+  userController.getStudents);
+router.get('/getInstructors', authMiddleware, allowedTo('superAdmin'),
+  userController.getInstructors);
+router.get('/:id', authMiddleware, allowedTo('superAdmin'),
+  userController.getUser);
 
 router.delete('/:id', authMiddleware, allowedTo('superAdmin'), userController.deleteUser);
 router.patch('/update-user/:id', authMiddleware, userController.updateUser);
