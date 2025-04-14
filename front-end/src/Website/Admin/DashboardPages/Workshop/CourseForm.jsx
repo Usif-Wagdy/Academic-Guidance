@@ -223,7 +223,11 @@ export default function CourseForm() {
                 <Form.Control
                   type="text"
                   name="author"
-                  value={isEditing ? course.author.name : course.author}
+                  value={
+                    isEditing
+                      ? course.author?.name || "User Deleted"
+                      : course.author
+                  }
                   disabled
                 />
               </Form.Group>

@@ -22,7 +22,7 @@ export default function About() {
       >
         <Row id="company">
           <div className="d-flex justify-content-between align-items-center my-5 flex-wrap text-center text-md-start">
-            <h1 className="col-md-6 col-12">About Skillbridge</h1>
+            <h1 className="col-md-6 col-12">About SkillWay</h1>
             <p className="col-md-6 col-12">
               Welcome to our platform, where we are passionate about empowering
               individuals to master the world of design and development. We
@@ -109,7 +109,7 @@ export default function About() {
           <div className="text-center text-md-start">
             <h1>Our Goals</h1>
             <p>
-              At SkillBridge, our goal is to empower individuals from all
+              At SkillWay, our goal is to empower individuals from all
               backgrounds to thrive in the world of design and development. We
               believe that education should be accessible and transformative,
               enabling learners to pursue their passions and make a meaningful

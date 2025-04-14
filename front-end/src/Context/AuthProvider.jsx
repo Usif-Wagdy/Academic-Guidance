@@ -1,37 +1,56 @@
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import Cookies from "js-cookie";
+import { Axios } from "../api/axios";
+import { checkAuthApi } from "../api/Api";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // Initialize state based on cookies
   const [auth, setAuth] = useState(() => {
     const token = Cookies.get("authToken");
     const userData = Cookies.get("userData");
-
     return token && userData ? { token, user: JSON.parse(userData) } : null;
   });
 
-  // UseMemo to prevent unnecessary re-renders
-  const value = useMemo(() => ({ auth, setAuth }), [auth]);
+  const logout = () => {
+    Cookies.remove("authToken");
+    Cookies.remove("userData");
+    setAuth(null);
+    // optionally redirect user to login page
+  };
 
-  // Check for changes in cookies once on mount and only update state if needed
-  useEffect(() => {
+  const checkAuth = async (isMounted) => {
     const token = Cookies.get("authToken");
-    const userData = Cookies.get("userData");
+    if (!token) return logout();
 
-    if (token && userData) {
-      const parsedUser = JSON.parse(userData);
-      if (!auth || auth.token !== token || auth.user?.id !== parsedUser.id) {
-        setAuth({ token, user: parsedUser });
+    try {
+      const res = await Axios.get(checkAuthApi, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (isMounted) {
+        setAuth({ token, user: res.data.user });
+        Cookies.set("userData", JSON.stringify(res.data.user));
       }
-    } else if (auth !== null) {
-      setAuth(null);
+    } catch (err) {
+      console.error("Auth check failed", err);
+      if (isMounted) logout();
     }
-  }, []); // This runs once when the component mounts
+  };
+
+  useEffect(() => {
+    let isMounted = true;
+
+    checkAuth(isMounted);
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const value = useMemo(() => ({ auth, setAuth, logout, checkAuth }), [auth]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-// Custom hook to use the auth context
 export const useAuth = () => useContext(AuthContext);

@@ -103,7 +103,7 @@ export default function CourseList() {
                 <div className="between-flex">
                   <Card.Title className="truncate">{course.name}</Card.Title>
                   <span className="text-capitalize text-muted truncate">
-                    by: {course.author?.name}
+                    by: {course.author?.name || "User Deleted"}
                   </span>
                 </div>
                 <div className="between-flex mt-3 text-light">

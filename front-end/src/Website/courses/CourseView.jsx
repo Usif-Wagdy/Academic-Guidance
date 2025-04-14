@@ -48,9 +48,10 @@ export default function CourseView() {
       // Enhance testimonials with userName and userProfilePic
       const enhancedTestimonials = fetchedTestimonials.map((t) => ({
         ...t,
-        userName: t.userId?.name,
-        userProfilePic: t.userId?.profilePic,
-        courseName: t.courseId?.name,
+        userName: t.userId?.name || "User Deleted",
+        userProfilePic:
+          t.userId?.profilePic || "https://www.viverefermo.it/images/user.png",
+        courseName: t.courseId?.name || "Course Deleted",
       }));
       setTestimonials(enhancedTestimonials);
       setShowModal(true);

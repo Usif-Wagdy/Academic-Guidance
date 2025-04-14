@@ -33,7 +33,7 @@ export default function BlogView() {
           <p className="px-4">
             by{" "}
             <span className="text-capitalize text-muted">
-              {blog.author.name}
+              {blog.author?.name}
             </span>{" "}
             on <span className="text-muted">{blog.date}</span>
           </p>

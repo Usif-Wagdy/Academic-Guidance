@@ -189,7 +189,9 @@ export default function BlogForm() {
               <Form.Control
                 type="text"
                 name="author"
-                value={isEditing ? blog.author.name : blog.author}
+                value={
+                  isEditing ? blog.author?.name || "User Deleted" : blog.author
+                }
                 disabled
               />
             </Form.Group>

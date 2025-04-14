@@ -95,7 +95,7 @@ export default function Blogs() {
 
                     <div className="between-flex w-100 mt-2 mb-3">
                       <Card.Subtitle className="text-capitalize text-muted m-0 truncate">
-                        by: {blog.author.name}
+                        by: {blog.author?.name}
                       </Card.Subtitle>
 
                       <div className="center-flex gap-3 px-2">

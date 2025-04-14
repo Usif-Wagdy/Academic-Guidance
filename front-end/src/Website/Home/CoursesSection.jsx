@@ -38,7 +38,7 @@ export default function CoursesSection() {
               </span>
             </div>
 
-            <div className="fw-bold p-2 fs-14px">By {course.author.name}</div>
+            <div className="fw-bold p-2 fs-14px">By {course.author?.name}</div>
           </div>
         </div>
 
@@ -66,9 +66,7 @@ export default function CoursesSection() {
         content={
           <Button className="btn-white border w-sm-100 m-0">View All</Button>
         }
-        description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-            eaque vero quidem quisquam porro sint asperiores veritatis ipsum.
-            Qua"
+        description="Explore our wide range of practical, hands-on courses designed to help you grow and succeed."
       />
 
       <Row xs={1} lg={2}>

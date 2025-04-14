@@ -10,6 +10,7 @@ export const updatePictureApi = "users/update-image"; // patch id -- user token 
 export const updatePasswordApi = "users/update-password"; // patch without id -- user token required
 export const updateRoleApi = "users/role"; // patch id -- superAdmin token required
 export const checkPasswordApi = "users/check-password"; // patch id -- user token required
+export const checkAuthApi = "users/check-Auth"; // get -- user token required
 
 // Courses
 export const coursesAPI = "courses"; //get -- post -- patch -- del

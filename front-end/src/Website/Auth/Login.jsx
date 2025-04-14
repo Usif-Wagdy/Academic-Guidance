@@ -39,8 +39,6 @@ export default function Login() {
         throw new Error(errorMessage || "Login failed");
       }
 
-      console.log(response.data.user);
-
       const { token, user } = response.data;
 
       // Store token in cookies
