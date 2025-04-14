@@ -138,15 +138,21 @@ exports.deleteUser = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
+    await Promise.all([
+      mongoose.model('Course').deleteMany({ instructorId: userId }),
+      mongoose.model('blog').deleteMany({ author: userId }),
+      mongoose.model('Testimonial').deleteMany({ userId }),
+    ]);
+
     res.status(200).json({
-      message: 'User deleted successfully',
+      message: 'User and associated data deleted successfully',
       user: deletedUser,
     });
   } catch (error) {
     console.error('Error deleting user:', error.message);
     res.status(500).json({ error: 'Failed to delete user' });
   }
-}
+};
 
 
 exports.getInstructors = async (req, res) => {
@@ -312,5 +318,33 @@ exports.checkPassword = async (req, res) => {
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+
+exports.checkauth = async (req, res) => {
+  try {
+
+
+    const userId = req.user.id;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: 'Invalid user ID format' });
+    }
+
+    const user = await User.findById(userId).select('-password');
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({
+      message: 'User authenticated successfully',
+      user,
+    });
+  } catch (error) {
+    console.error('Error authenticating user:', error.message);
+    res.status(500).json({ error: 'Failed to authenticate user' });
   }
 };

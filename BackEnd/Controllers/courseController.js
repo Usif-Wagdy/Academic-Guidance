@@ -79,12 +79,16 @@ exports.updateCourse = async (req, res) => {
 exports.deleteCourse = async (req, res) => {
     try {
         const id = req.params.id;
+
+        // Delete the course
         const course = await Course.findByIdAndDelete(id).populate("author", "name"); // Populate author's name
         if (!course) return res.status(404).json({ success: false, message: "Course not found." });
 
-        res.json({ success: true, message: "Course deleted successfully." });
+        await mongoose.model("Testimonial").deleteMany({ courseId: id });
+
+        res.json({ success: true, message: "Course and related testimonials deleted successfully." });
     } catch (error) {
-        res.status(500).json({ success: false, message: "Error deleting course." });
+        res.status(500).json({ success: false, message: "Error deleting course and related testimonials." });
     }
 };
 

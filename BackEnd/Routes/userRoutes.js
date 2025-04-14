@@ -10,6 +10,8 @@ router.post('/signIn', authController.login);
 
 router.post('/role/:id', authMiddleware, allowedTo('superAdmin'), userController.addRole);
 
+router.get('/check-auth', authMiddleware, userController.checkAuth);
+
 router.post('/check-password', authMiddleware, userController.checkPassword);
 
 router.get('/', authMiddleware, allowedTo('superAdmin'), userController.getAllUsers);
