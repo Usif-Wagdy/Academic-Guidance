@@ -136,6 +136,7 @@ export default function Login() {
 
           {/* Submit Button */}
           <Button
+            variant="primary text-light"
             type="submit"
             className="w-100 fw-semibold my-3"
             disabled={loading}

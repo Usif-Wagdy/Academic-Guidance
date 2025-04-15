@@ -72,13 +72,9 @@ export default function CourseView() {
         transition={{ duration: 0.5 }}
       >
         <div className="mb-4 text-center text-md-start">
-          <div className="between-flex">
+          <div className="between-flex  mb-3">
             <h2 className="fs-1">{currCourse.name}</h2>
-            <Button
-              variant="primary text-light"
-              className="border w-sm-100"
-              onClick={fetchTestimonials}
-            >
+            <Button variant="primary text-light" onClick={fetchTestimonials}>
               {loading ? "Loading.." : "Course Testimonials"}
             </Button>
           </div>

@@ -12,7 +12,7 @@ export default function CourseList() {
   const { courses, handleDelete } = useOutletContext(); // Assuming currentUser contains role and id
   const navigate = useNavigate();
   const { auth } = useAuth();
-  const currentUser = auth.user;
+  const currentUser = auth?.user;
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,9 +24,10 @@ export default function CourseList() {
 
   // Filter courses based on user role
   const filteredCourses =
-    currentUser.role === "superAdmin" || currentUser.role === "superInstructor"
+    currentUser?.role === "superAdmin" ||
+    currentUser?.role === "superInstructor"
       ? courses
-      : courses.filter((course) => course.instructorId === currentUser._id);
+      : courses.filter((course) => course.instructorId === currentUser?._id);
 
   // Calculate the index of the first and last course on the current page
   const indexOfLastCourse = currentPage * cardPerPage;

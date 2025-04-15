@@ -154,9 +154,6 @@ export default function Testimonials({ layout = "slider" }) {
                       ? `${testimonial.substring(0, MAX_TEXT_LENGTH)}...`
                       : testimonial}
                   </Card.Text>
-                  <div className="text-start mb-2 text-muted ps-2">
-                    <small>Course: {courseName}</small>
-                  </div>
                   <div className="center-flex justify-content-md-between flex-column flex-md-row gap-3">
                     <div className="d-flex align-items-center gap-3">
                       <img

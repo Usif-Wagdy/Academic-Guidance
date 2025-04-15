@@ -12,7 +12,7 @@ export default function UsersPage() {
   const [refreshKey, setRefreshKey] = useState(0);
   const location = useLocation();
   const { auth } = useAuth();
-  const currentUser = auth.user;
+  const currentUser = auth?.user;
 
   useEffect(() => {
     fetchUsers();
@@ -25,7 +25,7 @@ export default function UsersPage() {
 
       // Remove the logged-in user from the list
       if (currentUser) {
-        usersData = usersData.filter((user) => user._id !== currentUser._id);
+        usersData = usersData.filter((user) => user._id !== currentUser?._id);
       }
 
       setUsers(usersData);

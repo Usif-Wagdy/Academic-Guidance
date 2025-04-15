@@ -119,7 +119,7 @@ export default function Internships() {
                 </div>
               </div>
 
-              <div className="d-flex flex-wrap gap-2 mt-3">
+              <div className="d-flex justify-content-center flex-wrap gap-2 mt-3">
                 {intern.keywords.map((skill, idx) => (
                   <span
                     key={idx}
