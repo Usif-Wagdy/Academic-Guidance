@@ -16,7 +16,9 @@ app.use(cors());
 
 app.use(morgan('dev'));
 app.use(express.json());
-
+app.use("/", (req, res, next) => {
+    res.send("Welcome to the API");
+})
 app.use("/courses", courseRouter);
 app.use("/testimonials", testimonialRouter);
 app.use("/users", userRouter);
