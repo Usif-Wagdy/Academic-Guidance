@@ -2,7 +2,7 @@
 
 ## Description
 
-SkillWay is an academic guidance platform designed to assist students in navigating their educational and career paths. By leveraging advanced technologies, SkillWay offers personalized recommendations, resources, and tools to help users make informed decisions about their academic journeys.
+SkillWay is an academic guidance platform designed to assist students in navigating their educational and career paths. By leveraging advanced technologies, SkillWay offers personalized recommendations, resources, and tools to help users make informed decisions about their academic journeys. 
 
 ## Features
 
