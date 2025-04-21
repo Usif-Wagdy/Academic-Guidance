@@ -323,7 +323,7 @@ exports.checkPassword = async (req, res) => {
 
 
 
-exports.checkAuth = async (req, res) => {
+exports.checkauth = async (req, res) => {
   try {
 
 
@@ -347,4 +347,4 @@ exports.checkAuth = async (req, res) => {
     console.error('Error authenticating user:', error.message);
     res.status(500).json({ error: 'Failed to authenticate user' });
   }
-}; 
+};

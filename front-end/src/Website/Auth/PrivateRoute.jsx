@@ -1,30 +1,55 @@
 import { Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import AccessDeniedPage from "../../Components/Admin/Access";
+import { Axios } from "../../api/axios";
+import { checkAuthApi } from "../../api/Api";
+import { useState, useEffect } from "react";
 
 export default function PrivateRoute({ children, type }) {
-  const user = Cookies.get("userData");
-  const isAuthenticated = user ? true : false;
-  const userData = user ? JSON.parse(user) : null;
-  const isAdmin = userData?.isAdmin || false;
-  const role = userData?.role;
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Check if the user is authenticated (requireAuth)
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = Cookies.get("authToken");
+
+      try {
+        const res = await Axios.get(checkAuthApi, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        setUser(res.data.user);
+      } catch (err) {
+        console.error("Auth check failed", err);
+        Cookies.remove("authToken");
+        Cookies.remove("userData");
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  if (loading) return null; // or <LoadingSpinner />
+
+  const isAuthenticated = !!user;
+  const isAdmin = user?.isAdmin || false;
+  const role = user?.role;
+
   if (type === "requireAuth" && !isAuthenticated) {
     return <Navigate to="/Oops" />;
   }
 
-  // Check if the user is already authenticated (requireNoAuth)
   if (type === "requireNoAuth" && isAuthenticated) {
     return <Navigate to="/" />;
   }
 
-  // Role-based access for admin routes
   if (type === "admin" && !isAdmin) {
     return <Navigate to="/" />;
   }
 
-  // Role-based access for different roles :-
   if (type === "superAdmin" && role !== "superAdmin") {
     return <AccessDeniedPage />;
   }

@@ -47,10 +47,10 @@ export default function Footer() {
                 href="mailto:someone@example.com"
                 className="text-decoration-none"
               >
-                <FaEnvelope className="me-2" /> someone@example.com
+                <FaEnvelope className="me-2" /> academicguidancee@gmail.com
               </a>
               <a href="tel:+201234567890" className="text-decoration-none">
-                <FaPhone className="me-2" /> +20 123 456 7890
+                <FaPhone className="me-2" /> +20 120 761 3745
               </a>
               <a
                 href="https://www.google.com/maps/search/?q=Cairo,Egypt"
@@ -165,6 +165,7 @@ export default function Footer() {
                 href="https://www.facebook.com/"
                 target="_blank"
                 className="btn btn-secondary p-2  center-flex fs-4 "
+                rel="noreferrer"
               >
                 <FaFacebook />
               </a>
@@ -172,6 +173,7 @@ export default function Footer() {
                 href="https://www.twitter.com/"
                 target="_blank"
                 className="btn btn-secondary p-2  center-flex fs-4 "
+                rel="noreferrer"
               >
                 <FaTwitter />
               </a>
@@ -179,6 +181,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/"
                 target="_blank"
                 className="btn btn-secondary p-2  center-flex fs-4 "
+                rel="noreferrer"
               >
                 <FaLinkedin />
               </a>
@@ -188,7 +191,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <p className="mb-0 mt-4 text-muted">
-          © 2024 Skillbridge. All Rights Reserved.
+          © 2025 SkillWay. All Rights Reserved.
         </p>
       </Container>
     </footer>

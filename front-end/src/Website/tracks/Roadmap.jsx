@@ -47,7 +47,7 @@ export default function Roadmap() {
                   }}
                 >
                   <Card className="border-0 bg-white shadow-sm mb-3 rounded-3">
-                    <Card.Body className="p-4 d-flex justify-content-between">
+                    <Card.Body className="p-4 d-flex justify-content-between flex-md-row flex-column gap-3">
                       <h5 className="card-title text-dark">{step.title}</h5>
                       <Button
                         variant="dark"

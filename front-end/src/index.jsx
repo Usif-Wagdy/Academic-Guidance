@@ -19,15 +19,15 @@ import PrivateRoute from "./Website/Auth/PrivateRoute";
 import { AuthProvider } from "./Context/AuthProvider";
 
 // UX
+import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import ErrorPage from "./Website/Error/ErrorPage";
-import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
+import Oops from "./Website/Error/Oops";
 
 // Components
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Profile from "./Website/Profile/Profile";
-import Oops from "./Website/Error/Oops";
 
 // Lazy-loaded Website Pages
 const Home = lazy(() => import("./Website/Home/Home"));
@@ -46,7 +46,9 @@ const CVBuilder = lazy(() => import("./Website/CV Builder/CVBuilder"));
 
 // Lazy-loaded Dashboard Pages
 const Dashboard = lazy(() => import("./Website/Admin/Dashboard"));
+
 const Insights = lazy(() => import("./Website/Admin/DashboardPages/Insights"));
+
 const CVTemplate = lazy(() =>
   import("./Website/Admin/DashboardPages/CVTemplate")
 );
@@ -177,7 +179,9 @@ root.render(
               }
             >
               <Route index element={<Navigate to="insights" replace />} />
+
               <Route path="insights" element={<Insights />} />
+
               <Route
                 path="cv-template"
                 element={

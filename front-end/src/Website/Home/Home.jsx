@@ -1,11 +1,12 @@
 import { Container, Row } from "react-bootstrap";
 import Testimonials from "../../Components/Testimonials/Testimonials";
 import Benefits from "../../Components/Benefits/Benefits";
-import BrandPannel from "./BrandPannel";
 import HeroMsg from "./HeroMsg";
 import CoursesSection from "./CoursesSection";
 import SectionsHeads from "./SectionsHeads";
 import { motion } from "framer-motion";
+import { Img } from "react-image";
+import Skeleton from "react-loading-skeleton";
 
 export default function Home() {
   return (
@@ -16,12 +17,16 @@ export default function Home() {
         transition={{ duration: 0.5 }}
       >
         <HeroMsg />
-
-        <BrandPannel />
-
         {/* Hero Video STATIC */}
-        <Row className="mb-4">
-          <img src={`/Assets/hero.png`} alt="hero" loading="lazy" />
+        <Row className="my-5">
+          <Img
+            src={`/Assets/hero.jpg`}
+            alt="hero"
+            loader={<Skeleton height={600} />}
+            decoding="async"
+            loading="lazy"
+            className="rounded-3 w-100"
+          />
         </Row>
 
         {/* Benefits Section API */}
@@ -29,9 +34,7 @@ export default function Home() {
           id="benefits"
           title="Benefits"
           content={<Benefits layout="modal" />}
-          description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-              eaque vero quidem quisquam porro sint asperiores veritatis ipsum.
-              Qua"
+          description="Discover the advantages of learning with us - expert instructors, flexible learning, and real-world skills."
         />
         <Benefits layout="grid" />
 
@@ -42,9 +45,7 @@ export default function Home() {
           id="testimonials"
           title="Our Testimonials"
           content={<Testimonials layout="modal" />}
-          description=" Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-              eaque vero quidem quisquam porro sint asperiores veritatis ipsum.
-              Qua"
+          description="Hear from our students - real stories of growth, success, and transformation."
         />
         <Testimonials layout="grid" />
       </motion.div>

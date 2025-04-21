@@ -158,7 +158,9 @@ export default function Header() {
             <Nav className="d-lg-none flex-column text-center">
               <Button
                 variant={
-                  activeLink === "/auth/login" ? "primary" : "outline-primary"
+                  activeLink === "/auth/login"
+                    ? "primary text-light"
+                    : "outline-primary"
                 }
                 as={Link}
                 to="/auth/login"
@@ -170,7 +172,7 @@ export default function Header() {
               <Button
                 variant={
                   activeLink === "/auth/register"
-                    ? "primary"
+                    ? "primary text-light"
                     : "outline-primary"
                 }
                 as={Link}
@@ -246,7 +248,9 @@ export default function Header() {
           <Nav className="ms-auto d-none d-lg-flex">
             <Button
               variant={
-                activeLink === "/auth/register" ? "primary" : "outline-primary"
+                activeLink === "/auth/register"
+                  ? "primary text-light"
+                  : "outline-primary"
               }
               as={Link}
               to="/auth/register"
@@ -256,7 +260,9 @@ export default function Header() {
             </Button>
             <Button
               variant={
-                activeLink === "/auth/login" ? "primary" : "outline-primary"
+                activeLink === "/auth/login"
+                  ? "primary text-light"
+                  : "outline-primary"
               }
               as={Link}
               to="/auth/login"

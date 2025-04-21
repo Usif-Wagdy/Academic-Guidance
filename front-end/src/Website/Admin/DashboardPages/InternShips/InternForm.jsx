@@ -50,15 +50,13 @@ export default function InternshipForm() {
     }
   }, [id]);
 
-  const [internImage, setInternImage] = useState("");
+  const [internImage, setInternImage] = useState(intern?.image);
   const [selectedFile, setSelectedFile] = useState(null);
   const [showCropper, setShowCropper] = useState(false);
 
   useEffect(() => {
-    if (id && intern?.image) {
-      setInternImage(intern.image);
-    }
-  }, [intern]);
+    setInternImage(intern.image);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -176,7 +176,18 @@ export default function CourseForm() {
     setLoading(true);
     try {
       const { data } = await Axios.get(`${testimonialsAPI}/course/${id}`);
-      setTestimonials(data.testimonials);
+      const fetchedTestimonials = data.testimonials;
+
+      // Enhance testimonials with userName and userProfilePic
+      const enhancedTestimonials = fetchedTestimonials.map((t) => ({
+        ...t,
+        userName: t.userId?.name || "User Deleted",
+        userProfilePic:
+          t.userId?.profilePic || "https://www.viverefermo.it/images/user.png",
+        courseName: t.courseId?.name || "Course Deleted",
+      }));
+
+      setTestimonials(enhancedTestimonials);
       setShowModal(true);
     } catch (err) {
       console.error("Error fetching Testimonials:", err);
@@ -223,7 +234,11 @@ export default function CourseForm() {
                 <Form.Control
                   type="text"
                   name="author"
-                  value={isEditing ? course.author.name : course.author}
+                  value={
+                    isEditing
+                      ? course.author?.name || "User Deleted"
+                      : course.author
+                  }
                   disabled
                 />
               </Form.Group>

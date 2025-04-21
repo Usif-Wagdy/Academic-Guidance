@@ -39,8 +39,6 @@ export default function Login() {
         throw new Error(errorMessage || "Login failed");
       }
 
-      console.log(response.data.user);
-
       const { token, user } = response.data;
 
       // Store token in cookies
@@ -138,6 +136,7 @@ export default function Login() {
 
           {/* Submit Button */}
           <Button
+            variant="primary text-light"
             type="submit"
             className="w-100 fw-semibold my-3"
             disabled={loading}

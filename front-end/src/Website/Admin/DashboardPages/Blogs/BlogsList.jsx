@@ -12,7 +12,7 @@ export default function BlogList() {
   const { blogs, handleDelete } = useOutletContext(); // Assuming currentUser contains role and id
   const navigate = useNavigate();
   const { auth } = useAuth();
-  const currentUser = auth.user;
+  const currentUser = auth?.user;
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,9 +24,10 @@ export default function BlogList() {
 
   // Filter blogs based on user role
   const filteredBlogs =
-    currentUser.role === "superAdmin" || currentUser.role === "superInstructor"
+    currentUser?.role === "superAdmin" ||
+    currentUser?.role === "superInstructor"
       ? blogs
-      : blogs.filter((blog) => blog.author._id === currentUser._id);
+      : blogs.filter((blog) => blog.author?._id === currentUser?._id);
 
   // Calculate the index of the first and last blog on the current page
   const indexOfLastBlog = currentPage * cardsPerPage;
@@ -101,7 +102,7 @@ export default function BlogList() {
                 <div className="between-flex mb-2">
                   <Card.Title className="truncate m-0">{blog.title}</Card.Title>
                   <span className="text-capitalize text-muted truncate">
-                    by: {blog.author.name}
+                    by: {blog.author?.name || "User Deleted"}
                   </span>
                 </div>
 
