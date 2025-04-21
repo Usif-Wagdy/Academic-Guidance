@@ -347,4 +347,4 @@ exports.checkAuth = async (req, res) => {
     console.error('Error authenticating user:', error.message);
     res.status(500).json({ error: 'Failed to authenticate user' });
   }
-};
+}; 
