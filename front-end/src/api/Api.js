@@ -1,5 +1,5 @@
 // Main URL
-export const baseURL = `http://localhost:3000/`;
+export const baseURL = `https://skill-way.vercel.app/`;
 
 // Users
 export const registerAPI = "users/SignUp"; // post
