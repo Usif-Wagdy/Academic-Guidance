@@ -13,16 +13,19 @@ const app = express();
 
 app.use(cors());
 
-
 app.use(morgan('dev'));
 app.use(express.json());
 
-app.use("/courses", courseRouter);
-app.use("/testimonials", testimonialRouter);
-app.use("/users", userRouter);
-app.use("/interns", internRouter);
-app.use("/blogs", blogRouter);
-app.use("/tracks", trackRouter);
-app.use("/cv", cvRouter);
+app.use('/courses', courseRouter);
+app.use('/testimonials', testimonialRouter);
+app.use('/users', userRouter);
+app.use('/interns', internRouter);
+app.use('/blogs', blogRouter);
+app.use('/tracks', trackRouter);
+app.use('/cv', cvRouter);
+
+app.get('/', (req, res) => {
+  res.send('hello from Server');
+});
 
 module.exports = app;

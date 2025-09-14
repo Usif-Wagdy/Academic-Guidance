@@ -1,14 +1,21 @@
 const dotenv = require('dotenv');
 const connectDB = require('./Config/dbConfig');
-
-dotenv.config({ path: './config.env' });
-
 const app = require('./App');
 
+dotenv.config({ path: './.env' });
+
+// Connect DB
 connectDB();
 
-const port = process.env.PORT || 3000;
+// If running locally, start the server normally
+if (process.env.NODE_ENV !== 'production') {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(
+      `App running locally at http://localhost:${port}`,
+    );
+  });
+}
 
-app.listen(port, () => {
-  console.log(`App is running on port: ${port}`);
-});
+// For Vercel: export the app (no app.listen here)
+module.exports = app;
