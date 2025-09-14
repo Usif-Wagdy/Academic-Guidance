@@ -1,5 +1,7 @@
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const {
+  CloudinaryStorage,
+} = require('multer-storage-cloudinary');
 const multer = require('multer');
 require('dotenv').config();
 
@@ -29,7 +31,23 @@ const videoStorage = new CloudinaryStorage({
   },
 });
 
+// Storage for CVs / Documents
+const cvStorage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'user_cvs',
+    allowed_formats: ['pdf', 'doc', 'docx'],
+    resource_type: 'raw',
+  },
+});
+
+const cvUpload = multer({ storage: cvStorage });
 const imageUpload = multer({ storage: imageStorage });
 const videoUpload = multer({ storage: videoStorage });
 
-module.exports = { cloudinary, imageUpload, videoUpload };
+module.exports = {
+  cloudinary,
+  imageUpload,
+  videoUpload,
+  cvUpload,
+};
