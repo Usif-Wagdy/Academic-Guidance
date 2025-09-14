@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const userController = require('../Controllers/userContrtoller');
+const userController = require('../Controllers/userController');
 const authController = require('../Controllers/authController');
 const { authMiddleware, allowedTo } = require('../Middlewares/authMiddleware');
 const { imageUpload } = require('../Config/cloudinaryConfig');
@@ -10,7 +10,7 @@ router.post('/signIn', authController.login);
 
 router.post('/role/:id', authMiddleware, allowedTo('superAdmin'), userController.addRole);
 
-router.get('/check-auth', authMiddleware, userController.checkAuth);
+router.get('/check-auth', authMiddleware, userController.checkauth);
 
 router.post('/check-password', authMiddleware, userController.checkPassword);
 

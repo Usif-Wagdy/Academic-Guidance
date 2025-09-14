@@ -323,7 +323,7 @@ exports.checkPassword = async (req, res) => {
 
 
 
-exports.checkAuth = async (req, res) => {
+exports.checkauth = async (req, res) => {
   try {
 
 
